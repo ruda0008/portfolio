@@ -163,7 +163,7 @@ export default function App() {
       program: "Bachelor of Computer Applications",
       status: "Completed",
       graduation: "June 2024",
-      location: "Gujarat, IN"
+      location: ""
     }
   ];
 
