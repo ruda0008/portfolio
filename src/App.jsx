@@ -467,7 +467,7 @@ export default function App() {
               <Mail className="w-7 h-7 group-hover:scale-110 transition-transform" />
             </a>
             <a 
-              href="https://github.com/aryanrudani" 
+              href="https://github.com/ruda0008" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/50"
@@ -475,7 +475,7 @@ export default function App() {
               <Github className="w-7 h-7 group-hover:scale-110 transition-transform" />
             </a>
             <a 
-              href="https://linkedin.com/in/aryanrudani" 
+              href="https://www.linkedin.com/in/aryan-rudani-871258227/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/50"
