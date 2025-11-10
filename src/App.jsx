@@ -449,12 +449,12 @@ export default function App() {
                   ruda0008@algonquinlive.com
                 </a>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-gray-400 text-sm mb-1">Phone</p>
                 <a href="tel:+12269616526" className="text-xl font-bold text-purple-400 hover:text-purple-300 transition-colors">
                   +1 (226) 961-6526
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
 
