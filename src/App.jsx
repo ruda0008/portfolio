@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Cloud, Shield, Database, Code2, Mail, Github, Linkedin, ArrowRight, Award, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container } from 'lucide-react';
+import { Cloud, Shield, Database, Code2, Mail, Github, Linkedin, ArrowRight, Award, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container, Eye, ExternalLink } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('all');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,14 @@ export default function App() {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
+    // Fetch visit counter
+    fetch('https://api.countapi.xyz/hit/ruda0008-portfolio/visits')
+      .then(res => res.json())
+      .then(data => {
+        setVisitCount(data.value);
+      })
+      .catch(err => console.error('Counter error:', err));
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
@@ -41,7 +50,8 @@ export default function App() {
         "PyPDF2 extraction with regex parsing algorithms",
         "IAM least-privilege access policies",
         "Optimized DynamoDB partition keys"
-      ]
+      ],
+      link: "" // Add your link here later
     },
     {
       id: 2,
@@ -58,7 +68,8 @@ export default function App() {
         "Star schema with normalization best practices",
         "Basic tier SQL (5 DTU) + LRS storage optimization",
         "SQL firewall rules + RBAC security"
-      ]
+      ],
+      link: "" // Add your link here later
     },
     {
       id: 3,
@@ -75,7 +86,8 @@ export default function App() {
         "GitHub Actions pipeline with env variables",
         "CORS policies + environment-based routing",
         "PaaS deployment architecture"
-      ]
+      ],
+      link: "" // Add your link here later
     },
     {
       id: 4,
@@ -92,12 +104,32 @@ export default function App() {
         "Docker Compose multi-container orchestration",
         "Volume configuration for data persistence",
         "Copy-on-write behavior demonstration"
-      ]
+      ],
+      link: "" // Add your link here later
+    },
+    {
+      id: 5,
+      title: "More Projects Coming Soon",
+      category: "all",
+      impact: "In Development",
+      description: "Currently working on exciting new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned for updates!",
+      tech: ["Kubernetes", "Terraform", "CI/CD", "AWS", "Azure"],
+      metric: "Coming Soon",
+      icon: <Cloud className="w-6 h-6" />,
+      color: "from-gray-500 to-gray-700",
+      details: [
+        "Kubernetes cluster deployment and management",
+        "Infrastructure as Code with Terraform",
+        "Advanced CI/CD pipeline automation",
+        "Multi-cloud deployment strategies"
+      ],
+      link: "",
+      comingSoon: true
     }
   ];
 
   const stats = [
-    { number: "4", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
+    { number: "5+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
     { number: "2", label: "Cloud Platforms", icon: <Server className="w-5 h-5" /> },
     { number: "3", label: "Programs", icon: <BookOpen className="w-5 h-5" /> },
     { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
@@ -149,27 +181,30 @@ export default function App() {
       program: "Cloud Development and Operations",
       status: "In Progress",
       graduation: "June 2026",
-      location: "Ottawa, ON"
+      location: "Ottawa, ON",
+      gpa: null
     },
     {
       school: "Algonquin College",
       program: "Cybersecurity Analysis",
       status: "Completed",
       graduation: "June 2025",
-      location: "Ottawa, ON"
+      location: "Ottawa, ON",
+      gpa: "3.8/4.0"
     },
     {
       school: "Veer Narmad South Gujarat University",
       program: "Bachelor of Computer Applications",
       status: "Completed",
       graduation: "June 2024",
-      location: ""
+      location: "Gujarat, IN",
+      gpa: "3.3/4.0"
     }
   ];
 
   const filteredProjects = activeTab === 'all' 
     ? projects 
-    : projects.filter(p => p.category === activeTab);
+    : projects.filter(p => p.category === activeTab || p.category === 'all');
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -298,7 +333,9 @@ export default function App() {
             {filteredProjects.map((project, index) => (
               <div
                 key={project.id}
-                className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20"
+                className={`group relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 ${
+                  project.comingSoon ? 'opacity-75' : ''
+                }`}
               >
                 <div className="absolute -top-3 -right-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
                   {project.impact}
@@ -330,7 +367,7 @@ export default function App() {
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, i) => (
                     <span 
                       key={i} 
@@ -340,6 +377,22 @@ export default function App() {
                     </span>
                   ))}
                 </div>
+
+                {/* View Project Button */}
+                {!project.comingSoon && (
+                  <a
+                    href={project.link || "#"}
+                    target={project.link ? "_blank" : "_self"}
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 ${
+                      !project.link ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                    onClick={(e) => !project.link && e.preventDefault()}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>{project.link ? 'View Project' : 'Link Coming Soon'}</span>
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -408,6 +461,9 @@ export default function App() {
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">{edu.program}</h3>
                     <p className="text-cyan-400 font-semibold">{edu.school}</p>
+                    {edu.gpa && (
+                      <p className="text-purple-400 font-semibold mt-2">GPA: {edu.gpa}</p>
+                    )}
                   </div>
                   <div className="mt-4 md:mt-0 text-right">
                     <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold ${
@@ -449,12 +505,6 @@ export default function App() {
                   ruda0008@algonquinlive.com
                 </a>
               </div>
-              {/* <div>
-                <p className="text-gray-400 text-sm mb-1">Phone</p>
-                <a href="tel:+12269616526" className="text-xl font-bold text-purple-400 hover:text-purple-300 transition-colors">
-                  +1 (226) 961-6526
-                </a>
-              </div> */}
             </div>
           </div>
 
@@ -488,10 +538,23 @@ export default function App() {
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">
-            © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
-          </p>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <p className="text-gray-400 text-center md:text-left mb-4 md:mb-0">
+              © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
+            </p>
+            
+            {/* Visit Counter */}
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl px-4 py-3 shadow-xl">
+              <div className="flex items-center space-x-2">
+                <Eye className="w-4 h-4 text-green-400" />
+                <div className="text-sm">
+                  <span className="text-gray-400">Visitors:</span>
+                  <span className="ml-2 text-cyan-400 font-bold text-lg">{visitCount.toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
