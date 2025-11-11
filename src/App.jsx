@@ -490,7 +490,7 @@ export default function App() {
       <footer className="py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">
-            © 2024 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
+            © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
           </p>
         </div>
       </footer>
