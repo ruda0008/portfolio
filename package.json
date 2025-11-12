@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ruda0008.github.io/portfolio",
+  "homepage": "https://aryanrudani.space",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

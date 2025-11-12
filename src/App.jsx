@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Cloud, Shield, Database, Code2, Mail, Github, Linkedin, ArrowRight, Award, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container, Eye, ExternalLink } from 'lucide-react';
+import { Cloud, Shield, Database, Code2, Mail, Github, Linkedin, ArrowRight, Award, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container, ExternalLink } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('all');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [visitCount, setVisitCount] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,24 +16,6 @@ export default function App() {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-
-    // Fetch visit counter with fallback
-    const fetchVisitCount = async () => {
-      try {
-        const response = await fetch('https://api.countapi.xyz/hit/ruda0008-portfolio/visits');
-        if (!response.ok) throw new Error('CountAPI failed');
-        const data = await response.json();
-        setVisitCount(data.value || 0);
-      } catch (error) {
-        console.error('Counter error:', error);
-        // Fallback: Show approximate count based on days since launch
-        const baseCount = 1000;
-        const daysSinceLaunch = Math.floor((Date.now() - new Date('2024-11-01').getTime()) / (1000 * 60 * 60 * 24));
-        setVisitCount(baseCount + daysSinceLaunch * 7);
-      }
-    };
-
-    fetchVisitCount();
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
@@ -235,11 +216,11 @@ export default function App() {
       ></div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
         
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500/10 to-cyan-500/10 border border-green-500/20 rounded-full px-6 py-2 mb-8 backdrop-blur-xl">
@@ -292,12 +273,6 @@ export default function App() {
                 <div className="text-sm text-gray-400">{stat.label}</div>
               </div>
             ))}
-          </div>
-        </div>
-
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-cyan-400 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -548,25 +523,12 @@ export default function App() {
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-gray-400 text-center md:text-left mb-4 md:mb-0">
-              © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
-            </p>
-            
-            {/* Visit Counter */}
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl px-4 py-3 shadow-xl">
-              <div className="flex items-center space-x-2">
-                <Eye className="w-4 h-4 text-green-400" />
-                <div className="text-sm">
-                  <span className="text-gray-400">Visitors:</span>
-                  <span className="ml-2 text-cyan-400 font-bold text-lg">{visitCount.toLocaleString()}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-gray-400">
+            © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
+          </p>
         </div>
       </footer>
     </div>
   );
-}
+} 
