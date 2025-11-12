@@ -302,7 +302,7 @@ export default function App() {
                   I started in cybersecurity, learning how attackers think and how systems break. Now I build cloud infrastructure with that defensive mindset baked in because security isn't something you bolt on later.
                 </p>
                 <p>
-                  What drives me? Learning from different angles. Whether it's a new Azure service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
+                  What drives me? Learning from different perspective. Whether it's a new Azure service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
                 </p>
               </div>
             </div>
@@ -318,7 +318,7 @@ export default function App() {
                   Outside of tech, you'll find me on nature trails or grabbing coffee with friends. Some of my best solutions come when I step away from the screen.
                 </p>
                 <p className="text-white font-semibold">
-                 For me, it's not just about building great systems it's about living a meaningful life and creating things that matter. I want to work on projects that solve real problems and make a genuine impact. </p>
+                 For me, it's not just about building great systems it's about living a meaningful life and creating things that matter. </p>
               </div>
             </div>
           </div>
