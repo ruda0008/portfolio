@@ -277,6 +277,54 @@ export default function App() {
         </div>
       </section>
 
+      {/* About Section */}
+      <section id="about" className="py-32 px-6 bg-gradient-to-b from-black via-gray-900/50 to-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
+        
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-black mb-4">
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                About Me
+              </span>
+            </h2>
+          </div>
+
+          <div className="space-y-6">
+            {/* My Journey */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
+                <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full"></div>
+                <span>My Journey</span>
+              </h3>
+              <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
+                <p>
+                  I started in cybersecurity, learning how attackers think and how systems break. Now I build cloud infrastructure with that defensive mindset baked in because security isn't something you bolt on later.
+                </p>
+                <p>
+                  What drives me? Learning from different angles. Whether it's a new Azure service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
+                </p>
+              </div>
+            </div>
+
+            {/* Life Beyond Tech */}
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+              <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
+                <div className="w-2 h-8 bg-gradient-to-b from-pink-400 to-purple-500 rounded-full"></div>
+                <span>Life Beyond Tech</span>
+              </h3>
+              <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
+                <p>
+                  Outside of tech, you'll find me on nature trails or grabbing coffee with friends. Some of my best solutions come when I step away from the screen.
+                </p>
+                <p className="text-white font-semibold">
+                 For me, it's not just about building great systems it's about living a meaningful life and creating things that matter. I want to work on projects that solve real problems and make a genuine impact. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="projects" className="py-32 px-6 relative">
         <div className="max-w-7xl mx-auto">
@@ -531,4 +579,4 @@ export default function App() {
       </footer>
     </div>
   );
-} 
+}
