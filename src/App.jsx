@@ -291,11 +291,11 @@ export default function App() {
           </div>
 
           <div className="space-y-6">
-            {/* My Journey */}
+            {/* Approach */}
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
                 <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full"></div>
-                <span>My Journey</span>
+                <span>Approach</span>
               </h3>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
                 <p>
