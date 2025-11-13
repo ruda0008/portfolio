@@ -109,12 +109,12 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visitCount, setVisitCount] = useState(null);
   const [orbs, setOrbs] = useState([
-    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-800 to-blue-800' },
-    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-800 to-pink-800' },
-    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-800 to-purple-800' },
-    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-800 to-purple-800' },
-    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-800 to-cyan-800' },
-    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-800 to-indigo-800' }
+    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-720 to-blue-720' },
+    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-720 to-pink-720' },
+    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-720 to-purple-720' },
+    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-720 to-purple-720' },
+    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-720 to-cyan-720' },
+    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-720 to-indigo-720' }
   ]);
   const rafRef = useRef();
 
