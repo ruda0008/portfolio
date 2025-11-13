@@ -301,7 +301,7 @@ export default function App() {
                 <p>
                  With a foundation in cybersecurity, I focus on building cloud infrastructure that's secure, scalable, and resilient because security should be part of the design, not an afterthought. </p>
                 <p>
-                  What drives me? Learning from different perspective. Whether it's a new cloud service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
+                  What drives me? Learning from different perspectives. Whether it's a new cloud service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
                 </p>
               </div>
             </div>
