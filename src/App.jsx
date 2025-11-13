@@ -387,10 +387,9 @@ export default function App() {
               </h3>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
                 <p>
-                  I started in cybersecurity, learning how attackers think and how systems break. Now I build cloud infrastructure with that defensive mindset baked in—because security isn't something you bolt on later.
-                </p>
+                 With a foundation in cybersecurity, I focus on building cloud infrastructure that’s secure, scalable, and resilient because security should be part of the design, not an afterthought. </p>
                 <p>
-                  What drives me? Learning from different angles. Whether it's a new AWS service, a better way to architect solutions, or insights from the people around me—I'm constantly evolving my approach.
+                  What drives me? Learning from different Perspectives. Whether it's a new Cloud service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
                 </p>
               </div>
             </div>
@@ -406,8 +405,7 @@ export default function App() {
                   Outside of tech, you'll find me on nature trails or grabbing coffee with friends. Some of my best solutions come when I step away from the screen.
                 </p>
                 <p className="text-white font-semibold">
-                  I want to work on projects that solve real problems—not just build for the sake of building. Let's create infrastructure that's powerful, secure, and actually works for people.
-                </p>
+                 I aim to build meaningful solutions that are secure, scalable and addresses needs and creates real impact. </p>
               </div>
             </div>
           </div>
