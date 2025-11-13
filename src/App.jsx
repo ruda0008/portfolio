@@ -1,5 +1,107 @@
-import React, { useState, useEffect } from 'react';
-import { Cloud, Shield, Database, Code2, Mail, Github, Linkedin, ArrowRight, Award, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Cloud, Code2, Mail, Github, Linkedin, ArrowRight, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container, ExternalLink } from 'lucide-react';
+
+// Static data outside component - no recreation on re-renders
+const PROJECTS_DATA = [
+  {
+    id: 1,
+    title: "Serverless Resume Parser",
+    category: "aws",
+    impact: "Event-driven processing",
+    description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
+    tech: ["Lambda", "S3", "DynamoDB", "SES", "SQS", "Python", "PyPDF2"],
+    metric: "Full automation",
+    icon: <FileText className="w-6 h-6" />,
+    color: "from-orange-500 to-red-500",
+    details: [
+      "S3 event-driven architecture with Lambda triggers",
+      "PyPDF2 extraction with regex parsing algorithms",
+      "IAM least-privilege access policies",
+      "Optimized DynamoDB partition keys"
+    ],
+    link: ""
+  },
+  {
+    id: 2,
+    title: "Enterprise Data Analytics Pipeline",
+    category: "azure",
+    impact: "300K+ transactions",
+    description: "Built automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards with regional heatmaps.",
+    tech: ["Data Factory", "SQL Database", "Blob Storage", "Power BI"],
+    metric: "85% cost reduction",
+    icon: <BarChart3 className="w-6 h-6" />,
+    color: "from-blue-500 to-cyan-500",
+    details: [
+      "Automated data movement with ADF",
+      "Star schema with normalization best practices",
+      "Basic tier SQL (5 DTU) + LRS storage optimization",
+      "SQL firewall rules + RBAC security"
+    ],
+    link: ""
+  },
+  {
+    id: 3,
+    title: "Cloud-Native Microservices",
+    category: "azure",
+    impact: "Multi-service architecture",
+    description: "Deployed e-commerce app on Azure PaaS: App Service for Node.js/Python APIs, Static Web Apps for Vue.js frontend. RabbitMQ on Azure VM handles async messaging between services.",
+    tech: ["App Service", "Static Web Apps", "RabbitMQ", "Node.js", "Python"],
+    metric: "CI/CD with GitHub Actions",
+    icon: <Server className="w-6 h-6" />,
+    color: "from-purple-500 to-pink-500",
+    details: [
+      "RabbitMQ message broker for order/product services",
+      "GitHub Actions pipeline with env variables",
+      "CORS policies + environment-based routing",
+      "PaaS deployment architecture"
+    ],
+    link: ""
+  },
+  {
+    id: 4,
+    title: "Containerized Application",
+    category: "devops",
+    impact: "Multi-container setup",
+    description: "Created Docker images for Flask apps with layered architecture. Used Docker Compose to orchestrate Flask + Redis cache. Configured volumes for persistence and container networking.",
+    tech: ["Docker", "Docker Compose", "Flask", "Redis", "Python"],
+    metric: "Container isolation",
+    icon: <Container className="w-6 h-6" />,
+    color: "from-green-500 to-emerald-500",
+    details: [
+      "Dockerfiles with layered architecture",
+      "Docker Compose multi-container orchestration",
+      "Volume configuration for data persistence",
+      "Copy-on-write behavior demonstration"
+    ],
+    link: ""
+  },
+  {
+    id: 5,
+    title: "More Projects Coming Soon",
+    category: "all",
+    impact: "In Development",
+    description: "Currently working on exciting new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned for updates!",
+    tech: ["Kubernetes", "Terraform", "CI/CD", "AWS", "Azure"],
+    metric: "Coming Soon",
+    icon: <Cloud className="w-6 h-6" />,
+    color: "from-gray-500 to-gray-700",
+    details: [
+      "Kubernetes cluster deployment and management",
+      "Infrastructure as Code with Terraform",
+      "Advanced CI/CD pipeline automation",
+      "Multi-cloud deployment strategies"
+    ],
+    link: "",
+    comingSoon: true
+  }
+];
+
+const STATS_DATA = [
+  { number: "5+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
+  { number: "2", label: "Cloud Platforms", icon: <Server className="w-5 h-5" /> },
+  { number: "3", label: "Programs", icon: <BookOpen className="w-5 h-5" /> },
+  { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
+];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('all');
@@ -7,13 +109,14 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visitCount, setVisitCount] = useState(null);
   const [orbs, setOrbs] = useState([
-    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-800 to-blue-720' },
-    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-800 to-pink-720' },
-    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-800 to-purple-720' },
-    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-800 to-purple-720' },
-    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-800 to-cyan-720' },
-    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-800 to-indigo-720' }
+    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-800 to-blue-800' },
+    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-800 to-pink-800' },
+    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-800 to-purple-800' },
+    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-800 to-purple-800' },
+    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-800 to-cyan-800' },
+    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-800 to-indigo-800' }
   ]);
+  const rafRef = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +129,7 @@ export default function App() {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Fetch real visitor count
+    // Fetch visitor count
     const fetchVisitorCount = async () => {
       try {
         const response = await fetch('https://api.countapi.xyz/hit/aryanrudani-portfolio/visits');
@@ -40,7 +143,7 @@ export default function App() {
 
     fetchVisitorCount();
 
-    // Animate floating orbs with improved movement
+    // Optimized orb animation with RAF
     const animateOrbs = () => {
       setOrbs(prevOrbs => prevOrbs.map(orb => {
         let newX = orb.x + orb.dx;
@@ -48,7 +151,7 @@ export default function App() {
         let newDx = orb.dx;
         let newDy = orb.dy;
 
-        // Bounce off edges with slight randomization
+        // Bounce with randomization
         if (newX <= 5 || newX >= 95) {
           newDx = -orb.dx + (Math.random() - 0.5) * 0.02;
           newX = Math.max(5, Math.min(95, newX));
@@ -58,7 +161,7 @@ export default function App() {
           newY = Math.max(5, Math.min(95, newY));
         }
 
-        // Add slight random drift for more organic movement
+        // Organic drift
         newDx += (Math.random() - 0.5) * 0.001;
         newDy += (Math.random() - 0.5) * 0.001;
 
@@ -68,119 +171,23 @@ export default function App() {
 
         return { ...orb, x: newX, y: newY, dx: newDx, dy: newDy };
       }));
+      
+      rafRef.current = requestAnimationFrame(animateOrbs);
     };
 
-    const orbInterval = setInterval(animateOrbs, 25);
-
+    rafRef.current = requestAnimationFrame(animateOrbs);
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(orbInterval);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Serverless Resume Parser",
-      category: "aws",
-      impact: "Event-driven processing",
-      description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
-      tech: ["Lambda", "S3", "DynamoDB", "SES", "SQS", "Python", "PyPDF2"],
-      metric: "Full automation",
-      icon: <FileText className="w-6 h-6" />,
-      color: "from-orange-500 to-red-500",
-      details: [
-        "S3 event-driven architecture with Lambda triggers",
-        "PyPDF2 extraction with regex parsing algorithms",
-        "IAM least-privilege access policies",
-        "Optimized DynamoDB partition keys"
-      ],
-      link: "" // Add your link here later
-    },
-    {
-      id: 2,
-      title: "Enterprise Data Analytics Pipeline",
-      category: "azure",
-      impact: "300K+ transactions",
-      description: "Built automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards with regional heatmaps.",
-      tech: ["Data Factory", "SQL Database", "Blob Storage", "Power BI"],
-      metric: "85% cost reduction",
-      icon: <BarChart3 className="w-6 h-6" />,
-      color: "from-blue-500 to-cyan-500",
-      details: [
-        "Automated data movement with ADF",
-        "Star schema with normalization best practices",
-        "Basic tier SQL (5 DTU) + LRS storage optimization",
-        "SQL firewall rules + RBAC security"
-      ],
-      link: "" // Add your link here later
-    },
-    {
-      id: 3,
-      title: "Cloud-Native Microservices",
-      category: "azure",
-      impact: "Multi-service architecture",
-      description: "Deployed e-commerce app on Azure PaaS: App Service for Node.js/Python APIs, Static Web Apps for Vue.js frontend. RabbitMQ on Azure VM handles async messaging between services.",
-      tech: ["App Service", "Static Web Apps", "RabbitMQ", "Node.js", "Python"],
-      metric: "CI/CD with GitHub Actions",
-      icon: <Server className="w-6 h-6" />,
-      color: "from-purple-500 to-pink-500",
-      details: [
-        "RabbitMQ message broker for order/product services",
-        "GitHub Actions pipeline with env variables",
-        "CORS policies + environment-based routing",
-        "PaaS deployment architecture"
-      ],
-      link: "" // Add your link here later
-    },
-    {
-      id: 4,
-      title: "Containerized Application",
-      category: "devops",
-      impact: "Multi-container setup",
-      description: "Created Docker images for Flask apps with layered architecture. Used Docker Compose to orchestrate Flask + Redis cache. Configured volumes for persistence and container networking.",
-      tech: ["Docker", "Docker Compose", "Flask", "Redis", "Python"],
-      metric: "Container isolation",
-      icon: <Container className="w-6 h-6" />,
-      color: "from-green-500 to-emerald-500",
-      details: [
-        "Dockerfiles with layered architecture",
-        "Docker Compose multi-container orchestration",
-        "Volume configuration for data persistence",
-        "Copy-on-write behavior demonstration"
-      ],
-      link: "" // Add your link here later
-    },
-    {
-      id: 5,
-      title: "More Projects Coming Soon",
-      category: "all",
-      impact: "In Development",
-      description: "Currently working on exciting new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned for updates!",
-      tech: ["Kubernetes", "Terraform", "CI/CD", "AWS", "Azure"],
-      metric: "Coming Soon",
-      icon: <Cloud className="w-6 h-6" />,
-      color: "from-gray-500 to-gray-700",
-      details: [
-        "Kubernetes cluster deployment and management",
-        "Infrastructure as Code with Terraform",
-        "Advanced CI/CD pipeline automation",
-        "Multi-cloud deployment strategies"
-      ],
-      link: "",
-      comingSoon: true
-    }
-  ];
-
-  const stats = [
-    { number: "5+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
-    { number: "2", label: "Cloud Platforms", icon: <Server className="w-5 h-5" /> },
-    { number: "3", label: "Programs", icon: <BookOpen className="w-5 h-5" /> },
-    { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
-  ];
+  const projects = PROJECTS_DATA;
+  const stats = STATS_DATA;
 
   const skills = [
     { 
@@ -202,7 +209,7 @@ export default function App() {
     },
     { 
       category: "Security & Frameworks",
-      icon: <Shield className="w-5 h-5" />,
+      icon: <CheckCircle2 className="w-5 h-5" />,
       items: [
         { name: "IAM Policies, RBAC, Firewall Configuration", full: true },
         { name: "Least-Privilege Access, Palo Alto NGFW", full: true },
@@ -297,12 +304,12 @@ export default function App() {
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500/10 to-cyan-500/10 border border-green-500/20 rounded-full px-6 py-2 mb-8 backdrop-blur-xl">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-green-500/20 border rounded-full px-6 py-2 mb-8 backdrop-blur-xl">
             <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-sm text-green-400 font-semibold">Open to Cloud & Security Opportunities</span>
+            <span className="text-sm text-green-500 font-semibold">Open to Cloud & Security Opportunities</span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
+          <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight">
             <span className="bg-gradient-to-r from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">
               Aryan Rudani
             </span>
@@ -313,15 +320,19 @@ export default function App() {
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Building secure cloud infrastructure with <span className="text-cyan-400">AWS</span> and <span className="text-blue-400">Azure</span>. 
+            Building secure cloud infrastructure with <span className="text-cyan-500">AWS</span> and <span className="text-blue-500">Azure</span>. 
             Cybersecurity analyst turned cloud engineer specializing in <span className="text-white font-semibold">serverless architectures</span>, 
-            <span className="text-purple-400"> microservices</span>, and <span className="text-pink-400">DevSecOps</span>.
+            <span className="text-purple-500"> microservices</span>, and <span className="text-pink-500">DevSecOps</span>.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <a 
-              href="#projects" 
-              className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-bold text-lg text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"
             >
               <span className="relative z-10 flex items-center justify-center space-x-2">
                 <span>View Projects</span>
@@ -329,8 +340,12 @@ export default function App() {
               </span>
             </a>
             <a 
-              href="#contact" 
-              className="px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-bold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105"
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-8 py-4 bg-white/5 border-white/10 backdrop-blur-xl border rounded-full font-bold text-lg hover:bg-opacity-20 transition-all duration-300 hover:scale-105"
             >
               Get in Touch
             </a>
@@ -339,7 +354,7 @@ export default function App() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+              <div key={index} className="bg-white/5 border-white/10 backdrop-blur-xl border rounded-2xl p-6 hover:bg-opacity-20 transition-all duration-300">
                 <div className="text-cyan-400 mb-2">{stat.icon}</div>
                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
                   {stat.number}
@@ -380,7 +395,7 @@ export default function App() {
             </div>
 
             {/* Life Beyond Tech */}
-            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 backdrop-blur-xl border rounded-3xl p-8 shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
                 <div className="w-2 h-8 bg-gradient-to-b from-pink-400 to-purple-500 rounded-full"></div>
                 <span>Life Beyond Tech</span>
@@ -436,7 +451,7 @@ export default function App() {
 
           {/* Projects Grid */}
           <div className="grid md:grid-cols-2 gap-8">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <div
                 key={project.id}
                 className={`group relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 ${
@@ -506,7 +521,7 @@ export default function App() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-32 px-6 bg-gradient-to-b from-black to-purple-950/20">
+      <section id="skills" className="py-32 px-6 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -643,7 +658,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/10">
+      <footer className="py-12 px-6 border-white/10 border-t">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-400 text-center md:text-left">
@@ -652,10 +667,10 @@ export default function App() {
             
             {/* Visitor Counter */}
             {visitCount !== null && (
-              <div className="flex items-center space-x-2 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-full px-4 py-2">
+              <div className="flex items-center space-x-2 bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 backdrop-blur-xl border rounded-full px-4 py-2 shadow-lg">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="text-sm text-gray-400">Visitors:</span>
-                <span className="text-sm font-bold text-cyan-400">{visitCount.toLocaleString()}</span>
+                <span className="text-sm font-bold text-cyan-500">{visitCount.toLocaleString()}</span>
               </div>
             )}
           </div>
