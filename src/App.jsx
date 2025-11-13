@@ -109,15 +109,14 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visitCount, setVisitCount] = useState(null);
   const [orbs, setOrbs] = useState([
-    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-720 to-blue-720' },
-    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-720 to-pink-720' },
-    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-720 to-purple-720' },
-    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-720 to-purple-720' },
-    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-720 to-cyan-720' },
-    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-720 to-indigo-720' }
+    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-700 to-blue-700' },
+    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-700 to-pink-700' },
+    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-700 to-purple-700' },
+    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-700 to-purple-700' },
+    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-700 to-cyan-700' },
+    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-700 to-indigo-700' }
   ]);
   const rafRef = useRef();
-
   // Smooth scroll helper function
   const smoothScrollTo = (elementId) => {
     const element = document.getElementById(elementId);
@@ -383,7 +382,7 @@ export default function App() {
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
                 <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full"></div>
-                <span>My Journey</span>
+                <span>Approach</span>
               </h3>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
                 <p>
