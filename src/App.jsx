@@ -5,6 +5,15 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('all');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [visitCount, setVisitCount] = useState(null);
+  const [orbs, setOrbs] = useState([
+    { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-800 to-blue-800' },
+    { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-800 to-pink-800' },
+    { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-800 to-purple-800' },
+    { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-800 to-purple-800' },
+    { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-800 to-cyan-800' },
+    { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-800 to-indigo-800' }
+  ]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,11 +26,58 @@ export default function App() {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
+    // Fetch real visitor count
+    const fetchVisitorCount = async () => {
+      try {
+        const response = await fetch('https://api.countapi.xyz/hit/aryanrudani-portfolio/visits');
+        const data = await response.json();
+        setVisitCount(data.value);
+      } catch (error) {
+        console.error('Failed to fetch visitor count:', error);
+        setVisitCount('--');
+      }
+    };
+
+    fetchVisitorCount();
+
+    // Animate floating orbs with improved movement
+    const animateOrbs = () => {
+      setOrbs(prevOrbs => prevOrbs.map(orb => {
+        let newX = orb.x + orb.dx;
+        let newY = orb.y + orb.dy;
+        let newDx = orb.dx;
+        let newDy = orb.dy;
+
+        // Bounce off edges with slight randomization
+        if (newX <= 5 || newX >= 95) {
+          newDx = -orb.dx + (Math.random() - 0.5) * 0.02;
+          newX = Math.max(5, Math.min(95, newX));
+        }
+        if (newY <= 5 || newY >= 95) {
+          newDy = -orb.dy + (Math.random() - 0.5) * 0.02;
+          newY = Math.max(5, Math.min(95, newY));
+        }
+
+        // Add slight random drift for more organic movement
+        newDx += (Math.random() - 0.5) * 0.001;
+        newDy += (Math.random() - 0.5) * 0.001;
+
+        // Clamp speed
+        newDx = Math.max(-0.1, Math.min(0.1, newDx));
+        newDy = Math.max(-0.1, Math.min(0.1, newDy));
+
+        return { ...orb, x: newX, y: newY, dx: newDx, dy: newDy };
+      }));
+    };
+
+    const orbInterval = setInterval(animateOrbs, 25);
+
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(orbInterval);
     };
   }, []);
 
@@ -199,6 +255,24 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Floating Orbs Background */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {orbs.map(orb => (
+          <div 
+            key={orb.id}
+            className={`absolute bg-gradient-to-br ${orb.color} rounded-full filter blur-3xl opacity-30`}
+            style={{
+              width: `${orb.size}px`,
+              height: `${orb.size}px`,
+              left: `${orb.x}%`,
+              top: `${orb.y}%`,
+              transform: 'translate(-50%, -50%)',
+              transition: 'all 0.5s ease-out'
+            }}
+          ></div>
+        ))}
+      </div>
+
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-900 z-50">
         <div 
@@ -278,9 +352,7 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-32 px-6 bg-gradient-to-b from-black via-gray-900/50 to-black relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
-        
+      <section id="about" className="py-32 px-6 relative overflow-hidden">
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -291,17 +363,18 @@ export default function App() {
           </div>
 
           <div className="space-y-6">
-            {/* Approach */}
+            {/* My Journey */}
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
                 <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full"></div>
-                <span>Approach</span>
+                <span>My Journey</span>
               </h3>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
                 <p>
-                 With a foundation in cybersecurity, I focus on building cloud infrastructure that's secure, scalable, and resilient because security should be part of the design, not an afterthought. </p>
+                  I started in cybersecurity, learning how attackers think and how systems break. Now I build cloud infrastructure with that defensive mindset baked in—because security isn't something you bolt on later.
+                </p>
                 <p>
-                  What drives me? Learning from different perspectives. Whether it's a new cloud service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
+                  What drives me? Learning from different angles. Whether it's a new AWS service, a better way to architect solutions, or insights from the people around me—I'm constantly evolving my approach.
                 </p>
               </div>
             </div>
@@ -317,7 +390,8 @@ export default function App() {
                   Outside of tech, you'll find me on nature trails or grabbing coffee with friends. Some of my best solutions come when I step away from the screen.
                 </p>
                 <p className="text-white font-semibold">
-                 For me, it's not just about building great systems it's about living a meaningful life and creating things that matter. </p>
+                  I want to work on projects that solve real problems—not just build for the sake of building. Let's create infrastructure that's powerful, secure, and actually works for people.
+                </p>
               </div>
             </div>
           </div>
@@ -570,10 +644,21 @@ export default function App() {
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-gray-400">
-            © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
-          </p>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-gray-400 text-center md:text-left">
+              © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
+            </p>
+            
+            {/* Visitor Counter */}
+            {visitCount !== null && (
+              <div className="flex items-center space-x-2 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-full px-4 py-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-sm text-gray-400">Visitors:</span>
+                <span className="text-sm font-bold text-cyan-400">{visitCount.toLocaleString()}</span>
+              </div>
+            )}
+          </div>
         </div>
       </footer>
     </div>
