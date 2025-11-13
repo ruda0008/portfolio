@@ -299,10 +299,9 @@ export default function App() {
               </h3>
               <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
                 <p>
-                  I started in cybersecurity, learning how attackers think and how systems break. Now I build cloud infrastructure with that defensive mindset baked in because security isn't something you bolt on later.
-                </p>
+                 With a foundation in cybersecurity, I focus on building cloud infrastructure that's secure, scalable, and resilient because security should be part of the design, not an afterthought. </p>
                 <p>
-                  What drives me? Learning from different perspective. Whether it's a new Azure service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
+                  What drives me? Learning from different perspective. Whether it's a new cloud service, a better way to architect solutions, or insights from the people around me I'm constantly evolving my approach.
                 </p>
               </div>
             </div>
