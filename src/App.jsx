@@ -242,7 +242,7 @@ export default function App() {
       school: "Algonquin College",
       program: "Cloud Development and Operations",
       status: "In Progress",
-      graduation: "June 2026",
+      graduation: "August 2026",
       location: "Ottawa, ON",
       gpa: null
     },
@@ -250,7 +250,7 @@ export default function App() {
       school: "Algonquin College",
       program: "Cybersecurity Analysis",
       status: "Completed",
-      graduation: "June 2025",
+      graduation: "April 2025",
       location: "Ottawa, ON",
       gpa: "3.8/4.0"
     },
