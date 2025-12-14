@@ -92,7 +92,7 @@ const PROJECTS_DATA = [
       "5-min tumbling windows with safety classification",
       "Dual storage: Cosmos DB (fast) + Blob (archive)"
     ],
-    link: "",
+    link: "https://github.com/ruda0008/rideau-canal-monitoring",
     comingSoon: false
   },
   {
@@ -111,7 +111,7 @@ const PROJECTS_DATA = [
       "Advanced CI/CD pipeline automation",
       "Multi-cloud deployment strategies"
     ],
-    link: "https://github.com/ruda0008/rideau-canal-monitoring",
+    link: "",
     comingSoon: true
   }
 ];
