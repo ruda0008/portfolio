@@ -83,7 +83,7 @@ const PROJECTS_DATA = [
     description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
     tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Blob Storage", "Node.js", "Python"],
     metric: "Coming Soon",
-    icon: <Cloud className="w-6 h-6" />,
+    icon: <Server className="w-6 h-6" />,
     color: "from-gray-500 to-gray-700",
     details: [
       "Kubernetes cluster deployment and management",
@@ -92,7 +92,7 @@ const PROJECTS_DATA = [
       "Multi-cloud deployment strategies"
     ],
     link: "",
-    comingSoon: true
+    comingSoon: false
   }, 
   {
     id: 6,
@@ -102,7 +102,7 @@ const PROJECTS_DATA = [
     description: "Currently working on exciting new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned for updates!",
     tech: ["Kubernetes", "Terraform", "CI/CD", "AWS", "Azure"],
     metric: "Full Automation",
-    icon: <Server className="w-6 h-6" />,
+    icon: <Cloud className="w-6 h-6" />,
     color: "from-cyan-500 to-blue-500",
     details: [
      "Python sensors → Azure pipeline → Node.js dashboard",
@@ -111,7 +111,7 @@ const PROJECTS_DATA = [
     "Dual storage: Cosmos DB (fast) + Blob (archive)"
     ],
     link: "https://github.com/ruda0008/rideau-canal-monitoring",
-    comingSoon: false
+    comingSoon: true
   }
 ];
 
