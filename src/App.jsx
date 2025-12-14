@@ -1,5 +1,74 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Cloud, Code2, Mail, Github, Linkedin, ArrowRight, BookOpen, CheckCircle2, Server, Layers, FileText, BarChart3, Container, ExternalLink } from 'lucide-react';
+import { 
+  Cloud, 
+  Code2, 
+  Mail, 
+  Github, 
+  Linkedin, 
+  ArrowRight, 
+  BookOpen, 
+  CheckCircle2, 
+  Server, 
+  Layers, 
+  FileText, 
+  BarChart3, 
+  Container, 
+  ExternalLink,
+  
+  // ===== NEW ICONS FOR PROJECTS =====
+  
+  // IoT & Sensors
+  Radio,           // 📡 IoT/Wireless - BEST for IoT projects
+  Wifi,            // 📶 Network connectivity
+  Zap,             // ⚡ Real-time processing
+  Activity,        // 📈 Live monitoring/metrics
+  
+  // Cloud & Infrastructure
+  CloudCog,        // ☁️⚙️ Cloud configuration
+  CloudLightning,  // ☁️⚡ Serverless/Fast cloud
+  Database,        // 🗄️ Database projects
+  HardDrive,       // 💾 Storage solutions
+  
+  // Security & Compliance
+  Shield,          // 🛡️ Security projects
+  ShieldCheck,     // ✅🛡️ Security compliance
+  Lock,            // 🔒 Encryption/Auth
+  Key,             // 🔑 Access management
+  
+  // DevOps & Automation
+  GitBranch,       // 🌳 Git/CI/CD
+  Workflow,        // 🔄 Automation workflows
+  Cpu,             // 🖥️ Processing/Compute
+  Boxes,           // 📦 Microservices
+  
+  // Data & Analytics
+  TrendingUp,      // 📊 Analytics/Growth
+  PieChart,        // 🥧 Data visualization
+  LineChart,       // 📉 Time-series data
+  Brain,           // 🧠 AI/ML projects
+  
+  // Web & API
+  Globe,           // 🌐 Web applications
+  Webhook,         // 🪝 APIs/Webhooks
+  Network,         // 🕸️ Network architecture
+  Share2,          // 🔗 Data sharing/Integration
+  
+  // Development Tools
+  Terminal,        // 💻 CLI tools
+  Package,         // 📦 Package management
+  Wrench,          // 🔧 Configuration
+  Rocket,          // 🚀 Deployment
+  
+  // Monitoring & Alerts
+  Bell,            // 🔔 Notifications/Alerts
+  Eye,             // 👁️ Monitoring
+  AlertTriangle,   // ⚠️ Error handling
+  Target           // 🎯 Goal/Performance
+} from 'lucide-react';
+
+
+
+
 
 // Static data outside component - no recreation on re-renders
 const PROJECTS_DATA = [
@@ -11,7 +80,7 @@ const PROJECTS_DATA = [
     description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
     tech: ["Lambda", "S3", "DynamoDB", "SES", "SQS", "Python", "PyPDF2"],
     metric: "Full automation",
-    icon: <FileText className="w-6 h-6" />,
+    icon: <CloudLightning className="w-6 h-6" />,
     color: "from-orange-500 to-red-500",
     details: [
       "S3 event-driven architecture with Lambda triggers",
@@ -83,7 +152,7 @@ const PROJECTS_DATA = [
     description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
     tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Blob Storage", "Node.js", "Python"],
     metric: "Full Automation",
-    icon: <Server className="w-6 h-6" />,
+    icon: <Radio className="w-6 h-6" />,
     color: "from-cyan-500 to-blue-500",
     details: [
 
