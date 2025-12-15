@@ -165,7 +165,26 @@ const PROJECTS_DATA = [
     comingSoon: false
   },
   {
-    id: 6,
+  id: 6,
+  title: "Best Buy Cloud-Native Microservices Platform",
+  category: "azure",
+  impact: "Production-Ready Architecture",
+  description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
+  tech: ["Kubernetes", "Docker", "Azure AKS", "MongoDB", "RabbitMQ", "Node.js", "Go", "Vue.js", "GitHub Actions", "YAML"],
+  metric: "99.9% Uptime",
+  icon: <Boxes className="w-6 h-6" />,
+  color: "from-indigo-500 to-purple-500",
+  details: [
+    "5 microservices with independent scaling",
+    "MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover",
+    "RabbitMQ AMQP 1.0 message queue for 1000+ orders/min",
+    "CI/CD pipelines: 2 hours → 3 minutes deployment time"
+  ],
+  link: "https://github.com/venom0836/bestbuy-cloud-app",
+  comingSoon: false
+},
+  {
+    id: 7,
     title: "More Projects Coming Soon",
     category: "all",
     impact: "In Development",
