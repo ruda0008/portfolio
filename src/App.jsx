@@ -72,7 +72,48 @@ import {
 
 // Static data outside component - no recreation on re-renders
 const PROJECTS_DATA = [
+  
+
   {
+  id: 1,
+  title: "Cloud-Native Microservices Platform",
+  category: "azure",
+  impact: "Production-Ready Architecture",
+  description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
+  tech: ["Kubernetes", "Docker", "Azure AKS", "MongoDB", "RabbitMQ", "Node.js", "Go", "Vue.js", "GitHub Actions", "YAML"],
+  metric: "99.9% Uptime",
+  icon: <Boxes className="w-6 h-6" />,
+  color: "from-indigo-500 to-purple-500",
+  details: [
+    "5 microservices with independent scaling",
+    "MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover",
+    "RabbitMQ AMQP 1.0 message queue for 1000+ orders/min",
+    "CI/CD pipelines: 2 hours → 3 minutes deployment time"
+  ],
+  link: "https://github.com/ruda0008/fullstack-final-project",
+  comingSoon: false
+},
+  {
+    id: 2,
+    title: "Real-Time IoT Monitoring System",
+    category: "azure",
+    impact: "30x faster queries",
+    description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
+    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Blob Storage", "Node.js", "Python"],
+    metric: "Full Automation",
+    icon: <Radio className="w-6 h-6" />,
+    color: "from-cyan-500 to-blue-500",
+    details: [
+
+      "Python sensors → Azure pipeline → Node.js dashboard",
+      "Partition key optimization: 300ms → <10ms queries",
+      "5-min tumbling windows with safety classification",
+      "Dual storage: Cosmos DB (fast) + Blob (archive)"
+    ],
+    link: "https://github.com/ruda0008/rideau-canal-monitoring",
+    comingSoon: false
+  },
+{
     id: 3,
     title: "Serverless Resume Parser",
     category: "aws",
@@ -144,45 +185,6 @@ const PROJECTS_DATA = [
     ],
     link: ""
   },
-  {
-    id: 2,
-    title: "Real-Time IoT Monitoring System",
-    category: "azure",
-    impact: "30x faster queries",
-    description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
-    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Blob Storage", "Node.js", "Python"],
-    metric: "Full Automation",
-    icon: <Radio className="w-6 h-6" />,
-    color: "from-cyan-500 to-blue-500",
-    details: [
-
-      "Python sensors → Azure pipeline → Node.js dashboard",
-      "Partition key optimization: 300ms → <10ms queries",
-      "5-min tumbling windows with safety classification",
-      "Dual storage: Cosmos DB (fast) + Blob (archive)"
-    ],
-    link: "https://github.com/ruda0008/rideau-canal-monitoring",
-    comingSoon: false
-  },
-  {
-  id: 1,
-  title: "Cloud-Native Microservices Platform",
-  category: "azure",
-  impact: "Production-Ready Architecture",
-  description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
-  tech: ["Kubernetes", "Docker", "Azure AKS", "MongoDB", "RabbitMQ", "Node.js", "Go", "Vue.js", "GitHub Actions", "YAML"],
-  metric: "99.9% Uptime",
-  icon: <Boxes className="w-6 h-6" />,
-  color: "from-indigo-500 to-purple-500",
-  details: [
-    "5 microservices with independent scaling",
-    "MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover",
-    "RabbitMQ AMQP 1.0 message queue for 1000+ orders/min",
-    "CI/CD pipelines: 2 hours → 3 minutes deployment time"
-  ],
-  link: "https://github.com/ruda0008/fullstack-final-project",
-  comingSoon: false
-},
   {
     id: 7,
     title: "More Projects Coming Soon",
