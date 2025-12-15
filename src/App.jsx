@@ -73,7 +73,7 @@ import {
 // Static data outside component - no recreation on re-renders
 const PROJECTS_DATA = [
   {
-    id: 1,
+    id: 3,
     title: "Serverless Resume Parser",
     category: "aws",
     impact: "Event-driven processing",
@@ -91,7 +91,7 @@ const PROJECTS_DATA = [
     link: ""
   },
   {
-    id: 2,
+    id: 4,
     title: "Enterprise Data Analytics Pipeline",
     category: "azure",
     impact: "300K+ transactions",
@@ -109,7 +109,7 @@ const PROJECTS_DATA = [
     link: ""
   },
   {
-    id: 3,
+    id: 5,
     title: "Cloud-Native Microservices",
     category: "azure",
     impact: "Multi-service architecture",
@@ -127,7 +127,7 @@ const PROJECTS_DATA = [
     link: ""
   },
   {
-    id: 4,
+    id: 6,
     title: "Containerized Application",
     category: "devops",
     impact: "Multi-container setup",
@@ -145,7 +145,7 @@ const PROJECTS_DATA = [
     link: ""
   },
   {
-    id: 5,
+    id: 2,
     title: "Real-Time IoT Monitoring System",
     category: "azure",
     impact: "30x faster queries",
@@ -165,8 +165,8 @@ const PROJECTS_DATA = [
     comingSoon: false
   },
   {
-  id: 6,
-  title: "Best Buy Cloud-Native Microservices Platform",
+  id: 1,
+  title: "Cloud-Native Microservices Platform",
   category: "azure",
   impact: "Production-Ready Architecture",
   description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
@@ -180,7 +180,7 @@ const PROJECTS_DATA = [
     "RabbitMQ AMQP 1.0 message queue for 1000+ orders/min",
     "CI/CD pipelines: 2 hours → 3 minutes deployment time"
   ],
-  link: "https://github.com/venom0836/bestbuy-cloud-app",
+  link: "https://github.com/ruda0008/fullstack-final-project",
   comingSoon: false
 },
   {
