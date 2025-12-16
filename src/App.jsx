@@ -76,7 +76,7 @@ const PROJECTS_DATA = [
 
   {
   id: 1,
-  title: "Cloud-Native Microservices Platform",
+  title: "Enterprise Microservices Platform (Kubernetes)",
   category: "azure",
   impact: "Production-Ready Architecture",
   description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
@@ -207,8 +207,8 @@ const PROJECTS_DATA = [
 ];
 
 const STATS_DATA = [
-  { number: "5+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
-  { number: "2", label: "Cloud Platforms", icon: <Server className="w-5 h-5" /> },
+  { number: "6+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
+ { number: "99.9%", label: "Uptime SLA", icon: <CheckCircle2 className="w-5 h-5" /> }, // NEW - from Kubernetes
   { number: "30x", label: "Query Optimization", icon: <BarChart3 className="w-5 h-5" /> },
   { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
 ];
@@ -321,7 +321,7 @@ export default function App() {
       icon: <Code2 className="w-5 h-5" />,
       items: [
         { name: "Python, SQL, Bash, Java, C++", full: true },
-        { name: "Azure SQL Database, DynamoDB", full: true },
+        { name: "Azure SQL Database, DynamoDB, MongoDB", full: true },
         { name: "Star Schema Design, Database Normalization", full: true }
       ]
     },
@@ -335,16 +335,16 @@ export default function App() {
         { name: "AES-256, RSA, PKI, X.509 Certificates", full: true }
       ]
     },
-    {
-      category: "DevOps & Tools",
-      icon: <Layers className="w-5 h-5" />,
-      items: [
-        { name: "Docker, Docker Compose, Git, GitHub", full: true },
-        { name: "RabbitMQ, RESTful APIs, Event-Driven Architecture", full: true },
-        { name: "CI/CD with GitHub Actions", full: true },
-        { name: "Power BI Desktop, PyPDF2", full: true }
-      ]
-    }
+ {
+  category: "DevOps & Tools",
+  icon: <Layers className="w-5 h-5" />,
+  items: [
+    { name: "Kubernetes, Docker, Docker Compose, Git, GitHub", full: true }, // Added Kubernetes
+    { name: "RabbitMQ, RESTful APIs, Event-Driven Architecture", full: true },
+    { name: "CI/CD with GitHub Actions", full: true },
+    { name: "Power BI Desktop, PyPDF2", full: true }
+  ]
+}
   ];
 
   const education = [
