@@ -76,7 +76,7 @@ const PROJECTS_DATA = [
 
   {
   id: 1,
-  title: "Enterprise Microservices Platform (Kubernetes)",
+  title: "E-Commerce Microservices Cluster Platform (Kubernetes)",
   category: "azure",
   impact: "Production-Ready Architecture",
   description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
@@ -95,7 +95,7 @@ const PROJECTS_DATA = [
 },
   {
     id: 2,
-    title: "Real-Time IoT Monitoring System",
+    title: "Real-Time IoT Monitoring Pipeline",
     category: "azure",
     impact: "30x faster queries",
     description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
@@ -115,7 +115,7 @@ const PROJECTS_DATA = [
   },
 {
     id: 3,
-    title: "Serverless Resume Parser",
+    title: "Serverless Resume Screening Platform",
     category: "aws",
     impact: "Event-driven processing",
     description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
@@ -129,11 +129,11 @@ const PROJECTS_DATA = [
       "IAM least-privilege access policies",
       "Optimized DynamoDB partition keys"
     ],
-    link: ""
+    link: "https://github.com/ruda0008/AWS_resume_parser"
   },
   {
     id: 4,
-    title: "Enterprise Data Analytics Pipeline",
+    title: "Cloud Data Analytics Pipeline",
     category: "azure",
     impact: "300K+ transactions",
     description: "Built automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards with regional heatmaps.",
@@ -147,7 +147,7 @@ const PROJECTS_DATA = [
       "Basic tier SQL (5 DTU) + LRS storage optimization",
       "SQL firewall rules + RBAC security"
     ],
-    link: ""
+    link: "https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline"
   },
   {
     id: 5,
