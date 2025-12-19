@@ -115,7 +115,7 @@ const PROJECTS_DATA = [
   },
 {
     id: 3,
-    title: "Serverless Resume Screening Platform",
+    title: "Serverless Resume Screening Platform (AWS)",
     category: "aws",
     impact: "Event-driven processing",
     description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
