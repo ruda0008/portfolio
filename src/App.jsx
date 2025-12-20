@@ -362,7 +362,7 @@ export default function App() {
       status: "Completed",
       graduation: "April 2025",
       location: "Ottawa, ON",
-      gpa: "3.8/4.0"
+      gpa: "3.7/4.0"
     },
     {
       school: "Veer Narmad South Gujarat University",
@@ -438,7 +438,7 @@ export default function App() {
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
             Building secure cloud infrastructure with <span className="text-cyan-500">AWS</span> and <span className="text-blue-500">Azure</span>.
-            Cybersecurity analyst turned cloud engineer specializing in <span className="text-purple-500">CI/CD pipelines</span>, <span className="text-white font-semibold">serverless architectures</span>,
+            Cybersecurity analyst turned cloud engineer specializing in <span className="text-purple-500">Automation</span>, <span className="text-white font-semibold">serverless architectures</span>,
             and <span className="text-pink-500">DevSecOps</span>.
           </p>
 
