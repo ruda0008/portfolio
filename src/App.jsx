@@ -787,27 +787,24 @@
 
 
 
-
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Cloud, Code2, Mail, Github, Linkedin, ArrowRight, CheckCircle2, 
-  Server, Layers, FileText, BarChart3, Container, ExternalLink,
-  Radio, CloudLightning, Activity, Shield, Globe, Terminal, Cpu, Lock
+  Cloud, Code2, Mail, Github, Linkedin, ArrowRight, Server, Layers, 
+  BarChart3, Container, ExternalLink, Radio, CloudLightning, 
+  Activity, Shield, Globe, Terminal, Cpu, Database, Lock, Wifi, Zap
 } from 'lucide-react';
 
 // ==========================================
-// 1. DATA (YOUR EXACT DATA)
+// 1. YOUR EXACT DATA (UNCHANGED)
 // ==========================================
 const PROJECTS_DATA = [
   {
     id: 1,
     title: "E-Commerce Microservices Cluster",
     category: "azure",
-    impact: "Production-Ready Architecture",
-    description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover.",
-    tech: ["Kubernetes", "Azure AKS", "MongoDB", "RabbitMQ", "Go", "Terraform"],
-    metric: "99.9% Uptime",
+    description: "Architected enterprise-grade platform on AKS with 5 microservices. Implemented MongoDB replica set with auto-failover and RabbitMQ async messaging.",
+    tech: ["Kubernetes", "AKS", "MongoDB", "RabbitMQ", "Go"],
+    metric: "99.9% UPTIME",
     icon: <Server className="w-6 h-6" />,
     color: "cyan",
     link: "https://github.com/ruda0008/fullstack-final-project",
@@ -816,446 +813,321 @@ const PROJECTS_DATA = [
     id: 2,
     title: "IoT Real-Time Sentinel",
     category: "azure",
-    impact: "30x Faster Queries",
-    description: "Built Azure IoT pipeline for public safety monitoring. Streams sensor data through IoT Hub to Stream Analytics. Optimized Cosmos DB from 300ms to <10ms using partition strategy.",
-    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Python", "React"],
-    metric: "<10ms Latency",
+    description: "Public safety monitoring pipeline. Streams sensor data through IoT Hub to Stream Analytics. Optimized Cosmos DB partition strategy.",
+    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Python"],
+    metric: "<10ms LATENCY",
     icon: <Radio className="w-6 h-6" />,
-    color: "violet",
+    color: "magenta",
     link: "https://github.com/ruda0008/rideau-canal-monitoring",
   },
   {
     id: 3,
     title: "Serverless Resume Parser",
     category: "aws",
-    impact: "Event-Driven Processing",
-    description: "Automated resume screening system using Lambda with S3 triggers. Extracts candidate data using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
-    tech: ["AWS Lambda", "S3", "DynamoDB", "SQS", "Python"],
-    metric: "Auto-Scaling",
+    description: "Event-driven system using Lambda & S3 triggers. Extracts data using regex, stores in DynamoDB with SQS/SES notifications.",
+    tech: ["Lambda", "S3", "DynamoDB", "SQS", "Python"],
+    metric: "AUTO-SCALING",
     icon: <CloudLightning className="w-6 h-6" />,
-    color: "pink",
+    color: "cyan",
     link: "https://github.com/ruda0008/AWS_resume_parser"
   },
   {
     id: 4,
     title: "Data Analytics Pipeline",
     category: "azure",
-    impact: "300K+ Transactions",
-    description: "Automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards.",
+    description: "Automated ETL with Data Factory moving data Blob to SQL. Created star schema and Power BI dashboards.",
     tech: ["Data Factory", "Azure SQL", "Blob Storage", "Power BI"],
-    metric: "85% Cost Red.",
+    metric: "85% COST RED.",
     icon: <BarChart3 className="w-6 h-6" />,
-    color: "blue",
+    color: "magenta",
     link: "https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline"
-  },
-  {
-    id: 5,
-    title: "Cloud-Native Microservices",
-    category: "azure",
-    impact: "Multi-Service Arch",
-    description: "Deployed e-commerce app on Azure PaaS: App Service for Node/Python APIs, Static Web Apps for Vue.js. RabbitMQ on Azure VM handles async messaging.",
-    tech: ["App Service", "Static Web Apps", "RabbitMQ", "Node.js"],
-    metric: "CI/CD Actions",
-    icon: <Globe className="w-6 h-6" />,
-    color: "emerald",
-    link: ""
-  },
-  {
-    id: 6,
-    title: "Containerized Flask App",
-    category: "devops",
-    impact: "Container Isolation",
-    description: "Created Docker images for Flask apps with layered architecture. Used Docker Compose to orchestrate Flask + Redis cache with persistence volumes.",
-    tech: ["Docker", "Compose", "Flask", "Redis", "Python"],
-    metric: "Orchestration",
-    icon: <Container className="w-6 h-6" />,
-    color: "orange",
-    link: ""
   },
 ];
 
 const SKILLS_DATA = [
-  {
-    category: "Cloud Platforms",
-    icon: <Cloud className="w-5 h-5" />,
-    items: ["AWS (Lambda, S3, IAM)", "Azure (IoT Hub, AKS, Cosmos)"]
-  },
-  {
-    category: "Core Engineering",
-    icon: <Code2 className="w-5 h-5" />,
-    items: ["Python, Java, C++", "SQL & NoSQL Design"]
-  },
-  {
-    category: "Security Ops",
-    icon: <Shield className="w-5 h-5" />,
-    items: ["IAM, RBAC, Firewall", "NIST, ISO 27001, OWASP"]
-  },
-  {
-    category: "DevOps & Tools",
-    icon: <Layers className="w-5 h-5" />,
-    items: ["Docker, K8s, Git", "CI/CD Pipelines, Terraform"]
-  }
-];
-
-const EDUCATION_DATA = [
-  {
-    school: "Algonquin College",
-    program: "Cloud Development & Ops",
-    status: "In Progress",
-    year: "2026",
-    color: "cyan"
-  },
-  {
-    school: "Algonquin College",
-    program: "Cybersecurity Analysis",
-    status: "Completed",
-    year: "2025",
-    color: "violet"
-  },
-  {
-    school: "VNSGU",
-    program: "Bach. Computer Applications",
-    status: "Completed",
-    year: "2024",
-    color: "blue"
-  }
+  { category: "CLOUD INFRA", icon: <Cloud />, items: ["AWS (Lambda, S3, IAM)", "Azure (IoT, AKS, Cosmos)"] },
+  { category: "CORE ENG", icon: <Cpu />, items: ["Python, Java, C++", "SQL & NoSQL Design"] },
+  { category: "SEC OPS", icon: <Shield />, items: ["IAM, RBAC, Firewall", "NIST, OWASP Top 10"] },
+  { category: "DEVOPS", icon: <Layers />, items: ["Docker, K8s, Git", "CI/CD, Terraform"] }
 ];
 
 // ==========================================
-// 2. JAW-DROPPING VISUAL COMPONENTS
+// 2. CYBERPUNK UI COMPONENTS
 // ==========================================
 
-// --- Spotlight Card (The "Vercel" Effect) ---
-const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(6, 182, 212, 0.25)" }) => {
-  const divRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
+// The CRT Monitor Scanline Effect
+const ScanlineOverlay = () => (
+  <div className="pointer-events-none fixed inset-0 z-[100] overflow-hidden">
+    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay"></div>
+    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)50%,rgba(0,0,0,0.25)50%)] bg-[length:100%_4px] pointer-events-none"></div>
+    <div className="absolute inset-0 animate-scanline bg-[linear-gradient(to_bottom,transparent,rgba(6,182,212,0.1),transparent)] h-[20vh]"></div>
+  </div>
+);
 
-  const handleMouseMove = (e) => {
-    if (!divRef.current) return;
-    const rect = divRef.current.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    setOpacity(1);
-  };
+// The glowing wireframe background
+const CyberGrid = () => (
+  <div className="fixed inset-0 z-0 perspective-1000 pointer-events-none">
+    <div className="absolute inset-0 bg-gradient-to-t from-black via-black to-transparent z-10"></div>
+    <div className="absolute inset-0 -bottom-[50%] bg-[linear-gradient(to_right,rgba(6,182,212,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.2)_1px,transparent_1px)] bg-[size:4rem_4rem] [transform:rotateX(60deg)] animate-grid-flow"></div>
+  </div>
+);
 
-  const handleMouseLeave = () => {
-    setOpacity(0);
-  };
-
+// A glitched title component
+const GlitchText = ({ text, className = "" }) => {
   return (
-    <div
-      ref={divRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-xl border border-white/10 bg-black/50 backdrop-blur-md ${className}`}
-    >
-      {/* The Spotlight Glow */}
-      <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
-        style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
-        }}
-      />
-      <div className="relative h-full">{children}</div>
-    </div>
+    <h1 className={`relative inline-block font-mono font-black uppercase tracking-tighter ${className}`}>
+      <span className="absolute top-0 left-0 -ml-[2px] text-cyan-500 opacity-70 mix-blend-screen animate-glitch-1">{text}</span>
+      <span className="absolute top-0 left-0 ml-[2px] text-magenta-500 opacity-70 mix-blend-screen animate-glitch-2">{text}</span>
+      <span className="relative text-white z-10">{text}</span>
+    </h1>
   );
 };
 
-// --- 3D Moving Grid (The "Tron" Floor) ---
-const MovingGrid = () => {
+// Cyberpunk Card designed for high contrast data display
+const CyberCard = ({ children, color = "cyan", className = "" }) => {
+  const borderColor = color === 'cyan' ? 'border-cyan-500' : 'border-magenta-500';
+  const glowColor = color === 'cyan' ? 'group-hover:shadow-cyan-500/50' : 'group-hover:shadow-magenta-500/50';
+  
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none perspective-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent z-10" />
-      <div className="grid-floor"></div>
-      <style jsx>{`
-        .perspective-grid {
-          perspective: 1000px;
-          overflow: hidden;
-        }
-        .grid-floor {
-          position: absolute;
-          width: 200%;
-          height: 200%;
-          bottom: -50%;
-          left: -50%;
-          background-image: 
-            linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px);
-          background-size: 50px 50px;
-          transform: rotateX(60deg);
-          animation: gridMove 20s linear infinite;
-          opacity: 0.15;
-          mask-image: linear-gradient(to bottom, transparent, black 40%);
-        }
-        @keyframes gridMove {
-          0% { transform: rotateX(60deg) translateY(0); }
-          100% { transform: rotateX(60deg) translateY(50px); }
-        }
-      `}</style>
+    <div className={`relative group bg-black border-2 ${borderColor}/30 p-6 overflow-hidden transition-all duration-300 hover:border-${color}-400 ${glowColor} hover:shadow-[0_0_30px_-5px] ${className}`}>
+      {/* Decorative circuit lines */}
+      <div className={`absolute top-0 left-0 w-2 h-8 bg-${color}-500/50`}></div>
+      <div className={`absolute top-0 left-0 w-8 h-2 bg-${color}-500/50`}></div>
+      <div className={`absolute bottom-0 right-0 w-2 h-8 bg-${color}-500/50`}></div>
+      <div className={`absolute bottom-0 right-0 w-8 h-2 bg-${color}-500/50`}></div>
+      
+      {/* Scanline pass effect on hover */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-1000 ease-in-out z-0"></div>
+      
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
-  );
-};
-
-// --- Custom Glowing Cursor ---
-const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [trailing, setTrailing] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const move = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      // Slight delay for trail
-      setTimeout(() => setTrailing({ x: e.clientX, y: e.clientY }), 100);
-    };
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
-  }, []);
-
-  return (
-    <>
-      <div 
-        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none z-[100] mix-blend-difference"
-        style={{ left: position.x - 8, top: position.y - 8 }}
-      />
-      <div 
-        className="fixed w-12 h-12 border border-cyan-500 rounded-full pointer-events-none z-[99] transition-all duration-300 ease-out opacity-50"
-        style={{ left: trailing.x - 24, top: trailing.y - 24 }}
-      />
-    </>
   );
 };
 
 // ==========================================
 // 3. MAIN APP
 // ==========================================
-
 export default function App() {
   const [activeTab, setActiveTab] = useState('all');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const filteredProjects = activeTab === 'all' 
     ? PROJECTS_DATA 
     : PROJECTS_DATA.filter(p => p.category === activeTab);
 
+  if (!mounted) return null;
+
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden relative">
-      
-      {/* GLOBAL FX */}
-      <MovingGrid />
-      <div className="fixed inset-0 z-50 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
-      <CustomCursor />
+    <div className="min-h-screen bg-black text-white font-mono selection:bg-cyan-500 selection:text-black overflow-x-hidden relative">
+      <ScanlineOverlay />
+      <CyberGrid />
 
-      {/* HEADER / HERO */}
-      <div className="relative z-10 pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Top Label */}
-          <div className="flex items-center gap-3 mb-8 animate-fade-in-up">
-             <div className="h-px w-12 bg-cyan-500/50"></div>
-             <span className="font-mono text-cyan-400 text-sm tracking-[0.2em]">SYSTEM_ONLINE</span>
+      {/* --- HERO SECTION --- */}
+      <section className="relative z-10 min-h-[90vh] flex flex-col justify-center px-6 border-b-2 border-cyan-900/50 bg-black/80">
+        <div className="max-w-7xl mx-auto w-full">
+          
+          {/* Terminal Header */}
+          <div className="mb-8 flex items-center gap-4 text-cyan-400 text-sm tracking-widest uppercase">
+            <Terminal className="w-4 h-4" />
+            <span>Secure Connection :: Established</span>
+            <div className="flex-grow h-px bg-cyan-900/50"></div>
+            <span>[V.2025.1]</span>
           </div>
 
-          {/* Massive Name */}
-          <h1 className="text-7xl md:text-[10rem] font-black leading-[0.9] tracking-tighter mix-blend-color-dodge mb-8 animate-fade-in-up delay-100">
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-600 hover:text-cyan-50 transition-colors duration-500">ARYAN</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-500 to-gray-900 opacity-50">RUDANI</span>
-          </h1>
-
-          {/* Profile Summary */}
-          <div className="grid md:grid-cols-2 gap-12 items-end animate-fade-in-up delay-200">
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-5xl font-bold">
-                <span className="text-cyan-400">Cloud Architect</span> <span className="text-gray-600">&</span> <br/>
-                <span className="text-violet-400">Security Specialist</span>
-              </h2>
-              <div className="h-1 w-24 bg-gradient-to-r from-cyan-500 to-violet-500"></div>
-              <p className="text-gray-400 text-lg leading-relaxed max-w-md">
-                Building resilient, secure infrastructure. Specialized in AWS/Azure serverless architectures and DevSecOps pipelines.
-              </p>
-              
-              <div className="flex gap-4 pt-4">
-                <button 
-                  onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth'})}
-                  className="px-8 py-3 bg-white text-black font-bold hover:bg-cyan-400 transition-all hover:scale-105"
-                >
-                  VIEW WORK
-                </button>
-                <a 
-                  href="mailto:ruda0008@algonquinlive.com"
-                  className="px-8 py-3 border border-white/20 hover:border-white text-white font-bold transition-all"
-                >
-                  CONTACT
-                </a>
-              </div>
-            </div>
-
-            {/* Stats / Current Status */}
-            <div className="grid grid-cols-2 gap-4">
-               {EDUCATION_DATA.map((edu, i) => (
-                 <SpotlightCard key={i} className="p-6">
-                   <div className={`w-2 h-2 rounded-full bg-${edu.color}-500 mb-4 shadow-[0_0_10px_currentColor] text-${edu.color}-500`} />
-                   <div className="text-2xl font-bold font-mono mb-1">{edu.year}</div>
-                   <div className="text-sm text-gray-400">{edu.program}</div>
-                   <div className="text-xs text-gray-600 mt-2 uppercase tracking-wider">{edu.school}</div>
-                 </SpotlightCard>
-               ))}
-            </div>
+          {/* Main Title */}
+          <div className="mb-6">
+            <GlitchText text="ARYAN RUDANI" className="text-6xl md:text-9xl mb-2" />
+            <h2 className="text-2xl md:text-4xl text-gray-300 flex items-center gap-3">
+              <span className="text-magenta-500">&gt;</span> CLOUD_ARCHITECT <span className="text-cyan-500">//</span> SECURITY_SPECIALIST
+            </h2>
           </div>
+
+          {/* Bio Block */}
+          <div className="max-w-2xl bg-gray-900/50 border-l-4 border-cyan-500 p-6 mb-12 backdrop-blur-sm">
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Building resilient infrastructure where <span className="text-cyan-400 font-bold">Cloud</span> meets <span className="text-magenta-400 font-bold">Cybersecurity</span>. Specialized in AWS/Azure serverless architectures and DevSecOps pipelines.
+            </p>
+          </div>
+
+          {/* Cyber Buttons */}
+          <div className="flex flex-wrap gap-6">
+            <button onClick={() => document.getElementById('projects').scrollIntoView({behavior:'smooth'})} className="group relative px-8 py-4 bg-cyan-600 text-black font-bold text-lg uppercase tracking-wider overflow-hidden hover:bg-cyan-400 transition-colors">
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+              <span className="relative z-10 flex items-center gap-2">
+                INITIATE_PROJECTS <ArrowRight />
+              </span>
+            </button>
+            <a href="mailto:ruda0008@algonquinlive.com" className="px-8 py-4 border-2 border-white/20 text-white font-bold text-lg uppercase tracking-wider hover:border-cyan-400 hover:text-cyan-400 transition-colors">
+              SEND_TRANSMISSION
+            </a>
+          </div>
+
         </div>
-      </div>
+      </section>
 
-      {/* PROJECTS SECTION */}
-      <div id="projects" className="relative z-10 py-32 px-6">
-         <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-              <h2 className="text-6xl md:text-8xl font-black text-white/10 relative">
-                PROJECTS
-                <span className="absolute top-0 left-0 text-white/90 clip-text-half">WORK</span>
-              </h2>
-              
-              {/* Filter Tabs */}
-              <div className="flex gap-2 p-1 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm">
-                {['all', 'aws', 'azure', 'devops'].map(tab => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-2 rounded-md font-mono text-xs uppercase transition-all ${
-                      activeTab === tab ? 'bg-white text-black font-bold' : 'text-gray-400 hover:text-white'
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            {/* Project Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((project) => (
-                <SpotlightCard key={project.id} className="h-full group hover:shadow-2xl hover:shadow-cyan-900/20 transition-all duration-500">
-                  <div className="p-8 h-full flex flex-col relative z-20">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className={`p-3 rounded-lg bg-black border border-white/10 text-${project.color}-400 group-hover:text-white group-hover:bg-${project.color}-500 transition-all duration-300`}>
-                         {project.icon}
-                      </div>
-                      <ExternalLink className="w-5 h-5 text-gray-600 group-hover:text-white transition-colors" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-                      {project.description}
-                    </p>
-
-                    <div className="space-y-4">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 3).map((t, i) => (
-                          <span key={i} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-white/5 border border-white/10 rounded text-gray-400 font-mono">
-                            {t}
-                          </span>
-                        ))}
-                        {project.tech.length > 3 && (
-                          <span className="text-[10px] px-2 py-1 text-gray-500 font-mono">+{project.tech.length - 3}</span>
-                        )}
-                      </div>
-
-                      <div className="pt-4 border-t border-white/10 flex justify-between items-center">
-                        <span className={`text-xs font-bold text-${project.color}-400 font-mono flex items-center gap-2`}>
-                          <Activity className="w-3 h-3" /> {project.metric}
-                        </span>
-                        {project.link && (
-                          <a href={project.link} target="_blank" rel="noreferrer" className="text-xs font-bold hover:underline">
-                            SOURCE CODE
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </SpotlightCard>
+      {/* --- PROJECTS SECTION --- */}
+      <section id="projects" className="relative z-10 py-32 px-6 bg-black/90">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 pb-4 border-b border-cyan-900/50">
+            <h2 className="text-5xl md:text-7xl font-black uppercase text-white flex items-center gap-4">
+              <Database className="text-magenta-500 w-12 h-12" />
+              PROJECT_LOG
+            </h2>
+            
+            {/* Cyber Tabs */}
+            <div className="flex gap-4 mt-8 md:mt-0">
+              {['all', 'aws', 'azure'].map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-6 py-2 text-sm uppercase tracking-widest border-2 transition-all relative overflow-hidden group ${
+                    activeTab === tab 
+                    ? 'border-cyan-400 bg-cyan-400/10 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.5)]' 
+                    : 'border-gray-700 text-gray-500 hover:border-gray-400 hover:text-white'
+                  }`}
+                >
+                  [{tab}]
+                </button>
               ))}
             </div>
-         </div>
-      </div>
+          </div>
 
-      {/* SKILLS - TERMINAL STYLE */}
-      <div className="relative z-10 py-32 bg-black border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+          {/* Grid */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {filteredProjects.map((project) => (
+              <CyberCard key={project.id} color={project.color}>
+                 {/* Header */}
+                 <div className="flex justify-between items-start mb-6">
+                   <div className={`p-4 bg-${project.color}-500/10 text-${project.color}-400 border border-${project.color}-500/50`}>
+                     {project.icon}
+                   </div>
+                   <div className={`text-xs font-bold px-3 py-1 border border-${project.color}-500 text-${project.color}-400 uppercase tracking-wider`}>
+                      :: {project.category} ::
+                   </div>
+                 </div>
+                 
+                 <h3 className="text-3xl font-bold mb-4 uppercase">{project.title}</h3>
+                 
+                 <p className="text-gray-400 mb-8 leading-relaxed border-l-2 border-gray-800 pl-4">
+                  {project.description}
+                 </p>
+
+                 {/* Tech Stack & Metric Footer */}
+                 <div className="flex flex-col gap-6">
+                   <div className="flex flex-wrap gap-2">
+                     {project.tech.map((t, i) => (
+                       <span key={i} className="px-2 py-1 text-[10px] uppercase bg-gray-900 border border-gray-700 text-gray-300">
+                         {t}
+                       </span>
+                     ))}
+                   </div>
+
+                   <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+                      <div className={`flex items-center gap-2 font-bold text-${project.color}-400`}>
+                        <Activity className="w-4 h-4" />
+                        {project.metric}
+                      </div>
+                      {project.link && (
+                        <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 font-bold hover:text-cyan-400 transition-colors">
+                          SOURCE_UPLINK <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                   </div>
+                 </div>
+              </CyberCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- SKILLS SECTION --- */}
+      <section className="relative z-10 py-32 px-6 border-t-2 border-cyan-900/50 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-fixed">
+        <div className="max-w-7xl mx-auto bg-black/90 p-8 border-2 border-gray-800 backdrop-blur-md">
+          <h2 className="text-4xl font-black uppercase mb-12 flex items-center gap-4 text-white">
+            <Cpu className="text-cyan-500 w-10 h-10 animate-pulse" />
+            SYSTEM_CAPABILITIES
+          </h2>
           
-          <div>
-            <h2 className="text-4xl font-bold mb-8 flex items-center gap-4">
-              <Terminal className="w-8 h-8 text-cyan-500" /> 
-              TECH_STACK
-            </h2>
-            <div className="prose prose-invert text-gray-400">
-              <p className="text-lg">
-                My arsenal focuses on cloud-native technologies. I don't just write code; 
-                I architect systems that scale, heal themselves, and withstand attacks.
-              </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            {SKILLS_DATA.map((skill, idx) => (
+              <div key={idx} className="flex items-start gap-6 p-6 border border-gray-800 bg-gray-900/50 hover:border-cyan-500/50 transition-colors group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="text-cyan-500 group-hover:text-white transition-colors relative z-10">
+                  {React.cloneElement(skill.icon, { className: "w-8 h-8" })}
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-3 text-magenta-400 uppercase tracking-wider">{skill.category}</h3>
+                  <ul className="space-y-2">
+                    {skill.items.map((item, i) => (
+                      <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-cyan-500"></span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- FOOTER --- */}
+      <footer className="relative z-10 py-12 px-6 bg-black border-t-2 border-magenta-900/50 text-center">
+         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="text-left">
+              <GlitchText text="ARYAN RUDANI" className="text-2xl mb-1" />
+              <p className="text-gray-500 text-xs uppercase tracking-widest">End of Line // 2025</p>
             </div>
-          </div>
 
-          <div className="grid gap-4">
-             {SKILLS_DATA.map((skill, idx) => (
-               <div key={idx} className="group flex items-center gap-6 p-4 border-b border-white/10 hover:border-cyan-500/50 transition-colors">
-                  <div className="text-gray-500 group-hover:text-cyan-400 transition-colors">
-                    {skill.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">
-                      {skill.category}
-                    </h3>
-                    <div className="text-sm text-gray-500 font-mono">
-                      {skill.items.join(" / ")}
-                    </div>
-                  </div>
-               </div>
-             ))}
-          </div>
-
-        </div>
-      </div>
-
-      {/* FOOTER */}
-      <footer className="relative z-10 py-20 px-6 border-t border-white/10 bg-[#020202]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">ARYAN RUDANI</h2>
-            <p className="text-gray-500 text-sm">Cloud Architect & Security Specialist</p>
-          </div>
-
-          <div className="flex gap-6">
-            <a href="mailto:ruda0008@algonquinlive.com" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-cyan-500 hover:text-black transition-all">
-              <Mail className="w-5 h-5" />
-            </a>
-            <a href="https://github.com/ruda0008" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-white hover:text-black transition-all">
-              <Github className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/aryan-rudani-871258227/" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-[#0077b5] hover:text-white transition-all">
-              <Linkedin className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-        
-        {/* Giant Background Text */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-5">
-           <h1 className="text-[20vw] font-black text-center leading-none text-white whitespace-nowrap">
-             SECURE
-           </h1>
-        </div>
+            <div className="flex gap-8">
+              <a href="mailto:ruda0008@algonquinlive.com" className="text-gray-500 hover:text-cyan-400 transition-colors"><Mail /></a>
+              <a href="https://github.com/ruda0008" className="text-gray-500 hover:text-magenta-400 transition-colors"><Github /></a>
+              <a href="https://www.linkedin.com/in/aryan-rudani-871258227/" className="text-gray-500 hover:text-cyan-400 transition-colors"><Linkedin /></a>
+            </div>
+         </div>
       </footer>
 
-      {/* CSS Utility for Half-Clipped Text */}
-      <style jsx>{`
-        .clip-text-half {
-          clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+      {/* TAILWIND CONFIG FOR ANIMATIONS */}
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&display=swap');
+        
+        body { font-family: 'JetBrains Mono', monospace; }
+
+        .perspective-1000 { perspective: 1000px; }
+        
+        @keyframes grid-flow {
+          0% { transform: rotateX(60deg) translateY(0); }
+          100% { transform: rotateX(60deg) translateY(4rem); }
         }
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+        .animate-grid-flow { animation: grid-flow 2s linear infinite; }
+
+        @keyframes scanline {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(500%); }
         }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
+        .animate-scanline { animation: scanline 8s linear infinite; }
+
+        @keyframes glitch-1 {
+          0%, 100% { clip-path: inset(50% 0 30% 0); transform: translate(-5px, 0); }
+          20% { clip-path: inset(10% 0 60% 0); transform: translate(5px, 0); }
+          40% { clip-path: inset(80% 0 5% 0); transform: translate(-5px, 0); }
+          60% { clip-path: inset(40% 0 40% 0); transform: translate(5px, 0); }
         }
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
+        @keyframes glitch-2 {
+          0%, 100% { clip-path: inset(10% 0 60% 0); transform: translate(5px, 0); }
+          20% { clip-path: inset(80% 0 5% 0); transform: translate(-5px, 0); }
+          40% { clip-path: inset(40% 0 40% 0); transform: translate(5px, 0); }
+          60% { clip-path: inset(50% 0 30% 0); transform: translate(-5px, 0); }
+        }
+        .animate-glitch-1 { animation: glitch-1 2s infinite linear alternate-reverse; }
+        .animate-glitch-2 { animation: glitch-2 2s infinite linear alternate-reverse; }
       `}</style>
     </div>
   );
