@@ -809,157 +809,256 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Cloud, Code2, Mail, Github, Linkedin, ArrowRight, CheckCircle2, 
   Server, Layers, FileText, BarChart3, Container, ExternalLink,
-  Radio, CloudLightning, Brain, Activity, Terminal
+  Radio, CloudLightning, Brain, Activity, Terminal, Database,
+  Shield, Lock, Cpu, Globe
 } from 'lucide-react';
 
 // ==========================================
-// 1. DATA CONSTANTS
+// 1. YOUR ORIGINAL FULL DATA (RESTORED)
 // ==========================================
 const PROJECTS_DATA = [
   {
     id: 1,
-    title: "E-Commerce Microservices Cluster",
+    title: "E-Commerce Microservices Cluster Platform (Kubernetes)",
     category: "azure",
-    impact: "Production Architecture",
-    description: "Enterprise-grade platform on Azure Kubernetes Service. Features MongoDB replica sets with auto-failover, RabbitMQ async messaging, and self-healing node pools.",
-    tech: ["Kubernetes", "Azure AKS", "MongoDB", "RabbitMQ", "Go", "Terraform"],
-    metric: "99.99% Uptime",
+    impact: "Production-Ready Architecture",
+    description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
+    tech: ["Kubernetes", "Docker", "Azure AKS", "MongoDB", "RabbitMQ", "Node.js", "Go", "Vue.js", "GitHub Actions", "YAML"],
+    metric: "99.9% Uptime",
     icon: <Server className="w-6 h-6" />,
     color: "cyan",
+    details: [
+      "5 microservices with independent scaling",
+      "MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover",
+      "RabbitMQ AMQP 1.0 message queue for 1000+ orders/min",
+      "CI/CD pipelines: 2 hours → 3 minutes deployment time"
+    ],
     link: "https://github.com/ruda0008/fullstack-final-project",
   },
   {
     id: 2,
-    title: "IoT Real-Time Sentinel",
+    title: "Real-Time IoT Monitoring Pipeline",
     category: "azure",
-    impact: "30x Query Speed",
-    description: "Public safety monitoring pipeline streaming sensor data through IoT Hub to Stream Analytics. Optimized Cosmos DB partition strategies for sub-10ms latency.",
-    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Python", "React"],
-    metric: "<10ms Latency",
+    impact: "30x faster queries",
+    description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
+    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Blob Storage", "Node.js", "Python"],
+    metric: "Full Automation",
     icon: <Radio className="w-6 h-6" />,
     color: "violet",
+    details: [
+      "Python sensors → Azure pipeline → Node.js dashboard",
+      "Partition key optimization: 300ms → <10ms queries",
+      "5-min tumbling windows with safety classification",
+      "Dual storage: Cosmos DB (fast) + Blob (archive)"
+    ],
     link: "https://github.com/ruda0008/rideau-canal-monitoring",
   },
   {
     id: 3,
-    title: "Serverless Neural Parser",
+    title: "Serverless Resume Screening Platform (AWS)",
     category: "aws",
-    impact: "Event-Driven",
-    description: "Automated resume screening system using Lambda triggers and S3 events. Implements heavy regex pattern matching and DynamoDB streams for candidate indexing.",
-    tech: ["AWS Lambda", "S3", "DynamoDB", "SQS", "Python"],
-    metric: "Auto-Scaling",
+    impact: "Event-driven processing",
+    description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
+    tech: ["Lambda", "S3", "DynamoDB", "SES", "SQS", "Python", "PyPDF2"],
+    metric: "Full automation",
     icon: <CloudLightning className="w-6 h-6" />,
     color: "pink",
+    details: [
+      "S3 event-driven architecture with Lambda triggers",
+      "PyPDF2 extraction with regex parsing algorithms",
+      "IAM least-privilege access policies",
+      "Optimized DynamoDB partition keys"
+    ],
     link: "https://github.com/ruda0008/AWS_resume_parser"
   },
   {
     id: 4,
-    title: "Data Lake Analytics Engine",
+    title: "Cloud Data Analytics Pipeline",
     category: "azure",
-    impact: "Automated ETL",
-    description: "Built a star-schema data warehouse pipeline moving terabytes from Blob Storage to SQL via Data Factory. integrated Power BI for regional heatmap visualizations.",
-    tech: ["Data Factory", "Azure SQL", "Blob Storage", "Power BI"],
-    metric: "85% Cost Red.",
+    impact: "300K+ transactions",
+    description: "Built automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards with regional heatmaps.",
+    tech: ["Data Factory", "SQL Database", "Blob Storage", "Power BI"],
+    metric: "85% cost reduction",
     icon: <BarChart3 className="w-6 h-6" />,
     color: "blue",
+    details: [
+      "Automated data movement with ADF",
+      "Star schema with normalization best practices",
+      "Basic tier SQL (5 DTU) + LRS storage optimization",
+      "SQL firewall rules + RBAC security"
+    ],
     link: "https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline"
-  }
+  },
+  {
+    id: 5,
+    title: "Cloud-Native Microservices",
+    category: "azure",
+    impact: "Multi-service architecture",
+    description: "Deployed e-commerce app on Azure PaaS: App Service for Node.js/Python APIs, Static Web Apps for Vue.js frontend. RabbitMQ on Azure VM handles async messaging between services.",
+    tech: ["App Service", "Static Web Apps", "RabbitMQ", "Node.js", "Python"],
+    metric: "CI/CD with GitHub Actions",
+    icon: <Globe className="w-6 h-6" />,
+    color: "emerald",
+    details: [
+      "RabbitMQ message broker for order/product services",
+      "GitHub Actions pipeline with env variables",
+      "CORS policies + environment-based routing",
+      "PaaS deployment architecture"
+    ],
+    link: ""
+  },
+  {
+    id: 6,
+    title: "Containerized Application",
+    category: "devops",
+    impact: "Multi-container setup",
+    description: "Created Docker images for Flask apps with layered architecture. Used Docker Compose to orchestrate Flask + Redis cache. Configured volumes for persistence and container networking.",
+    tech: ["Docker", "Docker Compose", "Flask", "Redis", "Python"],
+    metric: "Container isolation",
+    icon: <Container className="w-6 h-6" />,
+    color: "orange",
+    details: [
+      "Dockerfiles with layered architecture",
+      "Docker Compose multi-container orchestration",
+      "Volume configuration for data persistence",
+      "Copy-on-write behavior demonstration"
+    ],
+    link: ""
+  },
 ];
 
 const SKILLS_DATA = [
   {
-    category: "Cloud Infrastructure",
-    icon: <Cloud className="w-5 h-5" />,
-    items: ["AWS (Lambda, S3, IAM)", "Azure (AKS, Cosmos, IoT Hub)", "Terraform IaC"]
+    category: "Cloud Platforms",
+    icon: <Cloud className="w-6 h-6 text-cyan-400" />,
+    items: [
+      "AWS (Lambda, S3, DynamoDB, IAM, SES, SQS)",
+      "Azure (IoT Hub, Stream Analytics, Cosmos DB, Data Factory, SQL, Blob, App Service, Functions, VMs)"
+    ]
   },
   {
-    category: "Core Engineering",
-    icon: <Code2 className="w-5 h-5" />,
-    items: ["Python & Go", "SQL & NoSQL Design", "System Architecture"]
+    category: "Programming & Databases",
+    icon: <Code2 className="w-6 h-6 text-violet-400" />,
+    items: [
+      "Python, SQL, Bash, Java, C++",
+      "Azure SQL Database, DynamoDB, MongoDB",
+      "Star Schema Design, Database Normalization"
+    ]
   },
   {
-    category: "Security Ops",
-    icon: <CheckCircle2 className="w-5 h-5" />,
-    items: ["IAM & RBAC", "NIST Compliance", "Zero Trust Architecture"]
+    category: "Security & Frameworks",
+    icon: <Shield className="w-6 h-6 text-pink-400" />,
+    items: [
+      "IAM Policies, RBAC, Firewall Configuration",
+      "Least-Privilege Access, Palo Alto NGFW",
+      "NIST, ISO 27001/27002, OWASP Top 10, MITRE ATT&CK",
+      "AES-256, RSA, PKI, X.509 Certificates"
+    ]
   },
   {
-    category: "DevOps Pipeline",
-    icon: <Layers className="w-5 h-5" />,
-    items: ["Docker & K8s", "GitHub Actions", "CI/CD Automation"]
+    category: "DevOps & Tools",
+    icon: <Layers className="w-6 h-6 text-emerald-400" />,
+    items: [
+      "Kubernetes, Docker, Docker Compose, Git, GitHub",
+      "RabbitMQ, RESTful APIs, Event-Driven Architecture",
+      "CI/CD with GitHub Actions",
+      "Power BI Desktop, PyPDF2"
+    ]
+  }
+];
+
+const EDUCATION_DATA = [
+  {
+    school: "Algonquin College",
+    program: "Cloud Development and Operations",
+    status: "In Progress",
+    graduation: "August 2026",
+    location: "Ottawa, ON",
+    gpa: null
+  },
+  {
+    school: "Algonquin College",
+    program: "Cybersecurity Analysis",
+    status: "Completed",
+    graduation: "April 2025",
+    location: "Ottawa, ON",
+    gpa: "3.7/4.0"
+  },
+  {
+    school: "Veer Narmad South Gujarat University",
+    program: "Bachelor of Computer Applications",
+    status: "Completed",
+    graduation: "June 2024",
+    location: "Gujarat, IN",
+    gpa: "3.3/4.0"
   }
 ];
 
 // ==========================================
-// 2. VISUAL COMPONENTS
+// 2. HIGH-PERFORMANCE VISUAL COMPONENTS
 // ==========================================
 
-// The high-performance background engine
 const NeuralBackground = () => {
   const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: -100, y: -100 });
-
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
+    let mouse = { x: -1000, y: -1000 };
 
     // Configuration
-    const particleCount = window.innerWidth < 768 ? 40 : 100;
-    const connectionDistance = 140;
-    const mouseRepelDist = 200;
+    const config = {
+      particleCount: window.innerWidth < 768 ? 40 : 90,
+      connectionDist: 150,
+      mouseDist: 250,
+      baseSpeed: 0.4
+    };
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-    
     window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
     resize();
-
-    // Mouse tracking
-    const handleMouseMove = (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener('mousemove', handleMouseMove);
 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.5; // Velocity X
-        this.vy = (Math.random() - 0.5) * 0.5; // Velocity Y
-        this.size = Math.random() * 2;
-        this.color = Math.random() > 0.5 ? 'cyan' : 'violet'; // 50/50 mix
+        this.vx = (Math.random() - 0.5) * config.baseSpeed;
+        this.vy = (Math.random() - 0.5) * config.baseSpeed;
+        this.size = Math.random() * 2 + 1;
+        // Cyan and Violet Theme
+        this.color = Math.random() > 0.5 ? 'rgba(6, 182, 212, ' : 'rgba(139, 92, 246, '; 
       }
 
       update() {
-        // Move
         this.x += this.vx;
         this.y += this.vy;
 
-        // Mouse Repulsion (The "Force Field")
-        const dx = this.x - mouseRef.current.x;
-        const dy = this.y - mouseRef.current.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+        // Mouse interaction (Repulsion)
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < mouseRepelDist) {
-          const forceDirectionX = dx / dist;
-          const forceDirectionY = dy / dist;
-          const force = (mouseRepelDist - dist) / mouseRepelDist;
-          
-          // Push away gently
-          this.vx += forceDirectionX * force * 0.05;
-          this.vy += forceDirectionY * force * 0.05;
+        if (dist < config.mouseDist) {
+          const force = (config.mouseDist - dist) / config.mouseDist;
+          const angle = Math.atan2(dy, dx);
+          this.vx += Math.cos(angle) * force * 0.1;
+          this.vy += Math.sin(angle) * force * 0.1;
         }
 
-        // Friction to stop them from speeding up infinitely
+        // Friction and bounds
         this.vx *= 0.99;
         this.vy *= 0.99;
 
-        // Bounce off walls
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
       }
@@ -967,56 +1066,111 @@ const NeuralBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color === 'cyan' ? '#06b6d4' : '#8b5cf6';
+        ctx.fillStyle = this.color + '0.7)';
         ctx.fill();
       }
     }
 
-    // Init particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+    // Init
+    for (let i = 0; i < config.particleCount; i++) particles.push(new Particle());
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Update and Draw Particles
-      particles.forEach((particle, i) => {
-        particle.update();
-        particle.draw();
-
-        // Connect particles
+      // Draw Connections first (behind dots)
+      for (let i = 0; i < particles.length; i++) {
         for (let j = i; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < connectionDistance) {
+          if (dist < config.connectionDist) {
             ctx.beginPath();
-            // Opacity based on distance
-            const opacity = 1 - (dist / connectionDistance);
-            ctx.strokeStyle = `rgba(100, 100, 255, ${opacity * 0.2})`; 
+            const opacity = 1 - (dist / config.connectionDist);
+            ctx.strokeStyle = `rgba(100, 200, 255, ${opacity * 0.15})`;
             ctx.lineWidth = 1;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
           }
         }
+      }
+
+      // Update and Draw Dots
+      particles.forEach(p => {
+        p.update();
+        p.draw();
       });
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
-
     return () => {
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-0 bg-black" />;
+  return <canvas ref={canvasRef} className="fixed inset-0 z-0 bg-[#050505]" />;
+};
+
+// 3D Tilt Card Component
+const TiltCard = ({ children, className }) => {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate rotation (max 15 degrees)
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (cardRef.current) {
+      cardRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    }
+  };
+
+  return (
+    <div 
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`transition-transform duration-200 ease-out transform-gpu ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Typewriter Effect
+const Typewriter = ({ text, delay = 50 }) => {
+  const [displayText, setDisplayText] = useState('');
+  
+  useEffect(() => {
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setDisplayText(text.substring(0, i + 1));
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, delay);
+    return () => clearInterval(timer);
+  }, [text, delay]);
+
+  return <span>{displayText}</span>;
 };
 
 // ==========================================
@@ -1025,185 +1179,234 @@ const NeuralBackground = () => {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('all');
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const filteredProjects = activeTab === 'all' 
     ? PROJECTS_DATA 
-    : PROJECTS_DATA.filter(p => p.category === activeTab);
-
-  const smoothScrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+    : PROJECTS_DATA.filter(p => p.category === activeTab || p.category === 'all');
 
   return (
-    <div className="min-h-screen text-white relative font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen text-white font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden">
       
-      {/* 1. Background Layer */}
       <NeuralBackground />
       
-      {/* 2. Spotlight Grid Effect */}
-      {/* This creates a grid that is only visible near the mouse */}
-      <div 
-        className="fixed inset-0 z-0 pointer-events-none opacity-20"
-        style={{
-          background: `
-            radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(6, 182, 212, 0.15), transparent 80%),
-            linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px)
-          `,
-          backgroundSize: '100% 100%, 40px 40px, 40px 40px'
-        }}
-      />
+      {/* Decorative Overlays */}
+      <div className="fixed inset-0 z-1 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,0)_0%,rgba(5,5,5,0.8)_100%)]" />
+      <div className="fixed inset-0 z-1 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_4px,6px_100%]" />
 
-      {/* 3. Scanline Overlay (Very subtle) */}
-      <div className="fixed inset-0 z-40 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,6px_100%] pointer-events-none" />
-
-      {/* 4. Main Content */}
+      {/* Content */}
       <div className="relative z-10">
         
-        {/* HERO SECTION */}
-        <section className="min-h-screen flex flex-col justify-center items-center px-6 pt-20 relative overflow-hidden">
+        {/* HERO */}
+        <section className="min-h-screen flex flex-col justify-center items-center px-6 relative">
            
-           {/* Glitch Status Badge */}
-           <div className="mb-8 relative group cursor-default">
-             <div className="absolute inset-0 bg-cyan-500 blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-             <div className="relative flex items-center gap-3 px-4 py-2 bg-black/40 border border-cyan-500/30 rounded-full backdrop-blur-md">
+           <div className="relative z-20 text-center space-y-8">
+             {/* Status Badge */}
+             <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-900/20 border border-cyan-500/30 rounded-full backdrop-blur-md animate-fade-in-down">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
                 </span>
                 <span className="text-cyan-400 font-mono text-sm tracking-widest">SYSTEM_ONLINE</span>
              </div>
-           </div>
 
-           {/* Main Title with CSS Glitch effect */}
-           <div className="text-center relative mb-6">
-             <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 mb-2">
+             {/* Name */}
+             <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 drop-shadow-2xl">
                ARYAN RUDANI
              </h1>
-             <p className="text-4xl md:text-6xl font-bold font-mono text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-fuchsia-400 animate-pulse">
-               CLOUD_ARCHITECT
-             </p>
-           </div>
+             
+             {/* Typing Title */}
+             <div className="text-2xl md:text-4xl font-mono text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-fuchsia-400 h-10">
+               <span className="text-white">&gt; </span>
+               <Typewriter text="CLOUD_ARCHITECT & SECURITY_SPECIALIST" />
+               <span className="animate-pulse text-cyan-400">_</span>
+             </div>
 
-           {/* Terminal Description */}
-           <div className="max-w-3xl mx-auto mb-12 p-6 rounded-xl bg-black/60 border border-white/10 backdrop-blur-md shadow-2xl relative overflow-hidden group hover:border-cyan-500/30 transition-colors">
-              <div className="flex gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-              </div>
-              <p className="font-mono text-gray-300 leading-relaxed text-lg">
-                <span className="text-cyan-400">root@aryan:~$</span> initializing secure infrastructure...<br/>
-                <span className="text-violet-400">&gt;</span> Specializing in <span className="text-white font-bold">AWS/Azure</span>, Serverless Architectures, and DevSecOps.<br/>
-                <span className="text-violet-400">&gt;</span> Mission: Build resilient, scalable systems that survive the unexpected.
-              </p>
-           </div>
+             {/* Bio Card */}
+             <div className="max-w-3xl mx-auto p-6 bg-black/40 border border-white/10 rounded-xl backdrop-blur-md text-left font-mono text-gray-300 leading-relaxed shadow-2xl">
+                <p>
+                  Building secure cloud infrastructure with <span className="text-cyan-400 font-bold">AWS</span> and <span className="text-violet-400 font-bold">Azure</span>.
+                  Cybersecurity analyst turned cloud engineer specializing in <span className="text-white">Automation</span>, 
+                  <span className="text-white"> Serverless Architectures</span>, and <span className="text-pink-400 font-bold">DevSecOps</span>.
+                </p>
+             </div>
 
-           {/* CTA Buttons */}
-           <div className="flex gap-6">
-             <button 
-                onClick={() => smoothScrollTo('projects')}
-                className="group relative px-8 py-4 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(6,182,212,0.3)]"
-             >
-                <div className="absolute inset-0 translate-y-[100%] group-hover:translate-y-[0%] bg-gradient-to-t from-cyan-500/20 to-transparent transition-transform duration-500" />
-                <span className="relative font-mono font-bold flex items-center gap-2">
-                   INITIATE_PROJECTS <ArrowRight className="w-4 h-4" />
-                </span>
-             </button>
-             <button 
-                onClick={() => smoothScrollTo('contact')}
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-lg font-mono font-bold transition-all hover:border-white/30"
-             >
-                CONTACT_PROTOCOL
-             </button>
+             {/* Buttons */}
+             <div className="flex flex-col md:flex-row gap-6 justify-center pt-8">
+                <button 
+                  onClick={() => document.getElementById('projects').scrollIntoView({behavior: 'smooth'})}
+                  className="group relative px-8 py-4 bg-cyan-500 text-black font-bold text-lg rounded-none skew-x-[-10deg] hover:bg-cyan-400 transition-all hover:scale-105"
+                >
+                  <span className="block skew-x-[10deg] flex items-center gap-2">
+                    VIEW_PROJECTS <ArrowRight className="w-5 h-5" />
+                  </span>
+                </button>
+                <button 
+                  onClick={() => document.getElementById('contact').scrollIntoView({behavior: 'smooth'})}
+                  className="group relative px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-lg rounded-none skew-x-[-10deg] hover:bg-white/5 transition-all hover:border-cyan-500/50 hover:text-cyan-400"
+                >
+                   <span className="block skew-x-[10deg]">
+                    CONTACT_ME
+                  </span>
+                </button>
+             </div>
            </div>
         </section>
 
-
-        {/* PROJECTS SECTION */}
+        {/* PROJECTS */}
         <section id="projects" className="py-32 px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col items-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-bold mb-4 font-mono text-white">
-                <span className="text-cyan-500">&lt;</span> PROJECT_DATABASE <span className="text-cyan-500">/&gt;</span>
+            <div className="flex flex-col items-center mb-20">
+              <h2 className="text-5xl md:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-800">
+                PROJECTS
               </h2>
               
-              {/* Tabs */}
-              <div className="flex flex-wrap gap-2 mt-8 justify-center">
-                {[
-                  { id: 'all', label: 'ALL_SYSTEMS' },
-                  { id: 'aws', label: 'AWS_CLOUD' },
-                  { id: 'azure', label: 'AZURE_CLOUD' }
-                ].map(tab => (
+              <div className="flex flex-wrap gap-4 justify-center">
+                {['all', 'aws', 'azure', 'devops'].map(tab => (
                   <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`px-6 py-2 rounded-full font-mono text-sm transition-all border ${
-                      activeTab === tab.id 
-                      ? 'bg-cyan-500 text-black border-cyan-500 font-bold shadow-[0_0_20px_rgba(6,182,212,0.4)]' 
-                      : 'bg-black/50 text-gray-400 border-white/10 hover:border-cyan-500/50 hover:text-cyan-400'
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-6 py-2 font-mono text-sm uppercase tracking-wider transition-all border ${
+                      activeTab === tab
+                      ? 'bg-cyan-500/10 border-cyan-500 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)]'
+                      : 'bg-black/40 border-white/10 text-gray-400 hover:border-white/30'
                     }`}
                   >
-                    {tab.label}
+                    {tab}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Grid */}
             <div className="grid md:grid-cols-2 gap-8">
               {filteredProjects.map((project) => (
-                <div key={project.id} className="group relative">
-                  {/* Holographic Border */}
-                  <div className={`absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-violet-500 rounded-2xl opacity-20 group-hover:opacity-60 blur transition duration-500`}></div>
-                  
-                  {/* Card Content */}
-                  <div className="relative h-full bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:bg-black/90 transition-all">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className={`p-3 rounded-lg bg-${project.color}-500/10 border border-${project.color}-500/20 text-${project.color}-400`}>
-                        {project.icon}
-                      </div>
-                      <span className="px-3 py-1 text-xs font-mono border border-cyan-500/30 text-cyan-400 rounded-full bg-cyan-900/10">
-                        {project.impact}
-                      </span>
+                <TiltCard key={project.id} className="h-full">
+                  <div className="relative h-full bg-black/60 backdrop-blur-xl border border-white/10 p-8 hover:border-cyan-500/40 group overflow-hidden">
+                    {/* Glowing Corner */}
+                    <div className={`absolute top-0 right-0 p-3 bg-${project.color}-500/20 rounded-bl-2xl border-b border-l border-${project.color}-500/30`}>
+                      <span className={`text-${project.color}-400 font-mono text-xs font-bold`}>{project.impact}</span>
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors font-mono">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 mb-6 leading-relaxed">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className={`p-3 rounded-lg bg-gradient-to-br from-${project.color}-500/20 to-transparent border border-${project.color}-500/20`}>
+                        {project.icon}
+                      </div>
+                      <h3 className="text-2xl font-bold font-mono text-white group-hover:text-cyan-400 transition-colors">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-gray-400 mb-6 leading-relaxed border-l-2 border-white/10 pl-4">
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-8">
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 mb-6">
                       {project.tech.map((t, i) => (
-                        <span key={i} className="text-xs font-mono text-gray-300 bg-white/5 px-2 py-1 rounded border border-white/5">
+                        <span key={i} className="px-2 py-1 text-xs font-mono bg-white/5 border border-white/5 text-gray-300 rounded">
                           {t}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between mt-auto border-t border-white/10 pt-6">
-                      <div className="flex items-center gap-2 text-green-400 text-sm font-mono">
+                    {/* Deep Details (Restored) */}
+                    <div className="space-y-2 mb-8 bg-black/40 p-4 rounded-lg border border-white/5">
+                      {project.details.map((detail, i) => (
+                        <div key={i} className="flex items-start gap-3 text-sm text-gray-400">
+                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full bg-${project.color}-500 flex-shrink-0`} />
+                          <span>{detail}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                      <div className="flex items-center gap-2 text-green-400 font-mono text-sm">
                         <Activity className="w-4 h-4" /> {project.metric}
                       </div>
-                      <a 
-                        href={project.link} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="flex items-center gap-2 text-sm font-bold text-white hover:text-cyan-400 transition-colors"
-                      >
-                        ACCESS <ExternalLink className="w-4 h-4" />
-                      </a>
+                      {project.link ? (
+                        <a 
+                          href={project.link} 
+                          target="_blank" 
+                          rel="noreferrer"
+                          className="flex items-center gap-2 text-sm font-bold text-white hover:text-cyan-400 transition-colors uppercase tracking-wider"
+                        >
+                          View Code <ExternalLink className="w-4 h-4" />
+                        </a>
+                      ) : (
+                        <span className="text-gray-600 text-sm font-mono cursor-not-allowed">ACCESS_DENIED</span>
+                      )}
+                    </div>
+                  </div>
+                </TiltCard>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SKILLS */}
+        <section id="skills" className="py-32 px-6 bg-gradient-to-b from-black/80 to-transparent relative">
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+          <div className="max-w-7xl mx-auto relative z-10">
+            <h2 className="text-4xl md:text-6xl font-black mb-16 text-center font-mono">
+              <span className="text-violet-500">##</span> SYSTEM_CAPABILITIES
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {SKILLS_DATA.map((group, idx) => (
+                <div key={idx} className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors group">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 bg-black rounded-lg border border-white/10 group-hover:border-violet-500/50 transition-colors">
+                      {group.icon}
+                    </div>
+                    <h3 className="text-xl font-bold font-mono">{group.category}</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {group.items.map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 group/item">
+                        <CheckCircle2 className="w-5 h-5 text-gray-600 group-hover/item:text-cyan-400 transition-colors mt-0.5" />
+                        <span className="text-gray-300 group-hover/item:text-white transition-colors">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* EDUCATION */}
+        <section className="py-32 px-6">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-black mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-800">
+              EDUCATION_LOG
+            </h2>
+            
+            <div className="space-y-6">
+              {EDUCATION_DATA.map((edu, idx) => (
+                <div key={idx} className="relative pl-8 border-l-2 border-white/10 hover:border-cyan-500 transition-colors group">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-black border-2 border-white/20 group-hover:border-cyan-500 group-hover:bg-cyan-500 transition-all" />
+                  
+                  <div className="bg-white/5 p-6 border border-white/5 group-hover:border-cyan-500/20 transition-all">
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                      <h3 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">{edu.program}</h3>
+                      <span className={`text-sm font-mono px-3 py-1 rounded border ${
+                        edu.status === 'In Progress' 
+                        ? 'border-green-500/30 text-green-400 bg-green-500/10' 
+                        : 'border-violet-500/30 text-violet-400 bg-violet-500/10'
+                      }`}>
+                        {edu.status}
+                      </span>
+                    </div>
+                    <p className="text-lg text-gray-300 mb-2">{edu.school}</p>
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 font-mono">
+                      <span>{edu.graduation}</span>
+                      <span>•</span>
+                      <span>{edu.location}</span>
+                      {edu.gpa && (
+                        <>
+                          <span>•</span>
+                          <span className="text-white">GPA: {edu.gpa}</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1212,61 +1415,43 @@ export default function App() {
           </div>
         </section>
 
-        {/* SKILLS SECTION */}
-        <section className="py-20 px-6 bg-gradient-to-b from-transparent to-black/50">
-          <div className="max-w-6xl mx-auto">
-             <h2 className="text-4xl font-bold mb-12 font-mono text-center">
-                <span className="text-violet-500">##</span> TECHNICAL_ARSENAL
-             </h2>
-             
-             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-               {SKILLS_DATA.map((skill, idx) => (
-                 <div key={idx} className="bg-white/5 border border-white/10 p-6 rounded-xl hover:border-violet-500/50 hover:bg-white/10 transition-all duration-300">
-                    <div className="mb-4 text-violet-400">{skill.icon}</div>
-                    <h4 className="text-lg font-bold mb-4 font-mono">{skill.category}</h4>
-                    <ul className="space-y-2">
-                      {skill.items.map((item, i) => (
-                        <li key={i} className="text-sm text-gray-400 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full" /> {item}
-                        </li>
-                      ))}
-                    </ul>
-                 </div>
-               ))}
-             </div>
-          </div>
-        </section>
-
-        {/* FOOTER / CONTACT */}
-        <section id="contact" className="py-32 px-6 border-t border-white/10 relative overflow-hidden">
-           <div className="max-w-4xl mx-auto text-center relative z-10">
-             <h2 className="text-5xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500">
-               READY TO DEPLOY?
+        {/* CONTACT */}
+        <section id="contact" className="py-32 px-6 border-t border-white/10 bg-black/40">
+           <div className="max-w-4xl mx-auto text-center">
+             <h2 className="text-5xl md:text-7xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500">
+               INITIALIZE_UPLINK
              </h2>
              <p className="text-xl text-gray-400 mb-12 font-mono">
-               Currently available for Cloud Architecture & Security roles.
+               Looking for a cloud developer with cybersecurity expertise?<br/>
+               Let's secure your infrastructure.
              </p>
              
-             <div className="flex justify-center gap-6">
-                <a href="mailto:ruda0008@algonquinlive.com" className="p-4 bg-white/5 rounded-full hover:bg-cyan-500 hover:text-black transition-all duration-300 hover:scale-110 border border-white/10">
-                  <Mail className="w-6 h-6" />
+             <div className="flex justify-center gap-8 mb-16">
+                <a href="mailto:ruda0008@algonquinlive.com" className="group">
+                  <div className="p-6 bg-white/5 rounded-2xl border border-white/10 group-hover:border-cyan-500/50 group-hover:bg-cyan-500/10 transition-all duration-300 group-hover:scale-110">
+                    <Mail className="w-8 h-8 text-white group-hover:text-cyan-400" />
+                  </div>
+                  <span className="block mt-4 font-mono text-sm text-gray-500 group-hover:text-cyan-400">EMAIL</span>
                 </a>
-                <a href="https://github.com/ruda0008" target="_blank" rel="noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-violet-500 hover:text-white transition-all duration-300 hover:scale-110 border border-white/10">
-                  <Github className="w-6 h-6" />
+                <a href="https://github.com/ruda0008" target="_blank" rel="noreferrer" className="group">
+                  <div className="p-6 bg-white/5 rounded-2xl border border-white/10 group-hover:border-violet-500/50 group-hover:bg-violet-500/10 transition-all duration-300 group-hover:scale-110">
+                    <Github className="w-8 h-8 text-white group-hover:text-violet-400" />
+                  </div>
+                  <span className="block mt-4 font-mono text-sm text-gray-500 group-hover:text-violet-400">GITHUB</span>
                 </a>
-                <a href="https://www.linkedin.com/in/aryan-rudani-871258227/" target="_blank" rel="noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110 border border-white/10">
-                  <Linkedin className="w-6 h-6" />
+                <a href="https://www.linkedin.com/in/aryan-rudani-871258227/" target="_blank" rel="noreferrer" className="group">
+                  <div className="p-6 bg-white/5 rounded-2xl border border-white/10 group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all duration-300 group-hover:scale-110">
+                    <Linkedin className="w-8 h-8 text-white group-hover:text-blue-400" />
+                  </div>
+                  <span className="block mt-4 font-mono text-sm text-gray-500 group-hover:text-blue-400">LINKEDIN</span>
                 </a>
              </div>
-             
-             <div className="mt-16 pt-8 border-t border-white/5 text-gray-500 font-mono text-sm">
-               <p>TERMINAL SESSION ACTIVE • ID: {Math.floor(Math.random() * 999999)}</p>
-               <p>© 2025 ARYAN RUDANI</p>
+
+             <div className="border-t border-white/10 pt-8 font-mono text-xs text-gray-600">
+               <p>ARYAN RUDANI // 2025</p>
+               <p>SECURE CONNECTION ESTABLISHED</p>
              </div>
            </div>
-           
-           {/* Decorative Grid Floor */}
-           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[linear-gradient(to_top,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:100%_40px] pointer-events-none" />
         </section>
       </div>
     </div>
