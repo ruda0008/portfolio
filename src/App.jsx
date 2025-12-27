@@ -74,25 +74,28 @@ import {
 const PROJECTS_DATA = [
   
 
-  {
+
+{
   id: 1,
-  title: "E-Commerce Microservices Cluster Platform (Kubernetes)",
+  title: "E-Commerce Microservices Platform with DevSecOps Pipeline",
   category: "azure",
-  impact: "Production-Ready Architecture",
-  description: "Architected and deployed enterprise-grade e-commerce platform with 5 microservices on Azure Kubernetes Service. Implemented MongoDB 3-node replica set with automatic failover, RabbitMQ message queue for async processing, and automated CI/CD pipelines achieving 95% faster deployments.",
-  tech: ["Kubernetes", "Docker", "Azure AKS", "MongoDB", "RabbitMQ", "Node.js", "Go", "Vue.js", "GitHub Actions", "YAML"],
-  metric: "99.9% Uptime",
+  impact: "Zero-Vulnerability Deployment",
+  description: "Enterprise e-commerce platform with 5 microservices on Azure Kubernetes Service. Implements DevSecOps: SonarQube SAST + Trivy container scanning enforce broken build policy. MongoDB 3-node replica set with automatic failover, RabbitMQ async messaging. Pipeline blocks any deployment failing security gates.",
+  tech: ["Kubernetes", "Docker", "Azure AKS", "SonarQube", "Trivy", "MongoDB", "RabbitMQ", "GitHub Actions", "SAST"],
+  metric: "Security-First",
   icon: <Boxes className="w-6 h-6" />,
   color: "from-indigo-500 to-purple-500",
   details: [
-    "5 microservices with independent scaling",
+    "SonarQube SAST: blocks deployment on code vulnerabilities",
+    "Trivy: scans Docker images for CVEs before push",
     "MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover",
-    "RabbitMQ AMQP 1.0 message queue for 1000+ orders/min",
+    "Defense in Depth: 2 automated security gates in CI/CD",
     "CI/CD pipelines: 2 hours → 3 minutes deployment time"
   ],
   link: "https://github.com/ruda0008/fullstack-final-project",
   comingSoon: false
 },
+
   {
     id: 2,
     title: "Real-Time IoT Monitoring Pipeline",
@@ -208,7 +211,7 @@ const PROJECTS_DATA = [
 
 const STATS_DATA = [
   { number: "6+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
- { number: "99.9%", label: "Uptime SLA", icon: <CheckCircle2 className="w-5 h-5" /> }, // NEW - from Kubernetes
+  { number: "2", label: "Security Gates", icon: <CheckCircle2 className="w-5 h-5" /> }, // NEW - from Kubernetes
   { number: "30x", label: "Query Optimization", icon: <BarChart3 className="w-5 h-5" /> },
   { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
 ];
@@ -336,15 +339,15 @@ export default function App() {
       ]
     },
  {
-  category: "DevOps & Tools",
-  icon: <Layers className="w-5 h-5" />,
-  items: [
-    { name: "Kubernetes, Docker, Docker Compose, Git, GitHub", full: true }, // Added Kubernetes
-    { name: "RabbitMQ, RESTful APIs, Event-Driven Architecture", full: true },
-    { name: "CI/CD with GitHub Actions", full: true },
-    { name: "Power BI Desktop, PyPDF2", full: true }
-  ]
-}
+      category: "DevSecOps & Automation",
+      icon: <Layers className="w-5 h-5" />,
+      items: [
+        { name: "Kubernetes, Docker, Docker Compose, Git, GitHub", full: true },
+        { name: "CI/CD with GitHub Actions, Security Gates (SAST, Container Scanning)", full: true },
+        { name: "RabbitMQ, RESTful APIs, Event-Driven Architecture", full: true },
+        { name: "SonarCloud, Trivy, Broken Build Policies", full: true }
+      ]
+    }
   ];
 
   const education = [
@@ -784,6 +787,541 @@ export default function App() {
 }
 
 
+
+
+
+
+
+
+
+
+
+// new cyberpunk ui. NEW CYBERPUNK UI
+
+
+// import React, { useState, useEffect } from 'react';
+// import {
+//   Cloud, Code2, Mail, Github, Linkedin, ArrowRight,
+//   BarChart3, ExternalLink, Radio, CloudLightning,
+//   CheckCircle2, Boxes, Activity, Shield, Terminal, 
+//   Target, Zap, ChevronDown, GraduationCap, Award, User
+// } from 'lucide-react';
+
+// /* --- DATA CONSTANTS --- */
+
+// const EDUCATION_DATA = [
+//   {
+//     id: 1,
+//     degree: "Cloud Development & Operations",
+//     school: "Algonquin College",
+//     year: "2024 - Present",
+//     status: "IN_PROGRESS",
+//     desc: "Specializing in Cloud Native Architecture, Kubernetes orchestration, and Azure/AWS DevOps pipelines. Leading real-time IoT monitoring projects.",
+//     color: "cyan"
+//   },
+//   {
+//     id: 2,
+//     degree: "Cybersecurity Program",
+//     school: "Algonquin College",
+//     year: "Completed",
+//     status: "GRADUATED",
+//     desc: "Comprehensive training in network security, risk management, ethical hacking, and defense strategies. Foundation for DevSecOps approach.",
+//     color: "pink"
+//   }
+// ];
+
+// const CERTIFICATIONS_DATA = [
+//   "AWS Certified Cloud Practitioner",
+//   "Microsoft Certified: Azure Fundamentals",
+//   "CompTIA Security+"
+// ];
+
+// const PROJECTS_DATA = [
+//   {
+//     id: 1,
+//     title: "E-Commerce Microservices Platform",
+//     category: "azure",
+//     impact: "PRODUCTION-READY",
+//     description: "Enterprise-grade platform with 5 microservices on Azure Kubernetes. MongoDB 3-node replica set, RabbitMQ messaging, automated CI/CD achieving 95% faster deployments.",
+//     tech: ["Kubernetes", "Docker", "Azure AKS", "MongoDB", "RabbitMQ"],
+//     metric: "99.9% UPTIME",
+//     icon: <Boxes className="w-6 h-6" />,
+//     link: "https://github.com/ruda0008/fullstack-final-project",
+//   },
+//   {
+//     id: 2,
+//     title: "Real-Time IoT Monitoring Pipeline",
+//     category: "azure",
+//     impact: "30x FASTER QUERIES",
+//     description: "Azure IoT pipeline for public safety monitoring. Streams sensor data through IoT Hub to Stream Analytics. Optimized Cosmos DB from 300ms to <10ms response time.",
+//     tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Python"],
+//     metric: "SUB-10MS LATENCY",
+//     icon: <Radio className="w-6 h-6" />,
+//     link: "https://github.com/ruda0008/rideau-canal-monitoring",
+//   },
+//   {
+//     id: 3,
+//     title: "Serverless Resume Screening",
+//     category: "aws",
+//     impact: "EVENT-DRIVEN",
+//     description: "Automated resume processing using Lambda with S3 triggers. PyPDF2 extraction with regex parsing, DynamoDB indexing, SQS + SES notifications.",
+//     tech: ["Lambda", "S3", "DynamoDB", "SES", "SQS", "Python"],
+//     metric: "ZERO-OPS",
+//     icon: <CloudLightning className="w-6 h-6" />,
+//     link: "https://github.com/ruda0008/AWS_resume_parser"
+//   },
+//   {
+//     id: 4,
+//     title: "Cloud Data Analytics Pipeline",
+//     category: "azure",
+//     impact: "85% COST REDUCTION",
+//     description: "Automated ETL pipeline with Azure Data Factory. Star schema design with normalized structure. Power BI dashboards with regional heatmaps for 300K+ transactions.",
+//     tech: ["Data Factory", "SQL Database", "Blob Storage", "Power BI"],
+//     metric: "300K+ TRANSACTIONS",
+//     icon: <BarChart3 className="w-6 h-6" />,
+//     link: "https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline"
+//   }
+// ];
+
+// const SKILLS_DATA = [
+//   {
+//     category: "CLOUD PLATFORMS",
+//     icon: <Cloud className="w-6 h-6" />,
+//     items: ["AWS (Lambda, S3, DynamoDB, IAM)", "Azure (IoT Hub, AKS, Cosmos DB)", "Event-Driven Architecture"]
+//   },
+//   {
+//     category: "CORE ENGINEERING",
+//     icon: <Code2 className="w-6 h-6" />,
+//     items: ["Python, SQL, Java, C++", "MongoDB, DynamoDB, Azure SQL", "RESTful APIs, Message Queues"]
+//   },
+//   {
+//     category: "SECURITY OPS",
+//     icon: <Shield className="w-6 h-6" />,
+//     items: ["IAM Policies, RBAC, Firewall", "NIST, ISO 27001, OWASP", "AES-256, RSA, PKI"]
+//   },
+//   {
+//     category: "DEVOPS ARSENAL",
+//     icon: <Terminal className="w-6 h-6" />,
+//     items: ["Kubernetes, Docker, Git", "CI/CD with GitHub Actions", "RabbitMQ, Power BI"]
+//   }
+// ];
+
+// export default function App() {
+//   const [activeTab, setActiveTab] = useState('all');
+//   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     setIsVisible(true);
+//     const handleMouseMove = (e) => {
+//       setMousePos({ x: e.clientX, y: e.clientY });
+//     };
+//     window.addEventListener('mousemove', handleMouseMove);
+//     return () => window.removeEventListener('mousemove', handleMouseMove);
+//   }, []);
+
+//   const filteredProjects = activeTab === 'all'
+//     ? PROJECTS_DATA
+//     : PROJECTS_DATA.filter(p => p.category === activeTab);
+
+//   return (
+//     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+//       <style>{`
+//         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+//         * { font-family: 'Space Grotesk', -apple-system, sans-serif; }
+//         .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+//         .text-neon-cyan { color: #00F0FF; text-shadow: 0 0 20px rgba(0, 240, 255, 0.6); }
+//         .text-neon-pink { color: #FF006E; text-shadow: 0 0 20px rgba(255, 0, 110, 0.6); }
+//         .text-neon-purple { color: #B24BF3; text-shadow: 0 0 20px rgba(178, 75, 243, 0.6); }
+
+//         .clip-corner { clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+//         .clip-corner-sm { clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+        
+//         .grid-dots {
+//           background-image: radial-gradient(circle, rgba(0, 240, 255, 0.15) 1px, transparent 1px);
+//           background-size: 32px 32px;
+//         }
+
+//         .scanlines {
+//           background: linear-gradient(to bottom, transparent 50%, rgba(0, 240, 255, 0.02) 50%);
+//           background-size: 100% 4px;
+//           pointer-events: none;
+//         }
+
+//         .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+//         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+//         .delay-100 { animation-delay: 0.1s; }
+//         .delay-200 { animation-delay: 0.2s; }
+//         .delay-300 { animation-delay: 0.3s; }
+        
+//         .hover-lift { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+//         .hover-lift:hover { transform: translateY(-8px); }
+        
+//         .glitch:hover::before { animation: glitch-1 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite; color: #00F0FF; }
+//         .glitch:hover::after { animation: glitch-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite; color: #FF006E; }
+//         @keyframes glitch-1 { 0% { transform: translateX(0); } 20% { transform: translateX(-2px); } 40% { transform: translateX(2px); } 100% { transform: translateX(0); } }
+//         @keyframes glitch-2 { 0% { transform: translateX(0); } 20% { transform: translateX(2px); } 40% { transform: translateX(-2px); } 100% { transform: translateX(0); } }
+//       `}</style>
+
+//       {/* BACKGROUND FX */}
+//       <div className="fixed inset-0 scanlines pointer-events-none z-50 opacity-50" />
+//       <div className="fixed inset-0 pointer-events-none z-40 transition-opacity duration-300"
+//         style={{ background: `radial-gradient(800px circle at ${mousePos.x}px ${mousePos.y}px, rgba(0, 240, 255, 0.08), transparent 70%)` }} />
+//       <div className="fixed inset-0 grid-dots opacity-40" />
+//       <div className="fixed top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60">
+//         <div className="h-full w-1/3 bg-gradient-to-r from-cyan-400 to-transparent animate-pulse" />
+//       </div>
+      
+//       {/* HERO SECTION */}
+//       <section className="relative min-h-screen flex items-center justify-center px-6 pt-20">
+//         <div className="max-w-7xl mx-auto w-full">
+//           <div className={`flex items-center gap-3 mb-12 ${isVisible ? 'fade-in-up' : 'opacity-0'}`}>
+//             <div className="flex items-center gap-3 px-5 py-2.5 bg-cyan-500/10 border border-cyan-500/40 clip-corner-sm backdrop-blur-sm">
+//               <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-pulse" />
+//               <span className="text-cyan-400 text-xs font-bold tracking-[0.2em] font-mono">SYSTEM_ACTIVE</span>
+//             </div>
+//             <div className="h-px w-24 bg-gradient-to-r from-cyan-500/50 to-transparent" />
+//           </div>
+
+//           <div className={`mb-10 ${isVisible ? 'fade-in-up delay-100' : 'opacity-0'}`}>
+//             <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-bold tracking-tighter leading-none mb-4 glitch" data-text="ARYAN RUDANI">
+//               <span className="block text-white">ARYAN</span>
+//               <span className="block text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text">RUDANI</span>
+//             </h1>
+//           </div>
+
+//           <div className={`flex flex-wrap items-center gap-5 mb-12 ${isVisible ? 'fade-in-up delay-200' : 'opacity-0'}`}>
+//             <div className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-400 text-black font-bold text-lg tracking-[0.15em] clip-corner hover-lift">
+//               CLOUD_ARCHITECT
+//             </div>
+//             <div className="w-16 h-px bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" />
+//             <div className="px-8 py-4 bg-gradient-to-r from-pink-500 to-pink-400 text-black font-bold text-lg tracking-[0.15em] clip-corner hover-lift">
+//               SECURITY_SPECIALIST
+//             </div>
+//           </div>
+
+//           <div className={`max-w-3xl mb-14 ${isVisible ? 'fade-in-up delay-300' : 'opacity-0'}`}>
+//             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
+//               Building <span className="text-neon-cyan font-bold">resilient cloud infrastructure</span> with AWS & Azure.
+//               Specializing in <span className="text-neon-pink font-bold">serverless architectures</span> and DevSecOps.
+//             </p>
+//           </div>
+
+//           <div className={`flex flex-wrap gap-5 ${isVisible ? 'fade-in-up delay-300' : 'opacity-0'}`}>
+//              <button onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })} className="px-10 py-5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-black font-bold text-lg tracking-wider clip-corner hover-lift">
+//               VIEW PROJECTS
+//             </button>
+//             <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="px-10 py-5 bg-zinc-900/50 border-2 border-cyan-500/60 text-cyan-400 font-bold text-lg tracking-wider clip-corner hover:bg-cyan-500/10 transition-all hover-lift">
+//               ABOUT ME
+//             </button>
+//           </div>
+          
+//           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+//              <span className="text-xs text-gray-600 font-bold tracking-wider font-mono">SCROLL</span>
+//              <ChevronDown className="w-5 h-5 text-cyan-400 animate-bounce" />
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ABOUT & EDUCATION SECTION */}
+//       <section id="about" className="relative py-32 px-6 bg-zinc-900/20 border-y border-zinc-800">
+//         <div className="max-w-7xl mx-auto">
+//           {/* Header */}
+//           <div className="flex items-center gap-6 mb-16">
+//             <div className="h-px w-20 bg-gradient-to-r from-cyan-500 to-transparent" />
+//             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">
+//               <span className="text-transparent bg-gradient-to-r from-white via-cyan-400 to-purple-500 bg-clip-text">BIO_DATA</span>
+//             </h2>
+//           </div>
+
+//           <div className="grid lg:grid-cols-2 gap-16">
+//             {/* Left: Narrative Bio */}
+//             <div>
+//                <div className="flex items-center gap-3 mb-6">
+//                  <User className="w-6 h-6 text-cyan-400" />
+//                  <h3 className="text-2xl font-bold text-white tracking-widest font-mono">PROFILE_SUMMARY</h3>
+//                </div>
+//                <div className="relative bg-zinc-900/40 border border-zinc-800 p-8 clip-corner backdrop-blur-sm hover:border-cyan-500/40 transition-colors">
+//                   <p className="text-lg text-gray-300 leading-relaxed mb-6">
+//                     I am a <span className="text-neon-cyan font-bold">Cloud Development and Operations</span> student with a robust background in <span className="text-neon-pink font-bold">Cybersecurity</span>.
+//                   </p>
+//                   <p className="text-lg text-gray-300 leading-relaxed mb-6">
+//                     My unique background allows me to bridge the gap between development and security (DevSecOps). I don't just build cloud infrastructure; I design it to be resilient, scalable, and impenetrable from day one.
+//                   </p>
+//                   <p className="text-lg text-gray-300 leading-relaxed">
+//                     Currently focusing on Kubernetes orchestration and serverless patterns on Azure, aiming to secure a challenging role where code meets infrastructure.
+//                   </p>
+                  
+//                   {/* Decorative bar */}
+//                   <div className="mt-8 flex gap-2">
+//                     <div className="h-2 w-full bg-zinc-800 rounded-sm overflow-hidden">
+//                       <div className="h-full w-3/4 bg-gradient-to-r from-cyan-500 to-purple-500 animate-pulse" />
+//                     </div>
+//                   </div>
+//                   <div className="flex justify-between mt-2 text-xs font-mono text-gray-500">
+//                     <span>PROGRESS</span>
+//                     <span>LOADING_OPPORTUNITIES...</span>
+//                   </div>
+//                </div>
+//             </div>
+
+//             {/* Right: Education & Certs */}
+//             <div>
+//                <div className="flex items-center gap-3 mb-6">
+//                  <GraduationCap className="w-6 h-6 text-pink-500" />
+//                  <h3 className="text-2xl font-bold text-white tracking-widest font-mono">EDUCATION_LOG</h3>
+//                </div>
+
+//                <div className="space-y-6">
+//                  {EDUCATION_DATA.map((edu) => (
+//                    <div key={edu.id} className="relative group bg-zinc-900/40 border border-zinc-800 p-6 clip-corner-sm hover:border-zinc-600 transition-all hover-lift">
+//                       <div className="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-100 transition-opacity">
+//                          <Award className={`w-8 h-8 text-${edu.color}-500`} />
+//                       </div>
+                      
+//                       <div className="flex justify-between items-start mb-2">
+//                         <span className={`text-xs font-bold px-2 py-1 bg-${edu.color}-500/10 text-${edu.color}-400 border border-${edu.color}-500/30 rounded-sm font-mono`}>
+//                           {edu.year}
+//                         </span>
+//                         <span className="text-xs font-bold text-gray-500 font-mono tracking-wider">{edu.status}</span>
+//                       </div>
+                      
+//                       <h4 className="text-xl font-bold text-white mb-1">{edu.degree}</h4>
+//                       <p className="text-cyan-400 font-mono text-sm mb-3">{edu.school}</p>
+//                       <p className="text-gray-400 text-sm leading-relaxed">{edu.desc}</p>
+//                    </div>
+//                  ))}
+//                </div>
+
+//                {/* Mini Certs Section */}
+//                <div className="mt-8">
+//                   <div className="flex flex-wrap gap-2">
+//                     {CERTIFICATIONS_DATA.map((cert, i) => (
+//                       <span key={i} className="px-3 py-1 bg-zinc-800/50 border border-zinc-700 text-gray-300 text-xs font-bold tracking-wider font-mono hover:text-cyan-400 hover:border-cyan-500/50 transition-colors cursor-default">
+//                         {cert}
+//                       </span>
+//                     ))}
+//                   </div>
+//                </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* PROJECTS SECTION */}
+//       <section id="projects" className="relative py-32 px-6">
+//         <div className="max-w-7xl mx-auto">
+//           <div className="mb-20">
+//             <div className="flex items-center gap-6 mb-10">
+//               <div className="h-px w-20 bg-gradient-to-r from-cyan-500 to-transparent" />
+//               <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">
+//                 <span className="text-transparent bg-gradient-to-r from-white via-cyan-400 to-purple-500 bg-clip-text">PROJECTS</span>
+//               </h2>
+//             </div>
+            
+//             <div className="flex gap-4 flex-wrap">
+//               {['all', 'aws', 'azure'].map(tab => (
+//                 <button
+//                   key={tab}
+//                   onClick={() => setActiveTab(tab)}
+//                   className={`relative px-8 py-4 font-bold text-sm tracking-[0.2em] transition-all duration-300 clip-corner-sm backdrop-blur-sm font-mono hover-lift ${
+//                     activeTab === tab 
+//                       ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-black shadow-xl' 
+//                       : 'bg-zinc-900/40 border border-zinc-800 text-gray-400 hover:border-cyan-500/50 hover:text-white'
+//                   }`}
+//                 >
+//                   {tab.toUpperCase()}
+//                   {activeTab === tab && <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-pink-500" />}
+//                 </button>
+//               ))}
+//             </div>
+//           </div>
+
+//           <div className="grid md:grid-cols-2 gap-8">
+//             {filteredProjects.map((project, idx) => (
+//               <div key={project.id} className="group relative bg-zinc-900/40 border border-zinc-800 p-10 hover:border-cyan-500/60 transition-all duration-500 clip-corner backdrop-blur-sm hover-lift">
+//                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 clip-corner" />
+//                 <div className="relative z-10">
+//                   <div className="absolute -top-5 -right-5 px-5 py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black text-xs tracking-[0.2em] clip-corner-sm shadow-xl font-mono">{project.impact}</div>
+//                   <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 flex items-center justify-center mb-8 clip-corner-sm group-hover:scale-110 transition-transform duration-500 shadow-xl">
+//                     {React.cloneElement(project.icon, { className: "w-8 h-8 text-black" })}
+//                   </div>
+//                   <h3 className="text-3xl font-bold mb-5 text-white group-hover:text-cyan-400 transition-colors duration-300">{project.title}</h3>
+//                   <p className="text-gray-400 mb-8 leading-relaxed text-base">{project.description}</p>
+//                   <div className="flex items-center gap-3 mb-8 px-5 py-3 bg-cyan-500/10 border border-cyan-500/40 w-fit clip-corner-sm backdrop-blur-sm">
+//                     <Activity className="w-5 h-5 text-cyan-400" />
+//                     <span className="font-bold text-cyan-400 text-sm tracking-wider font-mono">{project.metric}</span>
+//                   </div>
+//                   <div className="flex flex-wrap gap-3 mb-8">
+//                     {project.tech.map((tech, i) => (
+//                       <span key={i} className="px-4 py-2 bg-zinc-800/70 border border-zinc-700 text-purple-400 text-xs font-bold tracking-wider backdrop-blur-sm">
+//                         {tech}
+//                       </span>
+//                     ))}
+//                   </div>
+//                   {project.link && (
+//                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-black font-bold text-sm tracking-wider clip-corner-sm hover:shadow-2xl hover:shadow-cyan-500/60 transition-all duration-300 hover-lift font-mono">
+//                       <ExternalLink className="w-4 h-4" /> VIEW_CODE
+//                     </a>
+//                   )}
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* SKILLS SECTION */}
+//       <section className="relative py-32 px-6">
+//         <div className="max-w-7xl mx-auto">
+//           <div className="mb-20">
+//             <div className="flex items-center gap-6 mb-10">
+//               <div className="h-px w-20 bg-gradient-to-r from-pink-500 to-transparent" />
+//               <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">
+//                 <span className="text-transparent bg-gradient-to-r from-white via-pink-400 to-purple-500 bg-clip-text">TECH_STACK</span>
+//               </h2>
+//             </div>
+//           </div>
+//           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+//             {SKILLS_DATA.map((skill, idx) => (
+//               <div key={idx} className="group relative bg-zinc-900/40 border border-zinc-800 p-8 hover:border-pink-500/60 transition-all duration-500 clip-corner backdrop-blur-sm hover-lift">
+//                 <div className="w-14 h-14 bg-gradient-to-br from-pink-500 via-purple-500 to-cyan-500 flex items-center justify-center mb-8 clip-corner-sm group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
+//                   {React.cloneElement(skill.icon, { className: "w-7 h-7 text-black" })}
+//                 </div>
+//                 <h3 className="text-lg font-bold mb-6 text-pink-400 tracking-wider font-mono">{skill.category}</h3>
+//                 <ul className="space-y-3">
+//                   {skill.items.map((item, i) => (
+//                     <li key={i} className="flex items-start gap-3 text-sm text-gray-400 group/item hover:text-gray-200 transition-colors duration-300">
+//                       <span className="w-1.5 h-1.5 bg-purple-500 mt-2 flex-shrink-0 rounded-full group-hover/item:bg-pink-400 transition-colors duration-300" />
+//                       {item}
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* CONTACT SECTION */}
+//       <section className="relative py-32 px-6">
+//         <div className="max-w-4xl mx-auto text-center">
+//           <div className="mb-16">
+//             <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 glitch" data-text="LET'S CONNECT">
+//               <span className="text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text">LET'S CONNECT</span>
+//             </h2>
+//             <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+//               Looking for a cloud architect with <span className="text-cyan-400 font-bold">cybersecurity expertise</span>?
+//               Let's build something <span className="text-pink-400 font-bold">exceptional</span>.
+//             </p>
+//           </div>
+//           <div className="flex justify-center gap-5">
+//             {[
+//               { icon: <Mail />, href: "mailto:ruda0008@algonquinlive.com" },
+//               { icon: <Github />, href: "https://github.com/ruda0008" },
+//               { icon: <Linkedin />, href: "https://www.linkedin.com/in/aryan-rudani-871258227/" }
+//             ].map((social, i) => (
+//               <a key={i} href={social.href} target="_blank" rel="noopener noreferrer" className="group relative w-20 h-20 bg-zinc-900/50 border border-zinc-800 flex items-center justify-center hover:border-cyan-500/60 transition-all duration-300 clip-corner-sm backdrop-blur-sm hover-lift">
+//                 {React.cloneElement(social.icon, { className: "w-7 h-7 text-cyan-500 group-hover:text-pink-500 transition-colors duration-300" })}
+//               </a>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* FOOTER */}
+//       <footer className="relative py-16 px-6 border-t border-zinc-800">
+//         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+//           <div className="text-center md:text-left">
+//             <div className="text-3xl font-bold tracking-tighter text-transparent bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text mb-2">ARYAN_RUDANI</div>
+//             <div className="text-gray-600 text-xs font-bold tracking-[0.15em] font-mono">© 2025 • CLOUD_ARCHITECT • SECURITY_SPECIALIST</div>
+//           </div>
+//           <div className="flex items-center gap-3 px-5 py-3 bg-zinc-900/50 border border-zinc-800 clip-corner-sm backdrop-blur-sm">
+//             <div className="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-pulse" />
+//             <span className="text-xs text-gray-500 font-bold tracking-[0.15em] font-mono">STATUS_OPERATIONAL</span>
+//           </div>
+//         </div>
+//       </footer>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // NEWWWWW UI
 
 
 
