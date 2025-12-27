@@ -357,7 +357,7 @@ export default function App() {
       status: "In Progress",
       graduation: "August 2026",
       location: "Ottawa, ON",
-      gpa: null
+      gpa: "3.84/4.0"
     },
     {
       school: "Algonquin College",
