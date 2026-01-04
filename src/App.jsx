@@ -82,7 +82,7 @@ const PROJECTS_DATA = [
   impact: "Security Gated Pipeline Deployment",
   description: "Enterprise e-commerce platform with 5 microservices on Azure Kubernetes Service. Implements DevSecOps: SonarQube SAST + Trivy container scanning enforce broken build policy. MongoDB 3-node replica set with automatic failover, RabbitMQ async messaging. Pipeline blocks any deployment failing security gates.",
   tech: ["Kubernetes", "Docker", "Azure AKS", "SonarQube", "Trivy", "MongoDB", "RabbitMQ", "GitHub Actions", "SAST"],
-  metric: "Security-First",
+  metric: "SonarQube + Trivy Scanning in CI/CD Pipeline",
   icon: <Boxes className="w-6 h-6" />,
   color: "from-indigo-500 to-purple-500",
   details: [
