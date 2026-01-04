@@ -79,7 +79,7 @@ const PROJECTS_DATA = [
   id: 1,
   title: "E-Commerce Microservices Platform with DevSecOps Pipeline",
   category: "azure",
-  impact: "Zero-Vulnerability Deployment",
+  impact: "Security Gated Pipeline Deployment",
   description: "Enterprise e-commerce platform with 5 microservices on Azure Kubernetes Service. Implements DevSecOps: SonarQube SAST + Trivy container scanning enforce broken build policy. MongoDB 3-node replica set with automatic failover, RabbitMQ async messaging. Pipeline blocks any deployment failing security gates.",
   tech: ["Kubernetes", "Docker", "Azure AKS", "SonarQube", "Trivy", "MongoDB", "RabbitMQ", "GitHub Actions", "SAST"],
   metric: "Security-First",
@@ -138,10 +138,10 @@ const PROJECTS_DATA = [
     id: 4,
     title: "Cloud Data Analytics Pipeline",
     category: "azure",
-    impact: "300K+ transactions",
+    impact: "Cost-Optimized Architecture",
     description: "Built automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards with regional heatmaps.",
     tech: ["Data Factory", "SQL Database", "Blob Storage", "Power BI"],
-    metric: "85% cost reduction",
+    metric: "300K+ transactions",
     icon: <BarChart3 className="w-6 h-6" />,
     color: "from-blue-500 to-cyan-500",
     details: [
@@ -213,7 +213,7 @@ const STATS_DATA = [
   { number: "6+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
   { number: "2", label: "Security Gates", icon: <CheckCircle2 className="w-5 h-5" /> }, // NEW - from Kubernetes
   { number: "30x", label: "Query Optimization", icon: <BarChart3 className="w-5 h-5" /> },
-  { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
+ // { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
 ];
 
 export default function App() {
