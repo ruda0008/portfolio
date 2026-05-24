@@ -519,27 +519,17 @@ export default function App() {
           <Reveal delay={80}>
             <div className="rounded-3xl border border-line bg-card p-8 md:p-10 shadow-soft">
               <div className="space-y-5 text-lg text-muted leading-relaxed">
-                <p>
-                  I started in cybersecurity before moving into cloud development, and that background
-                  still shapes how I work. Security isn't something I bolt on after building a system —
-                  it's part of how I design from the beginning.
+                 <p>
+                  I started in cybersecurity before moving into cloud development, and that background still influences how I work. Security isn't something I think about after building a system it's part of how I design from the beginning.
                 </p>
                 <p>
-                  What drives me is learning, both in tech and in life: new cloud services, better ways
-                  to architect solutions, insights from other professionals, even conversations over
-                  coffee with friends. I like understanding not just how something works, but why it's
-                  built that way. That curiosity pushes me to dig deeper into the technologies I use.
+                  What drives me is learning both in tech and in life. New cloud services, better ways to architect solutions, insights from other professionals, even conversations over coffee with friends. I pick up perspectives everywhere. I like understanding not just how something works, but why it's built that way. That curiosity pushes me to dig deeper into the technologies I use.
                 </p>
                 <p>
-                  I've also learned that stepping away matters. Whether I'm on an adventure or just away
-                  from my desk, my mind processes problems differently — some of my better solutions
-                  arrived when I wasn't forcing them in front of a screen. Good work isn't just hours
-                  logged; it's thinking clearly.
+                  I've learned that stepping away matters. Whether I'm on a adventure or just away from my desk, my mind processes problems differently. Some of my better technical solutions have come when I wasn't sitting in front of a screen trying to force them. It's taught me that good work isn't just about hours logged it's about thinking clearly.
                 </p>
                 <p>
-                  I believe good infrastructure should be invisible. If it's running well, nobody
-                  notices it. That's what I aim for — systems reliable enough that teams can focus on
-                  their work instead of the platform underneath.
+                  I believe good infrastructure should be invisible. If it's running well, nobody notices it. That's what I aim for systems that are reliable enough that teams can focus on their work instead of worrying about the platform underneath.
                 </p>
               </div>
             </div>
