@@ -1,836 +1,815 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Cloud, 
-  Code2, 
-  Mail, 
-  Github, 
-  Linkedin, 
-  ArrowRight, 
-  BookOpen, 
-  CheckCircle2, 
-  Server, 
-  Layers, 
-  FileText, 
-  BarChart3, 
-  Container, 
-  ExternalLink,
-  
-  // ===== NEW ICONS FOR PROJECTS =====
-  
-  // IoT & Sensors
-  Radio,           // 📡 IoT/Wireless - BEST for IoT projects
-  Wifi,            // 📶 Network connectivity
-  Zap,             // ⚡ Real-time processing
-  Activity,        // 📈 Live monitoring/metrics
-  
-  // Cloud & Infrastructure
-  CloudCog,        // ☁️⚙️ Cloud configuration
-  CloudLightning,  // ☁️⚡ Serverless/Fast cloud
-  Database,        // 🗄️ Database projects
-  HardDrive,       // 💾 Storage solutions
-  
-  // Security & Compliance
-  Shield,          // 🛡️ Security projects
-  ShieldCheck,     // ✅🛡️ Security compliance
-  Lock,            // 🔒 Encryption/Auth
-  Key,             // 🔑 Access management
-  
-  // DevOps & Automation
-  GitBranch,       // 🌳 Git/CI/CD
-  Workflow,        // 🔄 Automation workflows
-  Cpu,             // 🖥️ Processing/Compute
-  Boxes,           // 📦 Microservices
-  
-  // Data & Analytics
-  TrendingUp,      // 📊 Analytics/Growth
-  PieChart,        // 🥧 Data visualization
-  LineChart,       // 📉 Time-series data
-  Brain,           // 🧠 AI/ML projects
-  
-  // Web & API
-  Globe,           // 🌐 Web applications
-  Webhook,         // 🪝 APIs/Webhooks
-  Network,         // 🕸️ Network architecture
-  Share2,          // 🔗 Data sharing/Integration
-  
-  // Development Tools
-  Terminal,        // 💻 CLI tools
-  Package,         // 📦 Package management
-  Wrench,          // 🔧 Configuration
-  Rocket,          // 🚀 Deployment
-  
-  // Monitoring & Alerts
-  Bell,            // 🔔 Notifications/Alerts
-  Eye,             // 👁️ Monitoring
-  AlertTriangle,   // ⚠️ Error handling
-  Target           // 🎯 Goal/Performance
+import {
+  Cloud,
+  Code2,
+  Mail,
+  Github,
+  Linkedin,
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  Server,
+  Layers,
+  BarChart3,
+  Container,
+  Sun,
+  Moon,
+  Menu,
+  X,
+  MapPin,
+  GraduationCap,
+  Boxes,
+  Radio,
+  CloudLightning,
 } from 'lucide-react';
 
+/* ------------------------------------------------------------------ */
+/*  Data                                                              */
+/* ------------------------------------------------------------------ */
 
-
-
-
-// Static data outside component - no recreation on re-renders
 const PROJECTS_DATA = [
-  
-
-
-{
-  id: 1,
-  title: "E-Commerce Microservices Platform with DevSecOps Pipeline",
-  category: "azure",
-  impact: "Security Gated Pipeline Deployment",
-  description: "Enterprise e-commerce platform with 5 microservices on Azure Kubernetes Service. Implements DevSecOps: SonarQube SAST + Trivy container scanning enforce broken build policy. MongoDB 3-node replica set with automatic failover, RabbitMQ async messaging. Pipeline blocks any deployment failing security gates.",
-  tech: ["Kubernetes", "Docker", "Azure AKS", "SonarQube", "Trivy", "MongoDB", "RabbitMQ", "GitHub Actions", "SAST"],
-  metric: "SonarQube + Trivy Scanning in CI/CD Pipeline",
-  icon: <Boxes className="w-6 h-6" />,
-  color: "from-indigo-500 to-purple-500",
-  details: [
-    "SonarQube SAST: blocks deployment on code vulnerabilities",
-    "Trivy: scans Docker images for CVEs before push",
-    "MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover",
-    "Defense in Depth: 2 automated security gates in CI/CD",
-    "CI/CD pipelines: 2 hours → 3 minutes deployment time"
-  ],
-  link: "https://github.com/ruda0008/fullstack-final-project",
-  comingSoon: false
-},
-
+  {
+    id: 1,
+    title: 'E-Commerce Microservices Platform with DevSecOps Pipeline',
+    category: 'azure',
+    impact: 'Security-Gated Pipeline',
+    description:
+      'Enterprise e-commerce platform with 5 microservices on Azure Kubernetes Service. Implements DevSecOps: SonarQube SAST + Trivy container scanning enforce a broken-build policy. MongoDB 3-node replica set with automatic failover, RabbitMQ async messaging. Pipeline blocks any deployment failing security gates.',
+    tech: ['Kubernetes', 'Docker', 'Azure AKS', 'SonarQube', 'Trivy', 'MongoDB', 'RabbitMQ', 'GitHub Actions', 'SAST'],
+    metric: 'SonarQube + Trivy scanning in CI/CD',
+    icon: <Boxes className="w-6 h-6" />,
+    details: [
+      'SonarQube SAST: blocks deployment on code vulnerabilities',
+      'Trivy: scans Docker images for CVEs before push',
+      'MongoDB replica set: 1 PRIMARY + 2 SECONDARY with auto-failover',
+      'Defense in depth: 2 automated security gates in CI/CD',
+      'CI/CD pipelines: 2 hours → 3 minutes deployment time',
+    ],
+    link: 'https://github.com/ruda0008/fullstack-final-project',
+    comingSoon: false,
+  },
   {
     id: 2,
-    title: "Real-Time IoT Monitoring Pipeline",
-    category: "azure",
-    impact: "30x faster queries",
-    description: "Built Azure IoT pipeline for public safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using partition strategy. Live dashboard with Chart.js.",
-    tech: ["IoT Hub", "Stream Analytics", "Cosmos DB", "Blob Storage", "Node.js", "Python"],
-    metric: "Full Automation",
+    title: 'Real-Time IoT Monitoring Pipeline',
+    category: 'azure',
+    impact: '30x faster queries',
+    description:
+      'Built an Azure IoT pipeline for public-safety monitoring across 3 canal locations. Streams sensor data through IoT Hub to Stream Analytics with 5-min windows. Optimized Cosmos DB from 300ms to <10ms using a partition strategy. Live dashboard with Chart.js.',
+    tech: ['IoT Hub', 'Stream Analytics', 'Cosmos DB', 'Blob Storage', 'Node.js', 'Python'],
+    metric: 'Full automation, end to end',
     icon: <Radio className="w-6 h-6" />,
-    color: "from-cyan-500 to-blue-500",
     details: [
-
-      "Python sensors → Azure pipeline → Node.js dashboard",
-      "Partition key optimization: 300ms → <10ms queries",
-      "5-min tumbling windows with safety classification",
-      "Dual storage: Cosmos DB (fast) + Blob (archive)"
+      'Python sensors → Azure pipeline → Node.js dashboard',
+      'Partition key optimization: 300ms → <10ms queries',
+      '5-min tumbling windows with safety classification',
+      'Dual storage: Cosmos DB (fast) + Blob (archive)',
     ],
-    link: "https://github.com/ruda0008/rideau-canal-monitoring",
-    comingSoon: false
+    link: 'https://github.com/ruda0008/rideau-canal-monitoring',
+    comingSoon: false,
   },
-{
+  {
     id: 3,
-    title: "Serverless Resume Screening Platform (AWS)",
-    category: "aws",
-    impact: "Event-driven processing",
-    description: "Built automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.",
-    tech: ["Lambda", "S3", "DynamoDB", "SES", "SQS", "Python", "PyPDF2"],
-    metric: "Full automation",
+    title: 'Serverless Resume Screening Platform (AWS)',
+    category: 'aws',
+    impact: 'Event-driven',
+    description:
+      'Built an automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.',
+    tech: ['Lambda', 'S3', 'DynamoDB', 'SES', 'SQS', 'Python', 'PyPDF2'],
+    metric: 'Full automation',
     icon: <CloudLightning className="w-6 h-6" />,
-    color: "from-orange-500 to-red-500",
     details: [
-      "S3 event-driven architecture with Lambda triggers",
-      "PyPDF2 extraction with regex parsing algorithms",
-      "IAM least-privilege access policies",
-      "Optimized DynamoDB partition keys"
+      'S3 event-driven architecture with Lambda triggers',
+      'PyPDF2 extraction with regex parsing algorithms',
+      'IAM least-privilege access policies',
+      'Optimized DynamoDB partition keys',
     ],
-    link: "https://github.com/ruda0008/AWS_resume_parser"
+    link: 'https://github.com/ruda0008/AWS_resume_parser',
   },
   {
     id: 4,
-    title: "Cloud Data Analytics Pipeline",
-    category: "azure",
-    impact: "Cost-Optimized Architecture",
-    description: "Built automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created normalized star schema and Power BI dashboards with regional heatmaps.",
-    tech: ["Data Factory", "SQL Database", "Blob Storage", "Power BI"],
-    metric: "300K+ transactions",
+    title: 'Cloud Data Analytics Pipeline',
+    category: 'azure',
+    impact: 'Cost-optimized',
+    description:
+      'Built an automated ETL pipeline with Azure Data Factory moving data from Blob Storage to SQL Database. Created a normalized star schema and Power BI dashboards with regional heatmaps.',
+    tech: ['Data Factory', 'SQL Database', 'Blob Storage', 'Power BI'],
+    metric: '300K+ transactions',
     icon: <BarChart3 className="w-6 h-6" />,
-    color: "from-blue-500 to-cyan-500",
     details: [
-      "Automated data movement with ADF",
-      "Star schema with normalization best practices",
-      "Basic tier SQL (5 DTU) + LRS storage optimization",
-      "SQL firewall rules + RBAC security"
+      'Automated data movement with ADF',
+      'Star schema with normalization best practices',
+      'Basic-tier SQL (5 DTU) + LRS storage optimization',
+      'SQL firewall rules + RBAC security',
     ],
-    link: "https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline"
+    link: 'https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline',
   },
   {
     id: 5,
-    title: "Cloud-Native Microservices",
-    category: "azure",
-    impact: "Multi-service architecture",
-    description: "Deployed e-commerce app on Azure PaaS: App Service for Node.js/Python APIs, Static Web Apps for Vue.js frontend. RabbitMQ on Azure VM handles async messaging between services.",
-    tech: ["App Service", "Static Web Apps", "RabbitMQ", "Node.js", "Python"],
-    metric: "CI/CD with GitHub Actions",
+    title: 'Cloud-Native Microservices',
+    category: 'azure',
+    impact: 'Multi-service',
+    description:
+      'Deployed an e-commerce app on Azure PaaS: App Service for Node.js/Python APIs, Static Web Apps for the Vue.js frontend. RabbitMQ on an Azure VM handles async messaging between services.',
+    tech: ['App Service', 'Static Web Apps', 'RabbitMQ', 'Node.js', 'Python'],
+    metric: 'CI/CD with GitHub Actions',
     icon: <Server className="w-6 h-6" />,
-    color: "from-purple-500 to-pink-500",
     details: [
-      "RabbitMQ message broker for order/product services",
-      "GitHub Actions pipeline with env variables",
-      "CORS policies + environment-based routing",
-      "PaaS deployment architecture"
+      'RabbitMQ message broker for order/product services',
+      'GitHub Actions pipeline with env variables',
+      'CORS policies + environment-based routing',
+      'PaaS deployment architecture',
     ],
-    link: ""
+    link: '',
   },
   {
     id: 6,
-    title: "Containerized Application",
-    category: "devops",
-    impact: "Multi-container setup",
-    description: "Created Docker images for Flask apps with layered architecture. Used Docker Compose to orchestrate Flask + Redis cache. Configured volumes for persistence and container networking.",
-    tech: ["Docker", "Docker Compose", "Flask", "Redis", "Python"],
-    metric: "Container isolation",
+    title: 'Containerized Application',
+    category: 'devops',
+    impact: 'Multi-container',
+    description:
+      'Created Docker images for Flask apps with a layered architecture. Used Docker Compose to orchestrate Flask + Redis cache. Configured volumes for persistence and container networking.',
+    tech: ['Docker', 'Docker Compose', 'Flask', 'Redis', 'Python'],
+    metric: 'Container isolation',
     icon: <Container className="w-6 h-6" />,
-    color: "from-green-500 to-emerald-500",
     details: [
-      "Dockerfiles with layered architecture",
-      "Docker Compose multi-container orchestration",
-      "Volume configuration for data persistence",
-      "Copy-on-write behavior demonstration"
+      'Dockerfiles with layered architecture',
+      'Docker Compose multi-container orchestration',
+      'Volume configuration for data persistence',
+      'Copy-on-write behavior demonstration',
     ],
-    link: ""
+    link: '',
   },
   {
     id: 7,
-    title: "More Projects Coming Soon",
-    category: "all",
-    impact: "In Development",
-    description: "Currently working on exciting new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned for updates!",
-    tech: ["Kubernetes", "Terraform", "CI/CD", "AWS", "Azure"],
-    metric: "Coming Soon",
+    title: 'More Projects Coming Soon',
+    category: 'all',
+    impact: 'In development',
+    description:
+      'Currently working on new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned.',
+    tech: ['Kubernetes', 'Terraform', 'CI/CD', 'AWS', 'Azure'],
+    metric: 'Coming soon',
     icon: <Cloud className="w-6 h-6" />,
-    color: "from-gray-500 to-gray-700",
     details: [
-      "Kubernetes cluster deployment and management",
-      "Infrastructure as Code with Terraform",
-      "Advanced CI/CD pipeline automation",
-      "Multi-cloud deployment strategies"
+      'Kubernetes cluster deployment and management',
+      'Infrastructure as Code with Terraform',
+      'Advanced CI/CD pipeline automation',
+      'Multi-cloud deployment strategies',
     ],
-    link: "",
-    comingSoon: true
-  }
+    link: '',
+    comingSoon: true,
+  },
 ];
 
 const STATS_DATA = [
-  { number: "6+", label: "Cloud Projects", icon: <Cloud className="w-5 h-5" /> },
-  { number: "2", label: "Security Gates", icon: <CheckCircle2 className="w-5 h-5" /> }, // NEW - from Kubernetes
-  { number: "30x", label: "Query Optimization", icon: <BarChart3 className="w-5 h-5" /> },
-  { number: "99.9%", label: "Uptime Achieved", icon: <Activity className="w-5 h-5" /> },
- // { number: "85%", label: "Cost Optimization", icon: <BarChart3 className="w-5 h-5" /> }
+  { number: '6+', label: 'Cloud Projects', icon: <Cloud className="w-5 h-5" /> },
+  { number: '2', label: 'Security Gates', icon: <CheckCircle2 className="w-5 h-5" /> },
+  { number: '30x', label: 'Query Optimization', icon: <BarChart3 className="w-5 h-5" /> },
+  { number: '99.9%', label: 'Uptime Achieved', icon: <Server className="w-5 h-5" /> },
 ];
 
+const SKILLS_DATA = [
+  {
+    category: 'Cloud Platforms',
+    icon: <Cloud className="w-5 h-5" />,
+    items: [
+      'AWS (Lambda, S3, DynamoDB, IAM, SES, SQS)',
+      'Azure (IoT Hub, Stream Analytics, Cosmos DB, Data Factory, SQL, Blob, App Service, Functions, VMs)',
+    ],
+  },
+  {
+    category: 'Programming & Databases',
+    icon: <Code2 className="w-5 h-5" />,
+    items: [
+      'Python, SQL, Bash, Java, C++',
+      'Azure SQL Database, DynamoDB, MongoDB',
+      'Star Schema Design, Database Normalization',
+    ],
+  },
+  {
+    category: 'Security & Frameworks',
+    icon: <CheckCircle2 className="w-5 h-5" />,
+    items: [
+      'IAM Policies, RBAC, Firewall Configuration',
+      'Least-Privilege Access, Palo Alto NGFW',
+      'NIST, ISO 27001/27002, OWASP Top 10, MITRE ATT&CK',
+      'AES-256, RSA, PKI, X.509 Certificates',
+    ],
+  },
+  {
+    category: 'DevSecOps & Automation',
+    icon: <Layers className="w-5 h-5" />,
+    items: [
+      'Kubernetes, Docker, Docker Compose, Git, GitHub',
+      'CI/CD with GitHub Actions, Security Gates (SAST, Container Scanning)',
+      'RabbitMQ, RESTful APIs, Event-Driven Architecture',
+      'SonarCloud, Trivy, Broken Build Policies',
+    ],
+  },
+];
+
+const EDUCATION_DATA = [
+  {
+    school: 'Algonquin College',
+    program: 'Cloud Development and Operations',
+    status: 'In Progress',
+    graduation: 'August 2026',
+    location: 'Ottawa, ON',
+    gpa: '3.84 / 4.0',
+  },
+  {
+    school: 'Algonquin College',
+    program: 'Cybersecurity Analysis',
+    status: 'Completed',
+    graduation: 'April 2025',
+    location: 'Ottawa, ON',
+    gpa: '3.7 / 4.0',
+  },
+  {
+    school: 'Veer Narmad South Gujarat University',
+    program: 'Bachelor of Computer Applications',
+    status: 'Completed',
+    graduation: 'June 2024',
+    location: 'Gujarat, IN',
+    gpa: '3.3 / 4.0',
+  },
+];
+
+const NAV_LINKS = [
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'education', label: 'Education' },
+  { id: 'contact', label: 'Contact' },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                           */
+/* ------------------------------------------------------------------ */
+
+function smoothScrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 76;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// Fade/slide content in as it enters the viewport.
+function Reveal({ children, className = '', delay = 0 }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.add('is-visible');
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+}
+
+function SectionHeading({ eyebrow, title, subtitle }) {
+  return (
+    <div className="text-center max-w-2xl mx-auto mb-14">
+      {eyebrow && (
+        <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-accent mb-4">
+          {eyebrow}
+        </span>
+      )}
+      <h2 className="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-ink">
+        {title}
+      </h2>
+      {subtitle && <p className="mt-4 text-lg text-muted leading-relaxed">{subtitle}</p>}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  App                                                               */
+/* ------------------------------------------------------------------ */
+
 export default function App() {
- const [activeTab, setActiveTab] = useState('all');
-const [scrollProgress, setScrollProgress] = useState(0);
-const [visitCount, setVisitCount] = useState(null);
+  const [activeTab, setActiveTab] = useState('all');
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light'
+  );
 
-// Use refs instead of state for performance
-const mousePositionRef = useRef({ x: 0, y: 0 });
-const orbsRef = useRef([
-  { id: 1, x: 15, y: 20, dx: 0.08, dy: 0.06, size: 180, color: 'from-cyan-700 to-blue-700', opacity: 0.3, targetOpacity: 0.3, opacitySpeed: 0.002 },
-  { id: 2, x: 75, y: 60, dx: -0.06, dy: 0.09, size: 160, color: 'from-purple-700 to-pink-700', opacity: 0.3, targetOpacity: 0.3, opacitySpeed: 0.002 },
-  { id: 3, x: 50, y: 80, dx: 0.07, dy: -0.05, size: 140, color: 'from-indigo-700 to-purple-700', opacity: 0.3, targetOpacity: 0.3, opacitySpeed: 0.002 },
-  { id: 4, x: 85, y: 30, dx: -0.05, dy: 0.08, size: 170, color: 'from-pink-700 to-purple-700', opacity: 0.3, targetOpacity: 0.3, opacitySpeed: 0.002 },
-  { id: 5, x: 30, y: 50, dx: 0.06, dy: -0.07, size: 150, color: 'from-blue-700 to-cyan-700', opacity: 0.3, targetOpacity: 0.3, opacitySpeed: 0.002 },
-  { id: 6, x: 60, y: 15, dx: -0.07, dy: 0.06, size: 155, color: 'from-violet-700 to-indigo-700', opacity: 0.3, targetOpacity: 0.3, opacitySpeed: 0.002 }
-]);
-const rafRef = useRef();
-const orbElementsRef = useRef([]);
-const glowElementRef = useRef(null);
-  // Smooth scroll helper function
-
-  const smoothScrollTo = (elementId) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      const top = element.offsetTop - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  };
-
-
-useEffect(() => {
-  const handleScroll = () => {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / totalHeight) * 100;
-    setScrollProgress(progress);
-  };
-
-  const handleMouseMove = (e) => {
-    mousePositionRef.current = { x: e.clientX, y: e.clientY };
-    if (glowElementRef.current) {
-      glowElementRef.current.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(99, 102, 241, 0.1), transparent 80%)`;
-    }
-  };
-
-  // Fetch visitor count
-  const fetchVisitorCount = async () => {
+  // Apply + persist theme
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') root.classList.add('dark');
+    else root.classList.remove('dark');
     try {
-      const response = await fetch('https://api.countapi.xyz/hit/aryanrudani-portfolio/visits');
-      const data = await response.json();
-      setVisitCount(data.value);
-    } catch (error) {
-      console.error('Failed to fetch visitor count:', error);
-      setVisitCount('--');
+      localStorage.setItem('theme', theme);
+    } catch {
+      /* ignore */
     }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#1a1714' : '#f1efe6');
+  }, [theme]);
+
+  // Scroll progress + nav state
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollProgress(progress);
+      setScrolled(window.scrollY > 12);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+
+  const handleNav = (id) => {
+    setMenuOpen(false);
+    smoothScrollTo(id);
   };
 
-  fetchVisitorCount();
-
-  // Optimized orb animation - manipulate DOM directly
-  const animateOrbs = () => {
-    orbsRef.current = orbsRef.current.map((orb, index) => {
-      let newX = orb.x + orb.dx;
-      let newY = orb.y + orb.dy;
-      let newDx = orb.dx;
-      let newDy = orb.dy;
-
-      if (newX <= 5 || newX >= 95) {
-        newDx = -orb.dx + (Math.random() - 0.5) * 0.02;
-        newX = Math.max(5, Math.min(95, newX));
-      }
-      if (newY <= 5 || newY >= 95) {
-        newDy = -orb.dy + (Math.random() - 0.5) * 0.02;
-        newY = Math.max(5, Math.min(95, newY));
-      }
-
-      newDx += (Math.random() - 0.5) * 0.001;
-      newDy += (Math.random() - 0.5) * 0.001;
-
-      newDx = Math.max(-0.1, Math.min(0.1, newDx));
-      newDy = Math.max(-0.1, Math.min(0.1, newDy));
-
-      // Twinkle effect - randomly change target opacity
-      let newOpacity = orb.opacity;
-      let newTargetOpacity = orb.targetOpacity;
-      
-      // Randomly decide to change target opacity (1% chance per frame)
-      if (Math.random() < 0.01) {
-        newTargetOpacity = Math.random() * 0.4 + 0.15;
-      }
-      
-      // Smoothly move current opacity towards target
-      if (Math.abs(newOpacity - newTargetOpacity) > 0.001) {
-        newOpacity += (newTargetOpacity - newOpacity) * orb.opacitySpeed * 60;
-      } else {
-        newOpacity = newTargetOpacity;
-      }
-
-      // Update DOM directly
-      if (orbElementsRef.current[index]) {
-        orbElementsRef.current[index].style.left = `${newX}%`;
-        orbElementsRef.current[index].style.top = `${newY}%`;
-        orbElementsRef.current[index].style.opacity = newOpacity;
-      }
-
-      return { ...orb, x: newX, y: newY, dx: newDx, dy: newDy, opacity: newOpacity, targetOpacity: newTargetOpacity };
-    });
-
-    rafRef.current = requestAnimationFrame(animateOrbs);
-  };
-
-  rafRef.current = requestAnimationFrame(animateOrbs);
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('mousemove', handleMouseMove);
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-  };
-}, []);
-
-  const projects = PROJECTS_DATA;
-  const stats = STATS_DATA;
-
-  const skills = [
-    {
-      category: "Cloud Platforms",
-      icon: <Cloud className="w-5 h-5" />,
-      items: [
-        { name: "AWS (Lambda, S3, DynamoDB, IAM, SES, SQS)", full: true },
-        { name: "Azure (IoT Hub, Stream Analytics, Cosmos DB, Data Factory, SQL, Blob, App Service, Functions, VMs)", full: true }
-      ]
-    },
-    {
-      category: "Programming & Databases",
-      icon: <Code2 className="w-5 h-5" />,
-      items: [
-        { name: "Python, SQL, Bash, Java, C++", full: true },
-        { name: "Azure SQL Database, DynamoDB, MongoDB", full: true },
-        { name: "Star Schema Design, Database Normalization", full: true }
-      ]
-    },
-    {
-      category: "Security & Frameworks",
-      icon: <CheckCircle2 className="w-5 h-5" />,
-      items: [
-        { name: "IAM Policies, RBAC, Firewall Configuration", full: true },
-        { name: "Least-Privilege Access, Palo Alto NGFW", full: true },
-        { name: "NIST, ISO 27001/27002, OWASP Top 10, MITRE ATT&CK", full: true },
-        { name: "AES-256, RSA, PKI, X.509 Certificates", full: true }
-      ]
-    },
- {
-      category: "DevSecOps & Automation",
-      icon: <Layers className="w-5 h-5" />,
-      items: [
-        { name: "Kubernetes, Docker, Docker Compose, Git, GitHub", full: true },
-        { name: "CI/CD with GitHub Actions, Security Gates (SAST, Container Scanning)", full: true },
-        { name: "RabbitMQ, RESTful APIs, Event-Driven Architecture", full: true },
-        { name: "SonarCloud, Trivy, Broken Build Policies", full: true }
-      ]
-    }
-  ];
-
-  const education = [
-    {
-      school: "Algonquin College",
-      program: "Cloud Development and Operations",
-      status: "In Progress",
-      graduation: "August 2026",
-      location: "Ottawa, ON",
-      gpa: "3.84/4.0"
-    },
-    {
-      school: "Algonquin College",
-      program: "Cybersecurity Analysis",
-      status: "Completed",
-      graduation: "April 2025",
-      location: "Ottawa, ON",
-      gpa: "3.7/4.0"
-    },
-    {
-      school: "Veer Narmad South Gujarat University",
-      program: "Bachelor of Computer Applications",
-      status: "Completed",
-      graduation: "June 2024",
-      location: "Gujarat, IN",
-      gpa: "3.3/4.0"
-    }
-  ];
-
-  const filteredProjects = activeTab === 'all'
-    ? projects
-    : projects.filter(p => p.category === activeTab || p.category === 'all');
+  const filteredProjects =
+    activeTab === 'all'
+      ? PROJECTS_DATA
+      : PROJECTS_DATA.filter((p) => p.category === activeTab || p.category === 'all');
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* Floating Orbs Background */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-  {orbsRef.current?.map((orb, index) => (
-    <div
-      key={orb.id}
-      ref={el => orbElementsRef.current[index] = el}
-      
-      className={`absolute bg-gradient-to-br ${orb.color} rounded-full filter blur-3xl`}
-      style={{
-        width: `${orb.size}px`,
-        height: `${orb.size}px`,
-        left: `${orb.x}%`,
-        top: `${orb.y}%`,
-        transform: 'translate(-50%, -50%)',
-        opacity: orb.opacity,
-        transition: 'all 0.5s ease-out'
-      }}
-    ></div>
-  ))}
-</div>
-
-      {/* Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-900 z-50">
+    <div className="min-h-screen bg-page text-ink overflow-x-hidden">
+      {/* Scroll progress */}
+      <div className="fixed top-0 left-0 w-full h-[3px] bg-transparent z-[60]">
         <div
-          className="h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 transition-all duration-300"
+          className="h-full bg-accent transition-[width] duration-150 ease-out"
           style={{ width: `${scrollProgress}%` }}
-        ></div>
+        />
       </div>
 
-      {/* Cursor Glow */}
-      <div
-  ref={glowElementRef}
-  className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-  style={{
-    background: `radial-gradient(600px at ${mousePositionRef.current.x}px ${mousePositionRef.current.y}px, rgba(99, 102, 241, 0.1), transparent 80%)`
-  }}
-></div>
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
-
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500/10 to-cyan-500/10 border-green-500/20 border rounded-full px-6 py-2 mb-8 backdrop-blur-xl">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-sm text-green-500 font-semibold">Open to Cloud & Security Opportunities</span>
-          </div>
-
-          <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">
+      {/* ---------------- Nav ---------------- */}
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled ? 'bg-page/80 backdrop-blur-md border-b border-line' : 'bg-transparent'
+        }`}
+      >
+        <nav className="max-w-6xl mx-auto px-6 h-[68px] flex items-center justify-between">
+          <button
+            onClick={() => handleNav('top')}
+            className="flex items-center gap-2.5 group"
+            aria-label="Back to top"
+          >
+            <span className="grid place-items-center w-9 h-9 rounded-xl bg-accent text-white font-serif font-semibold text-lg shadow-soft">
+              A
+            </span>
+            <span className="font-serif text-lg font-semibold tracking-tight text-ink">
               Aryan Rudani
             </span>
-            <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Cloud Developer
+          </button>
+
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleNav(link.id)}
+                className="px-3.5 py-2 text-sm font-medium text-muted hover:text-ink rounded-full hover:bg-surface transition-colors"
+              >
+                {link.label}
+              </button>
+            ))}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="ml-2 grid place-items-center w-9 h-9 rounded-full border border-line text-ink hover:bg-surface transition-colors"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="grid place-items-center w-9 h-9 rounded-full border border-line text-ink"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Menu"
+              className="grid place-items-center w-9 h-9 rounded-full border border-line text-ink"
+            >
+              {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-page/95 backdrop-blur-md border-b border-line px-6 py-4">
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => handleNav(link.id)}
+                  className="text-left px-3 py-2.5 text-base font-medium text-muted hover:text-ink rounded-lg hover:bg-surface transition-colors"
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* ---------------- Hero ---------------- */}
+      <section id="top" className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16">
+        {/* Subtle warm background texture */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-32 -left-24 w-[34rem] h-[34rem] rounded-full bg-accent-soft blur-3xl animate-float-slow" />
+          <div
+            className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-accent-soft blur-3xl animate-float-slow"
+            style={{ animationDelay: '3s' }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.5] dark:opacity-[0.35]"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgb(var(--c-ink) / 0.05) 1px, transparent 0)',
+              backgroundSize: '26px 26px',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-line bg-card/70 backdrop-blur px-4 py-1.5 mb-8 shadow-soft">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent" />
             </span>
+            <span className="text-sm font-medium text-ink">Open to Cloud &amp; Security roles</span>
+          </div>
+
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.02] tracking-tight text-ink">
+            Aryan Rudani
+            <span className="block text-accent mt-2">Cloud Developer &amp; Security</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Building secure cloud infrastructure with <span className="text-cyan-500">AWS</span> and <span className="text-blue-500">Azure</span>.
-            Cybersecurity analyst turned cloud engineer specializing in <span className="text-purple-500">Automation</span>, <span className="text-white font-semibold">serverless architectures</span>,
-            and <span className="text-pink-500">DevSecOps</span>.
+
+          <p className="mt-7 max-w-2xl text-lg md:text-xl text-muted leading-relaxed">
+            I build secure cloud infrastructure on{' '}
+            <span className="text-ink font-medium">AWS</span> and{' '}
+            <span className="text-ink font-medium">Azure</span>. A cybersecurity analyst turned cloud
+            engineer, focused on automation, serverless architectures, and{' '}
+            <span className="text-ink font-medium">DevSecOps</span>.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="mt-9 flex flex-col sm:flex-row gap-3.5">
             <button
               onClick={() => smoothScrollTo('projects')}
-              className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full font-bold text-lg text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-accent text-white font-medium hover:bg-accent-hover transition-all duration-300 shadow-soft hover:shadow-lift"
             >
-              <span className="relative z-10 flex items-center justify-center space-x-2">
-                <span>View Projects</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              View Projects
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
             <button
               onClick={() => smoothScrollTo('contact')}
-              className="px-8 py-4 bg-white/5 border-white/10 backdrop-blur-xl border rounded-full font-bold text-lg hover:bg-opacity-20 transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-line bg-card text-ink font-medium hover:bg-surface transition-all duration-300"
             >
               Get in Touch
             </button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {stats.map((stat, index) => (
-              <div key={index} className="bg-white/5 border-white/10 backdrop-blur-xl border rounded-2xl p-6 hover:bg-opacity-20 transition-all duration-300">
-                <div className="text-cyan-400 mb-2">{stat.icon}</div>
-                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-1">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+            {STATS_DATA.map((stat, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-line bg-card p-5 shadow-soft"
+              >
+                <div className="text-accent mb-2.5">{stat.icon}</div>
+                <div className="font-serif text-3xl font-semibold text-ink">{stat.number}</div>
+                <div className="text-sm text-muted mt-0.5">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      
-
-
-
-
-
-
-
-
-{/* About Section */}
-      <section id="about" className="py-32 px-6 relative overflow-hidden">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                About Me
-              </span>
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {/* My Approach */}
-            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4 flex items-center space-x-3">
-                <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-full"></div>
-                <span>My Approach</span>
-              </h3>
-              <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
+      {/* ---------------- About ---------------- */}
+      <section id="about" className="py-28 px-6">
+        <div className="max-w-4xl mx-auto">
+          <Reveal>
+            <SectionHeading eyebrow="About" title="A security mindset, applied to the cloud" />
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="rounded-3xl border border-line bg-card p-8 md:p-10 shadow-soft">
+              <div className="space-y-5 text-lg text-muted leading-relaxed">
                 <p>
-                  I started in cybersecurity before moving into cloud development, and that background still influences how I work. Security isn't something I think about after building a system it's part of how I design from the beginning.
+                  I started in cybersecurity before moving into cloud development, and that background
+                  still shapes how I work. Security isn't something I bolt on after building a system —
+                  it's part of how I design from the beginning.
                 </p>
                 <p>
-                  What drives me is learning both in tech and in life. New cloud services, better ways to architect solutions, insights from other professionals, even conversations over coffee with friends. I pick up perspectives everywhere. I like understanding not just how something works, but why it's built that way. That curiosity pushes me to dig deeper into the technologies I use.
+                  What drives me is learning, both in tech and in life: new cloud services, better ways
+                  to architect solutions, insights from other professionals, even conversations over
+                  coffee with friends. I like understanding not just how something works, but why it's
+                  built that way. That curiosity pushes me to dig deeper into the technologies I use.
                 </p>
                 <p>
-                  I've learned that stepping away matters. Whether I'm on a adventure or just away from my desk, my mind processes problems differently. Some of my better technical solutions have come when I wasn't sitting in front of a screen trying to force them. It's taught me that good work isn't just about hours logged it's about thinking clearly.
+                  I've also learned that stepping away matters. Whether I'm on an adventure or just away
+                  from my desk, my mind processes problems differently — some of my better solutions
+                  arrived when I wasn't forcing them in front of a screen. Good work isn't just hours
+                  logged; it's thinking clearly.
                 </p>
                 <p>
-                  I believe good infrastructure should be invisible. If it's running well, nobody notices it. That's what I aim for systems that are reliable enough that teams can focus on their work instead of worrying about the platform underneath.
+                  I believe good infrastructure should be invisible. If it's running well, nobody
+                  notices it. That's what I aim for — systems reliable enough that teams can focus on
+                  their work instead of the platform underneath.
                 </p>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
 
-          
+      {/* ---------------- Projects ---------------- */}
+      <section id="projects" className="py-28 px-6">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Work"
+              title="Cloud Projects"
+              subtitle="Real production projects across AWS, Azure, and containerized deployments."
+            />
+          </Reveal>
 
+          {/* Filter tabs */}
+          <Reveal>
+            <div className="flex flex-wrap justify-center gap-2.5 mb-12">
+              {[
+                { id: 'all', label: 'All' },
+                { id: 'aws', label: 'AWS' },
+                { id: 'azure', label: 'Azure' },
+                { id: 'devops', label: 'DevOps' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? 'bg-accent text-white shadow-soft'
+                      : 'bg-card text-muted border border-line hover:text-ink hover:bg-surface'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </Reveal>
 
+          <div className="grid md:grid-cols-2 gap-6">
+            {filteredProjects.map((project, i) => (
+              <Reveal key={project.id} delay={(i % 2) * 80}>
+                <article
+                  className={`group relative h-full rounded-3xl border border-line bg-card p-7 md:p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent/40 ${
+                    project.comingSoon ? 'opacity-80' : ''
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="grid place-items-center w-12 h-12 rounded-2xl bg-accent-soft text-accent">
+                      {project.icon}
+                    </div>
+                    <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-accent bg-accent-soft px-3 py-1.5 rounded-full">
+                      {project.impact}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-ink leading-snug group-hover:text-accent transition-colors">
+                    {project.title}
+                  </h3>
+
+                  <p className="mt-3 text-[15px] text-muted leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-5 flex items-center gap-2 text-accent">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                    <span className="text-sm font-medium">{project.metric}</span>
+                  </div>
+
+                  <ul className="mt-5 space-y-2">
+                    {project.details.map((detail, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0" />
+                        <span className="text-sm text-muted leading-relaxed">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.tech.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2.5 py-1 rounded-full text-xs font-medium text-muted bg-surface border border-line"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {!project.comingSoon && (
+                    <a
+                      href={project.link || '#'}
+                      target={project.link ? '_blank' : '_self'}
+                      rel="noopener noreferrer"
+                      onClick={(e) => !project.link && e.preventDefault()}
+                      className={`mt-7 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                        project.link
+                          ? 'text-accent hover:text-accent-hover'
+                          : 'text-muted cursor-not-allowed'
+                      }`}
+                    >
+                      {project.link ? 'View Project' : 'Link coming soon'}
+                      {project.link && <ArrowUpRight className="w-4 h-4" />}
+                    </a>
+                  )}
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* ---------------- Skills ---------------- */}
+      <section id="skills" className="py-28 px-6">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Toolkit"
+              title="Technical Skills"
+              subtitle="Cloud platforms, security frameworks, and development tools."
+            />
+          </Reveal>
 
-
-
-
-
-
-      {/* Projects Section */}
-      <section id="projects" className="py-32 px-6 relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                Cloud Projects
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Real production projects from AWS, Azure, and containerized deployments
-            </p>
-          </div>
-
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {[
-              { id: 'all', label: 'All Projects' },
-              { id: 'aws', label: 'AWS' },
-              { id: 'azure', label: 'Azure' },
-              { id: 'devops', label: 'DevOps' }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${activeTab === tab.id
-                    ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white shadow-lg shadow-purple-500/50'
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
-                  }`}
-              >
-                {tab.label}
-              </button>
+          <div className="grid md:grid-cols-2 gap-6">
+            {SKILLS_DATA.map((group, i) => (
+              <Reveal key={i} delay={(i % 2) * 80}>
+                <div className="h-full rounded-3xl border border-line bg-card p-8 shadow-soft transition-all duration-300 hover:border-accent/40">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="grid place-items-center w-10 h-10 rounded-xl bg-accent-soft text-accent">
+                      {group.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-ink">{group.category}</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {group.items.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                        <span className="text-[15px] text-muted leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className={`group relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 ${project.comingSoon ? 'opacity-75' : ''
-                  }`}
-              >
-                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
-                  {project.impact}
+      {/* ---------------- Education ---------------- */}
+      <section id="education" className="py-28 px-6">
+        <div className="max-w-4xl mx-auto">
+          <Reveal>
+            <SectionHeading eyebrow="Background" title="Education" />
+          </Reveal>
+
+          <div className="space-y-5">
+            {EDUCATION_DATA.map((edu, i) => (
+              <Reveal key={i} delay={i * 60}>
+                <div className="rounded-2xl border border-line bg-card p-7 md:p-8 shadow-soft transition-all duration-300 hover:border-accent/40">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div className="flex items-start gap-4">
+                      <div className="grid place-items-center w-11 h-11 rounded-xl bg-accent-soft text-accent shrink-0">
+                        <GraduationCap className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-ink">{edu.program}</h3>
+                        <p className="text-accent font-medium mt-0.5">{edu.school}</p>
+                        <p className="flex items-center gap-1.5 text-sm text-muted mt-2">
+                          <MapPin className="w-3.5 h-3.5" /> {edu.location}
+                          {edu.gpa && <span className="text-muted">· GPA {edu.gpa}</span>}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="md:text-right md:shrink-0">
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${
+                          edu.status === 'In Progress'
+                            ? 'text-accent border-accent/30 bg-accent-soft'
+                            : 'text-muted border-line bg-surface'
+                        }`}
+                      >
+                        {edu.status}
+                      </span>
+                      <p className="text-sm text-muted mt-2">{edu.graduation}</p>
+                    </div>
+                  </div>
                 </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <div className={`w-14 h-14 bg-gradient-to-br ${project.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                  {project.icon}
-                </div>
-
-                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-400 mb-6 leading-relaxed">
-                  {project.description}
+      {/* ---------------- Contact ---------------- */}
+      <section id="contact" className="py-28 px-6">
+        <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <div className="rounded-3xl border border-line bg-card p-10 md:p-14 shadow-soft text-center relative overflow-hidden">
+              <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-accent-soft blur-3xl pointer-events-none" />
+              <div className="relative z-10">
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-accent mb-4">
+                  Contact
+                </span>
+                <h2 className="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-ink">
+                  Let's build something
+                </h2>
+                <p className="mt-4 text-lg text-muted leading-relaxed max-w-xl mx-auto">
+                  Looking for a cloud developer with cybersecurity expertise? Let's talk about how I can
+                  help build and secure your infrastructure.
                 </p>
 
-                <div className="flex items-center space-x-2 mb-6 text-cyan-400">
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span className="font-semibold">{project.metric}</span>
-                </div>
-
-                <div className="space-y-2 mb-6">
-                  {project.details.map((detail, i) => (
-                    <div key={i} className="flex items-start space-x-2">
-                      <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-sm text-gray-400">{detail}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* View Project Button */}
-                {!project.comingSoon && (
-                  <a
-                    href={project.link || "#"}
-                    target={project.link ? "_blank" : "_self"}
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 ${!project.link ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
-                    onClick={(e) => !project.link && e.preventDefault()}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>{project.link ? 'View Project' : 'Link Coming Soon'}</span>
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-32 px-6 relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Technical Skills
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400">
-              Cloud platforms, security frameworks, and development tools
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {skills.map((skillGroup, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-purple-500/50 transition-all duration-300"
-              >
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                    {skillGroup.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-white">{skillGroup.category}</h3>
-                </div>
-
-                <div className="space-y-3">
-                  {skillGroup.items.map((skill, i) => (
-                    <div key={i} className="flex items-start space-x-3">
-                      <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-300">{skill.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Education Section */}
-      <section className="py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                Education
-              </span>
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {education.map((edu, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300"
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{edu.program}</h3>
-                    <p className="text-cyan-400 font-semibold">{edu.school}</p>
-                    {edu.gpa && (
-                      <p className="text-purple-400 font-semibold mt-2">GPA: {edu.gpa}</p>
-                    )}
-                  </div>
-                  <div className="mt-4 md:mt-0 text-right">
-                    <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold ${edu.status === "In Progress"
-                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                        : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
-                      }`}>
-                      {edu.status}
-                    </div>
-                    <p className="text-gray-400 text-sm mt-2">{edu.graduation}</p>
-                  </div>
-                </div>
-                <p className="text-gray-400">{edu.location}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-32 px-6 relative">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-black mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              Let's Connect
-            </span>
-          </h2>
-
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Looking for a cloud developer with cybersecurity expertise? Let's discuss how I can help build and secure your infrastructure.
-          </p>
-
-          {/* Contact Info */}
-          <div className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 mb-12 max-w-2xl mx-auto">
-            <div className="space-y-4">
-              <div>
-                <p className="text-gray-400 text-sm mb-1">Email</p>
-                <a href="mailto:ruda0008@algonquinlive.com" className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                <a
+                  href="mailto:ruda0008@algonquinlive.com"
+                  className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-white font-medium hover:bg-accent-hover transition-all duration-300 shadow-soft hover:shadow-lift"
+                >
+                  <Mail className="w-4 h-4" />
                   ruda0008@algonquinlive.com
                 </a>
+
+                <div className="mt-9 flex justify-center gap-3">
+                  <a
+                    href="mailto:ruda0008@algonquinlive.com"
+                    aria-label="Email"
+                    className="grid place-items-center w-11 h-11 rounded-full border border-line text-ink hover:bg-surface hover:text-accent transition-colors"
+                  >
+                    <Mail className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://github.com/ruda0008"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="grid place-items-center w-11 h-11 rounded-full border border-line text-ink hover:bg-surface hover:text-accent transition-colors"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/aryan-rudani-871258227/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="grid place-items-center w-11 h-11 rounded-full border border-line text-ink hover:bg-surface hover:text-accent transition-colors"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex justify-center space-x-6">
-            <a
-              href="mailto:ruda0008@algonquinlive.com"
-              className="group w-16 h-16 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50"
-            >
-              <Mail className="w-7 h-7 group-hover:scale-110 transition-transform" />
-            </a>
-            <a
-              href="https://github.com/ruda0008"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/50"
-            >
-              <Github className="w-7 h-7 group-hover:scale-110 transition-transform" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/aryan-rudani-871258227/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/50"
-            >
-              <Linkedin className="w-7 h-7 group-hover:scale-110 transition-transform" />
-            </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-white/10 border-t">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-400 text-center md:text-left">
-              © 2025 <span className="text-white font-semibold">Aryan Rudani</span> • Cloud Developer & Security Specialist
-            </p>
-
-            {/* Visitor Counter */}
-            {/* {visitCount !== null && (
-              <div className="flex items-center space-x-2 bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10 backdrop-blur-xl border rounded-full px-4 py-2 shadow-lg">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-400">Visitors:</span>
-                <span className="text-sm font-bold text-cyan-500">{visitCount.toLocaleString()}</span>
-              </div>
-            )} */}
-          </div>
+      {/* ---------------- Footer ---------------- */}
+      <footer className="py-10 px-6 border-t border-line">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-sm text-muted text-center md:text-left">
+            © {new Date().getFullYear()} <span className="text-ink font-medium">Aryan Rudani</span> ·
+            Cloud Developer &amp; Security Specialist
+          </p>
+          <button
+            onClick={() => smoothScrollTo('top')}
+            className="text-sm text-muted hover:text-accent transition-colors"
+          >
+            Back to top ↑
+          </button>
         </div>
       </footer>
     </div>
   );
 }
-
-
-
-

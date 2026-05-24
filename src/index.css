@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Light — "Claude paper". Channels are space-separated RGB for Tailwind alpha. */
+  --c-page: 241 239 230;    /* warm cream background */
+  --c-surface: 246 244 236; /* slightly raised wash */
+  --c-card: 250 249 244;    /* card surface */
+  --c-ink: 26 24 19;        /* near-black warm text */
+  --c-muted: 107 102 91;    /* secondary text */
+  --c-accent: 198 96 60;    /* Claude clay / terracotta */
+  --c-accent-hover: 171 79 48;
+  --c-line: rgba(26, 24, 19, 0.10);
+  --c-accent-soft: rgba(198, 96, 60, 0.12);
+}
+
+.dark {
+  /* Dark — warm charcoal, not pure black */
+  --c-page: 26 23 20;
+  --c-surface: 32 29 25;
+  --c-card: 36 33 28;
+  --c-ink: 240 238 230;
+  --c-muted: 163 156 143;
+  --c-accent: 219 138 102;
+  --c-accent-hover: 230 162 131;
+  --c-line: rgba(240, 238, 230, 0.12);
+  --c-accent-soft: rgba(219, 138, 102, 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(var(--c-page));
+  color: rgb(var(--c-ink));
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Editorial serif uses optical sizing for that warm display look */
+.font-serif {
+  font-optical-sizing: auto;
+}
+
+/* Selection in Claude clay */
+::selection {
+  background: var(--c-accent-soft);
+  color: var(--c-ink);
+}
+
+/* Warm, slim scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--c-page));
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+  border-radius: 999px;
+  border: 3px solid rgb(var(--c-page));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-muted));
+}
+
+/* Scroll-reveal: hidden until .is-visible is added by IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
