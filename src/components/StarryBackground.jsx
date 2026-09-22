@@ -5,6 +5,8 @@ import React, { useEffect, useRef } from 'react';
  * An interactive, high-performance celestial starfield & constellation canvas
  * crafted specifically to harmonize with both the warm cream (Light) and
  * warm charcoal (Dark) palettes of the portfolio.
+ * 
+ * Enhanced with crisp celestial cartography contrast for high visibility in Light mode.
  */
 export default function StarryBackground({ theme = 'dark' }) {
   const canvasRef = useRef(null);
@@ -26,13 +28,13 @@ export default function StarryBackground({ theme = 'dark' }) {
       y: -1000,
       targetX: -1000,
       targetY: -1000,
-      radius: 140,
+      radius: 145,
       active: false,
     };
 
-    // Color definitions tailored to the warm theme
     const isDark = theme === 'dark';
 
+    // Color palettes tuned for high aesthetics & contrast in both themes
     const starColorsDark = [
       'rgba(255, 248, 238, ', // Soft warm ivory
       'rgba(219, 138, 102, ', // Claude clay / terracotta accent
@@ -40,11 +42,13 @@ export default function StarryBackground({ theme = 'dark' }) {
       'rgba(235, 185, 155, ', // Dusty peach
     ];
 
+    // Light mode palette: crisp celestial cartography contrast on cream paper
     const starColorsLight = [
-      'rgba(198, 96, 60, ',   // Terracotta clay accent
-      'rgba(165, 110, 75, ',  // Warm bronze
-      'rgba(180, 135, 100, ', // Warm sepia / ochre
-      'rgba(140, 105, 80, ',  // Muted ink clay
+      'rgba(215, 80, 35, ',   // Vibrant terracotta clay
+      'rgba(180, 100, 25, ',  // Deep warm golden amber
+      'rgba(60, 50, 75, ',    // Deep celestial slate ink
+      'rgba(195, 65, 45, ',   // Deep terracotta rust
+      'rgba(85, 75, 100, ',   // Twilight astronomical ink
     ];
 
     const starColors = isDark ? starColorsDark : starColorsLight;
@@ -57,8 +61,8 @@ export default function StarryBackground({ theme = 'dark' }) {
       const startX = Math.random() * (width * 0.85);
       const startY = Math.random() * (height * 0.45);
       const angle = (Math.PI / 4) + (Math.random() * 0.2 - 0.1); // ~45 degrees downward
-      const speed = 7 + Math.random() * 5;
-      const length = 70 + Math.random() * 60;
+      const speed = isDark ? (7 + Math.random() * 5) : (8 + Math.random() * 5);
+      const length = 75 + Math.random() * 65;
       
       shootingStars.push({
         x: startX,
@@ -68,48 +72,50 @@ export default function StarryBackground({ theme = 'dark' }) {
         length,
         life: 0,
         maxLife: 45 + Math.random() * 20,
-        color: isDark ? '255, 235, 205' : '198, 96, 60',
+        color: isDark ? '255, 235, 205' : '215, 80, 35',
       });
     }
 
     // Determine particle count based on viewport area
     const area = width * height;
-    const baseCount = Math.floor(area / 11000);
-    const starCount = Math.max(45, Math.min(baseCount, 130));
+    const baseCount = Math.floor(area / (isDark ? 10500 : 9000));
+    const starCount = Math.max(50, Math.min(baseCount, 140));
 
-    // Initialize stars
+    // Initialize stars with crisp sizing for light mode visibility
     const stars = [];
     for (let i = 0; i < starCount; i++) {
-      const radius = Math.random() < 0.72 
-        ? 0.75 + Math.random() * 0.75 
-        : Math.random() < 0.90 
-          ? 1.5 + Math.random() * 0.6 
-          : 2.2 + Math.random() * 0.8; // Bright focal stars
+      let radius;
+      if (isDark) {
+        radius = Math.random() < 0.70 
+          ? 0.85 + Math.random() * 0.75 
+          : Math.random() < 0.90 
+            ? 1.6 + Math.random() * 0.6 
+            : 2.3 + Math.random() * 0.8;
+      } else {
+        // Light mode: larger, crisper radii so stars are distinctly noticeable on cream paper
+        radius = Math.random() < 0.55
+          ? 1.25 + Math.random() * 0.75  // 1.25px - 2.0px
+          : Math.random() < 0.85
+            ? 1.9 + Math.random() * 0.7   // 1.9px - 2.6px
+            : 2.7 + Math.random() * 0.9;  // 2.7px - 3.6px (prominent focal stars)
+      }
 
-      const isFocal = radius > 2.0;
+      const isFocal = isDark ? radius > 2.0 : radius > 2.5;
 
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        baseX: 0,
-        baseY: 0,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
+        vx: (Math.random() - 0.5) * (isDark ? 0.22 : 0.28),
+        vy: (Math.random() - 0.5) * (isDark ? 0.22 : 0.28),
         radius,
         colorBase: starColors[Math.floor(Math.random() * starColors.length)],
-        baseAlpha: isDark ? 0.35 + Math.random() * 0.5 : 0.25 + Math.random() * 0.45,
+        // Higher base alpha in light mode for unmistakable contrast
+        baseAlpha: isDark ? 0.38 + Math.random() * 0.50 : 0.55 + Math.random() * 0.40,
         twinkleSpeed: 0.015 + Math.random() * 0.03,
         twinklePhase: Math.random() * Math.PI * 2,
         isFocal,
-        glowPulse: Math.random() * Math.PI * 2,
       });
     }
-
-    // Pre-record base coords
-    stars.forEach((s) => {
-      s.baseX = s.x;
-      s.baseY = s.y;
-    });
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
@@ -141,6 +147,7 @@ export default function StarryBackground({ theme = 'dark' }) {
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
     window.addEventListener('pointerleave', handlePointerLeave);
 
+    // Animation loop
     let isVisible = !document.hidden;
 
     const handleVisibilityChange = () => {
@@ -162,7 +169,7 @@ export default function StarryBackground({ theme = 'dark' }) {
       }
 
       // Check shooting star trigger
-      if (currentTime - lastShootingStarTime > 7500 + Math.random() * 4000) {
+      if (currentTime - lastShootingStarTime > 7000 + Math.random() * 4000) {
         createShootingStar();
         lastShootingStarTime = currentTime;
       }
@@ -170,7 +177,7 @@ export default function StarryBackground({ theme = 'dark' }) {
       ctx.clearRect(0, 0, width, height);
 
       // 1. Constellation filaments between close stars
-      const connectionDist = isDark ? 95 : 85;
+      const connectionDist = isDark ? 95 : 90;
       const connectionDistSq = connectionDist * connectionDist;
 
       for (let i = 0; i < stars.length; i++) {
@@ -181,14 +188,15 @@ export default function StarryBackground({ theme = 'dark' }) {
 
           if (distSq < connectionDistSq) {
             const dist = Math.sqrt(distSq);
-            const lineAlpha = (1 - dist / connectionDist) * (isDark ? 0.14 : 0.09);
+            // More prominent line alpha in light mode so constellation threads are clearly visible
+            const lineAlpha = (1 - dist / connectionDist) * (isDark ? 0.15 : 0.28);
             ctx.beginPath();
             ctx.moveTo(stars[i].x, stars[i].y);
             ctx.lineTo(stars[j].x, stars[j].y);
             ctx.strokeStyle = isDark
               ? `rgba(219, 138, 102, ${lineAlpha})`
               : `rgba(198, 96, 60, ${lineAlpha})`;
-            ctx.lineWidth = 0.65;
+            ctx.lineWidth = isDark ? 0.65 : 0.95;
             ctx.stroke();
           }
         }
@@ -204,18 +212,18 @@ export default function StarryBackground({ theme = 'dark' }) {
 
           if (distSq < mRadiusSq) {
             const dist = Math.sqrt(distSq);
-            const mAlpha = (1 - dist / mouse.radius) * (isDark ? 0.22 : 0.14);
+            const mAlpha = (1 - dist / mouse.radius) * (isDark ? 0.24 : 0.42);
             ctx.beginPath();
             ctx.moveTo(stars[i].x, stars[i].y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.strokeStyle = isDark
               ? `rgba(251, 211, 141, ${mAlpha})`
-              : `rgba(198, 96, 60, ${mAlpha})`;
-            ctx.lineWidth = 0.75;
+              : `rgba(215, 80, 35, ${mAlpha})`;
+            ctx.lineWidth = isDark ? 0.75 : 1.1;
             ctx.stroke();
 
-            // Subtle magnetic pull towards cursor
-            const force = (1 - dist / mouse.radius) * 0.6;
+            // Gentle magnetic pull towards cursor
+            const force = (1 - dist / mouse.radius) * (isDark ? 0.6 : 0.8);
             stars[i].x += (dx / dist) * force;
             stars[i].y += (dy / dist) * force;
           }
@@ -239,7 +247,7 @@ export default function StarryBackground({ theme = 'dark' }) {
         // Twinkle calculation
         star.twinklePhase += star.twinkleSpeed;
         const twinkleFactor = 0.5 + 0.5 * Math.sin(star.twinklePhase);
-        const currentAlpha = star.baseAlpha * (0.6 + 0.4 * twinkleFactor);
+        const currentAlpha = star.baseAlpha * (0.65 + 0.35 * twinkleFactor);
 
         // Draw star core
         ctx.beginPath();
@@ -251,21 +259,21 @@ export default function StarryBackground({ theme = 'dark' }) {
         if (star.isFocal) {
           // Soft outer halo
           ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius * 2.8, 0, Math.PI * 2);
-          ctx.fillStyle = `${star.colorBase}${currentAlpha * 0.22})`;
+          ctx.arc(star.x, star.y, star.radius * (isDark ? 2.8 : 2.2), 0, Math.PI * 2);
+          ctx.fillStyle = `${star.colorBase}${currentAlpha * (isDark ? 0.22 : 0.25)})`;
           ctx.fill();
 
           // Delicate 4-point cross diffraction sparkle
-          const spikeLen = (star.radius * 2.5) * (0.7 + 0.3 * twinkleFactor);
+          const spikeLen = (star.radius * 2.6) * (0.7 + 0.3 * twinkleFactor);
           ctx.beginPath();
           // Horizontal
           ctx.moveTo(star.x - spikeLen, star.y);
           ctx.lineTo(star.x + spikeLen, star.y);
           // Vertical
           ctx.moveTo(star.x, star.y - spikeLen);
-          ctx.lineTo(star.x, star.y + spikeLen);
-          ctx.strokeStyle = `${star.colorBase}${currentAlpha * 0.5})`;
-          ctx.lineWidth = 0.55;
+          ctx.lineTo(star.x + spikeLen, star.y);
+          ctx.strokeStyle = `${star.colorBase}${currentAlpha * (isDark ? 0.55 : 0.80)})`;
+          ctx.lineWidth = isDark ? 0.55 : 0.95;
           ctx.stroke();
         }
       }
@@ -278,7 +286,7 @@ export default function StarryBackground({ theme = 'dark' }) {
         meteor.life++;
 
         const progress = meteor.life / meteor.maxLife;
-        const trailAlpha = (1 - progress) * (isDark ? 0.7 : 0.5);
+        const trailAlpha = (1 - progress) * (isDark ? 0.75 : 0.85);
 
         // Draw gradient streak
         const tailX = meteor.x - (meteor.vx / Math.hypot(meteor.vx, meteor.vy)) * meteor.length;
@@ -286,21 +294,21 @@ export default function StarryBackground({ theme = 'dark' }) {
 
         const grad = ctx.createLinearGradient(tailX, tailY, meteor.x, meteor.y);
         grad.addColorStop(0, `rgba(${meteor.color}, 0)`);
-        grad.addColorStop(0.7, `rgba(${meteor.color}, ${trailAlpha * 0.4})`);
+        grad.addColorStop(0.65, `rgba(${meteor.color}, ${trailAlpha * 0.45})`);
         grad.addColorStop(1, `rgba(${meteor.color}, ${trailAlpha})`);
 
         ctx.beginPath();
         ctx.moveTo(tailX, tailY);
         ctx.lineTo(meteor.x, meteor.y);
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.4;
+        ctx.lineWidth = isDark ? 1.4 : 2.0;
         ctx.lineCap = 'round';
         ctx.stroke();
 
         // Bright tip
         ctx.beginPath();
-        ctx.arc(meteor.x, meteor.y, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = isDark ? `rgba(255, 255, 255, ${trailAlpha})` : `rgba(198, 96, 60, ${trailAlpha})`;
+        ctx.arc(meteor.x, meteor.y, isDark ? 1.2 : 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = isDark ? `rgba(255, 255, 255, ${trailAlpha})` : `rgba(215, 80, 35, ${trailAlpha})`;
         ctx.fill();
 
         if (meteor.life >= meteor.maxLife || meteor.x > width + 50 || meteor.y > height + 50) {
