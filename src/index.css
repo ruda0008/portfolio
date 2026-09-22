@@ -30,6 +30,32 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+/* Laptops & desktop displays (prevents elements from looking tiny at 100% zoom) */
+@media (min-width: 1024px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 20px;
+  }
 }
 
 /* `overflow-x: clip` prevents horizontal scroll without creating a scroll

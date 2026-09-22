@@ -24,6 +24,10 @@ import {
   Lock,
   Sparkles,
   ChevronDown,
+  Briefcase,
+  Building2,
+  Calendar,
+  Linkedin,
 } from 'lucide-react';
 
 /* ================================================================== */
@@ -34,7 +38,7 @@ function HeroArt() {
   return (
     <svg
       viewBox="0 0 480 480"
-      className="w-full max-w-[460px] mx-auto"
+      className="w-full max-w-[460px] xl:max-w-[520px] 2xl:max-w-[560px] mx-auto transition-transform duration-300"
       aria-hidden="true"
     >
       <defs>
@@ -298,6 +302,27 @@ function Monogram() {
 const PROJECTS_DATA = [
   {
     id: 1,
+    title: 'Enterprise Azure Landing Zone (Hub-and-Spoke)',
+    category: 'azure',
+    impact: 'Multi-Environment Terraform IaC',
+    description:
+      'Enterprise-grade Azure Landing Zone designed with modular Terraform following Microsoft Cloud Adoption Framework (CAF). Deploys a hub-and-spoke network topology with Azure Firewall, Azure Bastion, VPN Gateway, Private DNS, and dedicated Dev, QA, and Prod AKS spoke clusters integrated with Azure Key Vault and ACR. Automated via GitHub Actions with passwordless Azure OIDC and remote state locking.',
+    tech: ['Terraform', 'Azure AKS', 'Azure Firewall', 'Hub & Spoke', 'Key Vault', 'ACR', 'GitHub Actions', 'Azure OIDC', 'Private DNS'],
+    metric: 'Modular IaC · Hub-Spoke Architecture',
+    icon: <Workflow className="w-6 h-6" />,
+    details: [
+      'Modular Terraform architecture implementing Microsoft Cloud Adoption Framework (CAF)',
+      'Centralized Hub network: Azure Firewall, Azure Bastion host, VPN Gateway, and Private DNS Resolver',
+      'Isolated DEV, QA, and PROD spokes with dedicated AKS clusters and Azure Key Vault integration',
+      'Shared services spoke hosting Azure Container Registry (ACR) with private endpoints and AcrPull role bindings',
+      'GitHub Actions CI/CD with passwordless Azure OIDC authentication and remote tfstate locking in Azure Blob Storage',
+      'Strict network egress filtering, UDR routing tables, and zero-trust Network Security Groups (NSGs)',
+    ],
+    link: 'https://github.com/ruda0008/terraform_ALZ_project',
+    comingSoon: false,
+  },
+  {
+    id: 2,
     title: 'E-Commerce Microservices Platform with DevSecOps Pipeline',
     category: 'azure',
     impact: 'Security-Gated Pipeline',
@@ -317,7 +342,27 @@ const PROJECTS_DATA = [
     comingSoon: false,
   },
   {
-    id: 2,
+    id: 3,
+    title: 'Automated Serverless Resume Screening Platform (AWS)',
+    category: 'aws',
+    impact: 'Event-driven Architecture',
+    description:
+      'Built an automated serverless hiring automation platform using AWS Lambda with S3 event triggers. Automatically extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores candidate profiles in DynamoDB, and orchestrates scoring and notifications via SQS queues and SES emails.',
+    tech: ['AWS Lambda', 'S3', 'DynamoDB', 'SES', 'SQS', 'Python', 'PyPDF2', 'IAM'],
+    metric: 'Event-Driven Automation',
+    icon: <CloudLightning className="w-6 h-6" />,
+    details: [
+      'S3 event-driven architecture with AWS Lambda triggers for instant candidate scoring',
+      'Automated candidate parsing algorithm extracting contact info, skills, and work history',
+      'Enforced least-privilege security by blocking public S3 access and defining granular IAM Roles',
+      'Asynchronous notification workflows via SQS message queues and SES transactional emails',
+      'Optimized DynamoDB partition keys for fast single-digit millisecond candidate queries',
+    ],
+    link: 'https://github.com/ruda0008/Serverless-Resume-Screening-Platform',
+    comingSoon: false,
+  },
+  {
+    id: 4,
     title: 'Real-Time IoT Monitoring Pipeline',
     category: 'azure',
     impact: '30x faster queries',
@@ -336,25 +381,7 @@ const PROJECTS_DATA = [
     comingSoon: false,
   },
   {
-    id: 3,
-    title: 'Serverless Resume Screening Platform (AWS)',
-    category: 'aws',
-    impact: 'Event-driven',
-    description:
-      'Built an automated resume processing system using Lambda with S3 triggers. Extracts candidate data (contact info, skills, education) using PyPDF2 and regex, stores in DynamoDB. Includes SQS + SES notification system.',
-    tech: ['Lambda', 'S3', 'DynamoDB', 'SES', 'SQS', 'Python', 'PyPDF2'],
-    metric: 'Full automation',
-    icon: <CloudLightning className="w-6 h-6" />,
-    details: [
-      'S3 event-driven architecture with Lambda triggers',
-      'PyPDF2 extraction with regex parsing algorithms',
-      'IAM least-privilege access policies',
-      'Optimized DynamoDB partition keys',
-    ],
-    link: 'https://github.com/ruda0008/AWS_resume_parser',
-  },
-  {
-    id: 4,
+    id: 5,
     title: 'Cloud Data Analytics Pipeline',
     category: 'azure',
     impact: 'Cost-optimized',
@@ -370,9 +397,10 @@ const PROJECTS_DATA = [
       'SQL firewall rules + RBAC security',
     ],
     link: 'https://github.com/ruda0008/Cloud-Data-Analytics-Pipeline',
+    comingSoon: false,
   },
   {
-    id: 5,
+    id: 6,
     title: 'Cloud-Native Microservices',
     category: 'azure',
     impact: 'Multi-service',
@@ -388,9 +416,10 @@ const PROJECTS_DATA = [
       'PaaS deployment architecture',
     ],
     link: '',
+    comingSoon: false,
   },
   {
-    id: 6,
+    id: 7,
     title: 'Containerized Application',
     category: 'devops',
     impact: 'Multi-container',
@@ -406,71 +435,102 @@ const PROJECTS_DATA = [
       'Copy-on-write behavior demonstration',
     ],
     link: '',
-  },
-  {
-    id: 7,
-    title: 'More Projects Coming Soon',
-    category: 'all',
-    impact: 'In development',
-    description:
-      'Currently working on new cloud projects involving Kubernetes orchestration, serverless architectures, and advanced DevSecOps pipelines. Stay tuned.',
-    tech: ['Kubernetes', 'Terraform', 'CI/CD', 'AWS', 'Azure'],
-    metric: 'Coming soon',
-    icon: <Cloud className="w-6 h-6" />,
-    details: [
-      'Kubernetes cluster deployment and management',
-      'Infrastructure as Code with Terraform',
-      'Advanced CI/CD pipeline automation',
-      'Multi-cloud deployment strategies',
-    ],
-    link: '',
-    comingSoon: true,
+    comingSoon: false,
   },
 ];
 
-const STATS_DATA = [
-  { number: '6+', label: 'Cloud Projects', icon: <Cloud className="w-5 h-5" /> },
-  { number: '2', label: 'Security Gates', icon: <CheckCircle2 className="w-5 h-5" /> },
-  { number: '30x', label: 'Query Optimization', icon: <BarChart3 className="w-5 h-5" /> },
-  { number: '99.9%', label: 'Uptime Achieved', icon: <Server className="w-5 h-5" /> },
+const EXPERIENCE_DATA = [
+  {
+    company: 'Canadian Blood Services',
+    role: 'Systems Analyst (DevOps) Co-op',
+    period: 'May 2026 – Aug 2026',
+    location: 'Ottawa, ON',
+    type: 'Co-op',
+    description:
+      'Migrated production workloads to Azure Kubernetes Service (AKS), built automated CI/CD pipelines, integrated enterprise SSO & access controls, and engineered containerized synthetic observability.',
+    highlights: [
+      'Migrated Drupal-based web apps along with database from on-premises OpenShift cluster to Azure Kubernetes Service (AKS) using Helm charts, with GitHub Actions deploying across Dev, QA and Production environments.',
+      'Deployed multiple applications on a Red Hat OpenShift cluster and built SSO and access-control integrations across internal platforms: an OAuth-based access gateway using an oauth-proxy sidecar with Nginx, and Microsoft Entra ID SAML SSO for SonarQube with attribute/claims mapping and group synchronization.',
+      'Migrated synthetic monitoring from a paid Dynatrace platform to an open-source Grafana k6, building browser-based synthetic checks across multiple production applications with automated failure capture and containerized execution.',
+      'Developed a rate-limiting feature for an internal app that fetches secrets from Azure Key Vault, capping read/delete actions per user and service per hour to prevent abuse and unauthorized mass access.',
+      'Built an automated GitHub Actions pipeline that detects and scales down crash-looping workloads on AKS using a restart-count and time-based threshold, reducing manual intervention on failed deployments.',
+    ],
+    tech: [
+      'Azure AKS',
+      'Red Hat OpenShift',
+      'Helm',
+      'GitHub Actions',
+      'Microsoft Entra ID',
+      'OAuth & SAML SSO',
+      'Grafana k6',
+      'Azure Key Vault',
+      'Nginx',
+      'Dynatrace',
+    ],
+  },
+  {
+    company: 'CarClinch',
+    role: 'Cloud Engineer (Client Project - AI Lead Management Platform)',
+    period: 'Jan 2026 – Apr 2026',
+    location: 'Remote',
+    type: 'Client Project',
+    description:
+      'Designed and delivered serverless cloud infrastructure on Azure using modular Terraform for an AI-powered lead management platform.',
+    highlights: [
+      'Designed and delivered the infrastructure using Terraform for a serverless AI lead management platform, provisioning Azure Functions, Cosmos DB, Service Bus, Key Vault, Static Web Apps, and Azure AI Foundry.',
+      'Implemented production-grade security controls including managed identities, Key Vault secret references, and least-privilege RBAC across services.',
+      'Collaborated with team members and worked directly with the client in agile sprints to deliver the platform.',
+    ],
+    tech: [
+      'Terraform',
+      'Azure Functions',
+      'Cosmos DB',
+      'Azure Service Bus',
+      'Azure Key Vault',
+      'Static Web Apps',
+      'Azure AI Foundry',
+      'RBAC',
+    ],
+  },
 ];
 
 const SKILLS_DATA = [
   {
-    category: 'Cloud Platforms',
+    category: 'Cloud & Infrastructure (IaC)',
     icon: <Cloud className="w-5 h-5" />,
     items: [
-      'AWS (Lambda, S3, DynamoDB, IAM, SES, SQS)',
-      'Azure (IoT Hub, Stream Analytics, Cosmos DB, Data Factory, SQL, Blob, App Service, Functions, VMs)',
+      'Terraform (Modular Hub-and-Spoke Landing Zones, State Locking, Azure OIDC)',
+      'Azure (AKS, Functions, Key Vault, Cosmos DB, Azure Firewall, Entra ID, Storage, Service Bus)',
+      'AWS (Lambda, S3, DynamoDB, EC2, IAM Policies, SQS, SES, RBAC)',
     ],
   },
   {
-    category: 'Programming & Databases',
-    icon: <Code2 className="w-5 h-5" />,
-    items: [
-      'Python, SQL, Bash, Java, C++',
-      'Azure SQL Database, DynamoDB, MongoDB',
-      'Star Schema Design, Database Normalization',
-    ],
-  },
-  {
-    category: 'Security & Frameworks',
-    icon: <CheckCircle2 className="w-5 h-5" />,
-    items: [
-      'IAM Policies, RBAC, Firewall Configuration',
-      'Least-Privilege Access, Palo Alto NGFW',
-      'NIST, ISO 27001/27002, OWASP Top 10, MITRE ATT&CK',
-      'AES-256, RSA, PKI, X.509 Certificates',
-    ],
-  },
-  {
-    category: 'DevSecOps & Automation',
+    category: 'DevOps, Containers & CI/CD',
     icon: <Layers className="w-5 h-5" />,
     items: [
-      'Kubernetes, Docker, Docker Compose, Git, GitHub',
-      'CI/CD with GitHub Actions, Security Gates (SAST, Container Scanning)',
-      'RabbitMQ, RESTful APIs, Event-Driven Architecture',
-      'SonarCloud, Trivy, Broken Build Policies',
+      'Kubernetes (K8s), Azure Kubernetes Service (AKS), Red Hat OpenShift',
+      'Docker, Docker Compose, Helm Charts, Container Registries (ACR)',
+      'GitHub Actions CI/CD (Multi-stage pipelines, automated deployment, broken build policy)',
+      'SonarCloud / SonarQube SAST, Trivy Container CVE Scanning',
+    ],
+  },
+  {
+    category: 'Monitoring & Observability',
+    icon: <BarChart3 className="w-5 h-5" />,
+    items: [
+      'Grafana, Grafana k6 (Automated containerized synthetic monitoring)',
+      'InfluxDB, Azure Monitor, Log Analytics Workspaces, Dynatrace',
+      'Automated failure detection and pod lifecycle auto-healing on AKS',
+    ],
+  },
+  {
+    category: 'Security, Identity & Languages',
+    icon: <CheckCircle2 className="w-5 h-5" />,
+    items: [
+      'Microsoft Entra ID (SAML SSO, attribute/claims mapping, group sync)',
+      'OAuth-Proxy Sidecars, Nginx, Least-Privilege IAM Roles, Azure RBAC',
+      'Key Vault Rate Limiting & Secret References, NIST, OWASP Top 10, MITRE ATT&CK',
+      'Languages: Python, Bash, JavaScript, SQL',
     ],
   },
 ];
@@ -478,15 +538,15 @@ const SKILLS_DATA = [
 const EDUCATION_DATA = [
   {
     school: 'Algonquin College',
-    program: 'Cloud Development and Operations',
-    status: 'In Progress',
+    program: 'Cloud Development and Operations Graduate Certificate',
+    status: 'Completed',
     graduation: 'August 2026',
     location: 'Ottawa, ON',
-    gpa: '3.84 / 4.0',
+    gpa: '3.86 / 4.0',
   },
   {
     school: 'Algonquin College',
-    program: 'Cybersecurity Analysis',
+    program: 'Cybersecurity Analysis Graduate Certificate',
     status: 'Completed',
     graduation: 'April 2025',
     location: 'Ottawa, ON',
@@ -496,7 +556,7 @@ const EDUCATION_DATA = [
     school: 'Veer Narmad South Gujarat University',
     program: 'Bachelor of Computer Applications',
     status: 'Completed',
-    graduation: 'June 2024',
+    graduation: 'April 2024',
     location: 'Gujarat, IN',
     gpa: '3.3 / 4.0',
   },
@@ -505,30 +565,30 @@ const EDUCATION_DATA = [
 const CAPABILITIES = [
   {
     num: '01',
-    title: 'Cloud Architecture',
-    desc: 'I design multi-service systems on AWS and Azure that survive the failure modes most teams only discover in production. Replica sets, partition strategies, infrastructure that scales without needing constant attention.',
-    tags: 'AWS · Azure · IaC',
+    title: 'Cloud Architecture & IaC',
+    desc: 'I design multi-service architectures and landing zones on Azure and AWS using modular Terraform. Hub-and-spoke networks, Kubernetes clusters, zero-trust security boundaries, and automated state management that scales reliably in production.',
+    tags: 'Terraform · Azure · AWS · IaC',
     icon: <Cloud className="w-6 h-6" />,
     Art: ArtArchitecture,
     highlights: [
+      'Hub-and-spoke Azure Landing Zone with Azure Firewall and isolated AKS spokes',
+      'Modular Terraform with Azure OIDC authentication and remote tfstate locking',
       '5 microservices on Azure Kubernetes Service with auto-failover',
-      'MongoDB 3-node replica set: 1 PRIMARY, 2 SECONDARY',
       'Cosmos DB partition strategy: 300ms to <10ms query latency',
-      'Multi-tier storage pipeline with Blob cold archive',
     ],
   },
   {
     num: '02',
-    title: 'DevSecOps Pipelines',
-    desc: 'Security gates that block bad builds instead of catching them in review. SonarQube SAST and Trivy container scanning enforce a broken-build policy, so vulnerabilities never reach prod.',
-    tags: 'GitHub Actions · SAST · Trivy',
+    title: 'DevSecOps & Platform Automation',
+    desc: 'Automated CI/CD pipelines that enforce quality and security before code reaches production. From container vulnerability scanning to crash-loop auto-remediation and Helm-based zero-downtime releases.',
+    tags: 'GitHub Actions · OpenShift · AKS · Helm',
     icon: <Workflow className="w-6 h-6" />,
     Art: ArtDevSecOps,
     highlights: [
-      'SonarQube SAST blocks commits with known vulnerabilities',
-      'Trivy container scanning on every Docker image push',
-      'Broken-build policy enforced across 5 services',
-      'CI/CD deployment time cut from 2 hours to 3 minutes',
+      'Migrated production web workloads from on-prem OpenShift to AKS with Helm',
+      'Automated pipeline detecting and scaling down crash-looping AKS workloads',
+      'SonarQube SAST + Trivy container scanning with broken-build security gates',
+      'Synthetic monitoring migration from Dynatrace to containerized Grafana k6',
     ],
   },
   {
@@ -539,24 +599,24 @@ const CAPABILITIES = [
     icon: <Boxes className="w-6 h-6" />,
     Art: ArtServerless,
     highlights: [
-      'AWS Lambda + S3 event triggers for resume parsing',
+      'AWS Lambda + S3 event triggers for automated resume screening',
       'Docker Compose: Flask + Redis multi-container stack',
-      'Azure Functions deployed via App Service',
+      'Azure Functions serverless AI platform with Service Bus',
       'RabbitMQ async messaging between microservices',
     ],
   },
   {
     num: '04',
     title: 'Security by Design',
-    desc: 'IAM least-privilege, zero-trust patterns, OWASP-aware code. A cybersecurity background means security shapes the architecture from day one, not a checklist at the end.',
-    tags: 'IAM · OWASP · NIST',
+    desc: 'IAM least-privilege, zero-trust patterns, and identity federation. A cybersecurity background means security shapes the architecture from day one, not a checklist at the end.',
+    tags: 'Entra ID · SAML/OAuth · Key Vault · RBAC',
     icon: <Lock className="w-6 h-6" />,
     Art: ArtSecurity,
     highlights: [
-      'IAM least-privilege policies across every AWS resource',
-      'Palo Alto NGFW with role-based access control',
-      'PKI and X.509 certificate management',
-      'OWASP Top 10 and MITRE ATT&CK threat modeling',
+      'Microsoft Entra ID SAML SSO and OAuth proxy sidecars with Nginx',
+      'Azure Key Vault rate limiting capping unauthorized mass secret access',
+      'Least-privilege RBAC roles and managed identity federation across cloud services',
+      'OWASP Top 10, NIST frameworks, and automated CVE gate enforcement',
     ],
   },
 ];
@@ -564,13 +624,25 @@ const CAPABILITIES = [
 const NAV_LINKS = [
   { id: 'capabilities', label: 'What I Build' },
   { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
 ];
 
-const SECTION_IDS = ['top', 'capabilities', 'about', 'projects', 'skills', 'education', 'contact'];
+const SECTION_IDS = ['top', 'capabilities', 'about', 'experience', 'projects', 'skills', 'education', 'contact'];
+
+const SECTION_LABELS = {
+  top: 'Home',
+  capabilities: 'What I Build',
+  about: 'About',
+  experience: 'Experience',
+  projects: 'Projects',
+  skills: 'Skills',
+  education: 'Education',
+  contact: 'Contact',
+};
 
 const ROTATING_WORDS = ['Security', 'DevSecOps', 'Automation', 'Serverless', 'Kubernetes'];
 
@@ -579,9 +651,13 @@ const ROTATING_WORDS = ['Security', 'DevSecOps', 'Automation', 'Serverless', 'Ku
 /* ================================================================== */
 
 function smoothScrollTo(id) {
+  if (id === 'top') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
   const el = document.getElementById(id);
   if (el) {
-    const top = el.getBoundingClientRect().top + window.scrollY - 76;
+    const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 76);
     window.scrollTo({ top, behavior: 'smooth' });
   }
 }
@@ -650,51 +726,7 @@ function Ornament() {
   );
 }
 
-/* ---------------- Animated stat counter ---------------- */
 
-function StatCard({ value, label, icon, large = false }) {
-  const [ref, inView] = useInView({ threshold: 0.4 });
-  const match = String(value).match(/^([\d.]+)(.*)$/);
-  const target = match ? parseFloat(match[1]) : 0;
-  const suffix = match ? match[2] : '';
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const duration = 1500;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now) => {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      const v = eased * target;
-      const isFloat = target % 1 !== 0;
-      setCount(isFloat ? Number(v.toFixed(1)) : Math.floor(v));
-      if (t < 1) raf = requestAnimationFrame(tick);
-      else setCount(target);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, target]);
-
-  return (
-    <div
-      ref={ref}
-      className={`rounded-2xl border border-line bg-card p-5 shadow-soft ${large ? 'col-span-2' : ''}`}
-    >
-      <div className="text-accent mb-2.5">{icon}</div>
-      <div
-        className={`font-serif font-semibold text-ink tabular-nums ${
-          large ? 'text-5xl' : 'text-3xl'
-        }`}
-      >
-        {count}
-        {suffix}
-      </div>
-      <div className="text-sm text-muted mt-0.5">{label}</div>
-    </div>
-  );
-}
 
 /* ---------------- Rotating word ---------------- */
 
@@ -803,7 +835,7 @@ function StorySection() {
 
   return (
     <section id="capabilities" className="relative px-6 py-24">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto">
         <Reveal>
           <SectionHeading
             eyebrow="What I Build"
@@ -866,11 +898,10 @@ function StorySection() {
                 className="md:min-h-[75vh] flex items-center"
               >
                 <div
-                  className={`w-full rounded-3xl border bg-card p-7 md:p-10 shadow-soft transition-all duration-500 ${
-                    idx === active
+                  className={`w-full rounded-3xl border bg-card p-7 md:p-10 shadow-soft transition-all duration-500 ${idx === active
                       ? 'border-accent/40 shadow-lift md:scale-[1.01]'
                       : 'border-line opacity-70'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">
@@ -948,9 +979,8 @@ function ProjectCard({ project, delay }) {
         ref={cardRef}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
-        className={`group relative h-full rounded-3xl border border-line bg-card p-7 md:p-8 shadow-soft transition-all duration-200 will-change-transform hover:shadow-lift hover:border-accent/40 ${
-          project.comingSoon ? 'opacity-80' : ''
-        }`}
+        className={`group relative h-full rounded-3xl border border-line bg-card p-7 md:p-8 shadow-soft transition-all duration-200 will-change-transform hover:shadow-lift hover:border-accent/40 ${project.comingSoon ? 'opacity-80' : ''
+          }`}
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Decorative corner accent */}
@@ -984,9 +1014,8 @@ function ProjectCard({ project, delay }) {
 
         {/* Collapsible details (grid-rows trick for smooth height animation) */}
         <div
-          className={`relative grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
-            expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-          }`}
+          className={`relative grid transition-[grid-template-rows,opacity] duration-300 ease-out ${expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+            }`}
         >
           <div className="overflow-hidden">
             <ul className="pt-5 space-y-2">
@@ -1021,9 +1050,8 @@ function ProjectCard({ project, delay }) {
           >
             {expanded ? 'Hide details' : 'Show details'}
             <ChevronDown
-              className={`w-4 h-4 transition-transform duration-300 ${
-                expanded ? 'rotate-180' : ''
-              }`}
+              className={`w-4 h-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''
+                }`}
             />
           </button>
 
@@ -1033,11 +1061,10 @@ function ProjectCard({ project, delay }) {
               target={project.link ? '_blank' : '_self'}
               rel="noopener noreferrer"
               onClick={(e) => !project.link && e.preventDefault()}
-              className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
-                project.link
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${project.link
                   ? 'text-accent hover:text-accent-hover'
                   : 'text-muted/60 cursor-not-allowed'
-              }`}
+                }`}
             >
               {project.link ? 'View Project' : 'Link coming soon'}
               {project.link && <ArrowUpRight className="w-4 h-4" />}
@@ -1053,33 +1080,31 @@ function ProjectCard({ project, delay }) {
 
 function SectionDots({ active }) {
   return (
-    <div className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4">
+    <div className="hidden md:flex fixed left-6 xl:left-8 2xl:left-10 top-1/2 -translate-y-1/2 z-40 flex-col gap-4">
       {SECTION_IDS.map((id) => {
         const isActive = active === id;
         return (
           <button
             key={id}
             onClick={() => smoothScrollTo(id)}
-            aria-label={`Go to ${id}`}
+            aria-label={`Go to ${SECTION_LABELS[id] || id}`}
             className="group relative grid place-items-center w-4 h-4"
           >
             {/* Soft halo behind the active dot */}
             <span
-              className={`absolute inset-0 rounded-full bg-accent/15 transition-transform duration-300 ${
-                isActive ? 'scale-100' : 'scale-0'
-              }`}
+              className={`absolute inset-0 rounded-full bg-accent/15 transition-transform duration-300 ${isActive ? 'scale-100' : 'scale-0'
+                }`}
             />
             {/* The dot itself */}
             <span
-              className={`relative block rounded-full transition-all duration-300 ${
-                isActive
+              className={`relative block rounded-full transition-all duration-300 ${isActive
                   ? 'w-2.5 h-2.5 bg-accent'
                   : 'w-2 h-2 bg-ink/30 group-hover:bg-ink/60 group-hover:scale-110'
-              }`}
+                }`}
             />
             {/* Hover label sliding in to the right of the dot */}
-            <span className="absolute left-6 px-2.5 py-1 rounded-md text-[11px] font-medium bg-card border border-line text-ink shadow-soft whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none capitalize">
-              {id === 'top' ? 'Home' : id}
+            <span className="absolute left-6 px-2.5 py-1 rounded-md text-[11px] font-medium bg-card border border-line text-ink shadow-soft whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none">
+              {SECTION_LABELS[id] || (id === 'top' ? 'Home' : id)}
             </span>
           </button>
         );
@@ -1129,11 +1154,14 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
-  const [theme, setTheme] = useState(() =>
-    typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
-      ? 'dark'
-      : 'light'
-  );
+  const [theme, setTheme] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark') return 'dark';
+      if (stored === 'light') return 'light';
+    }
+    return 'light';
+  });
 
   // Progress bar is updated via direct DOM write inside the scroll handler
   // (no re-render of the whole tree on every scroll event).
@@ -1231,11 +1259,10 @@ export default function App() {
 
       {/* ---------------- Nav ---------------- */}
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-page/80 backdrop-blur-md border-b border-line' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-page/80 backdrop-blur-md border-b border-line' : 'bg-transparent'
+          }`}
       >
-        <nav className="max-w-6xl mx-auto px-6 h-[68px] flex items-center justify-between">
+        <nav className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <button
             onClick={() => handleNav('top')}
             className="group"
@@ -1251,11 +1278,10 @@ export default function App() {
               <button
                 key={link.id}
                 onClick={() => handleNav(link.id)}
-                className={`px-3.5 py-2 text-sm font-medium rounded-full transition-colors ${
-                  activeSection === link.id
+                className={`px-3.5 py-2 text-sm font-medium rounded-full transition-colors ${activeSection === link.id
                     ? 'text-accent bg-accent-soft'
                     : 'text-muted hover:text-ink hover:bg-surface'
-                }`}
+                  }`}
               >
                 {link.label}
               </button>
@@ -1311,7 +1337,7 @@ export default function App() {
       >
         <HeroBlobs />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
+        <div className="relative z-10 max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Left: copy */}
             <div className="lg:col-span-7">
@@ -1366,12 +1392,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Stats: animated count-up cards — span the full hero container width */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {STATS_DATA.map((stat, i) => (
-              <StatCard key={i} value={stat.number} label={stat.label} icon={stat.icon} />
-            ))}
-          </div>
+
         </div>
       </section>
 
@@ -1384,7 +1405,7 @@ export default function App() {
 
       {/* ---------------- About (two-col with monogram) ---------------- */}
       <section id="about" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto">
           <Reveal>
             <SectionHeading eyebrow="About" title="A security mindset, applied to the cloud" />
           </Reveal>
@@ -1422,16 +1443,16 @@ export default function App() {
                     <span className="font-serif text-4xl text-accent leading-none float-left mr-2 mt-1">
                       I
                     </span>
- started in cybersecurity before moving into cloud development, and that background still influences how I work. Security isn't something I think about after building a system it's part of how I design from the beginning.
+                    started in cybersecurity before moving into cloud development, and that background still influences how I work. Security isn't something I think about after building a system — it's part of how I design from the beginning.
                   </p>
                   <p>
-What drives me is learning both in tech and in life. New cloud services, better ways to architect solutions, insights from other professionals, even conversations over coffee with friends. I pick up perspectives everywhere. I like understanding not just how something works, but why it's built that way. That curiosity pushes me to dig deeper into the technologies I use.
+                    What drives me is learning, both in tech and in life. New cloud services, better ways to architect solutions, insights from other professionals, even conversations over coffee with friends. I pick up perspectives everywhere. I like understanding not just how something works, but why it's built that way. That curiosity pushes me to dig deeper into the technologies I use.
                   </p>
                   <p>
-I've learned that stepping away matters. Whether I'm on a adventure or just away from my desk, my mind processes problems differently. Some of my better technical solutions have come when I wasn't sitting in front of a screen trying to force them. It's taught me that good work isn't just about hours logged it's about thinking clearly.
+                    I've learned that stepping away matters. Whether I'm on an adventure or just away from my desk, my mind processes problems differently. Some of my better technical solutions have come when I wasn't sitting in front of a screen trying to force them. It's taught me that good work isn't just about hours logged — it's about thinking clearly.
                   </p>
                   <p>
-I believe good infrastructure should be invisible. If it's running well, nobody notices it. That's what I aim for systems that are reliable enough that teams can focus on their work instead of worrying about the platform underneath.
+                    I believe good infrastructure should be invisible. If it's running well, nobody notices it. That's what I aim for — systems that are reliable enough that teams can focus on their work instead of worrying about the platform underneath.
                   </p>
                 </div>
               </div>
@@ -1442,9 +1463,91 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
 
       <Ornament />
 
+      {/* ---------------- Experience ---------------- */}
+      <section id="experience" className="py-28 px-6">
+        <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Career"
+              title="Work Experience"
+              subtitle="Engineering production cloud platforms, automated DevSecOps pipelines, and enterprise migrations."
+            />
+          </Reveal>
+
+          <div className="space-y-8">
+            {EXPERIENCE_DATA.map((exp, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <div className="rounded-3xl border border-line bg-card p-8 md:p-10 shadow-soft transition-all duration-300 hover:border-accent/40">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 pb-6 border-b border-line">
+                    <div className="flex items-start gap-4">
+                      <div className="grid place-items-center w-12 h-12 rounded-2xl bg-accent-soft text-accent shrink-0">
+                        <Briefcase className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2.5">
+                          <h3 className="font-serif text-2xl font-semibold text-ink">
+                            {exp.role}
+                          </h3>
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold text-accent border border-accent/30 bg-accent-soft">
+                            {exp.type}
+                          </span>
+                        </div>
+                        <p className="text-accent font-medium text-lg mt-1 flex items-center gap-2">
+                          <Building2 className="w-4 h-4" />
+                          <span>{exp.company}</span>
+                        </p>
+                        <p className="flex items-center gap-1.5 text-sm text-muted mt-2">
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>{exp.location}</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="md:text-right shrink-0">
+                      <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-line bg-surface text-ink">
+                        <Calendar className="w-3.5 h-3.5 text-accent" />
+                        {exp.period}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-base text-ink font-medium leading-relaxed">
+                    {exp.description}
+                  </p>
+
+                  <ul className="mt-5 space-y-3">
+                    {exp.highlights.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                        <span className="text-[15px] text-muted leading-relaxed">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-8 pt-6 border-t border-line flex flex-wrap gap-2">
+                    {exp.tech.map((t, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 rounded-full text-xs font-medium border border-line bg-surface text-muted hover:text-ink transition-colors"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Ornament />
+
       {/* ---------------- Projects ---------------- */}
       <section id="projects" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto">
           <Reveal>
             <SectionHeading
               eyebrow="Work"
@@ -1464,11 +1567,10 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeTab === tab.id
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === tab.id
                       ? 'bg-accent text-white shadow-soft'
                       : 'bg-card text-muted border border-line hover:text-ink hover:bg-surface'
-                  }`}
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -1476,7 +1578,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 xl:gap-8">
             {filteredProjects.map((project, i) => (
               <ProjectCard key={project.id} project={project} delay={(i % 2) * 80} />
             ))}
@@ -1488,7 +1590,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
 
       {/* ---------------- Skills ---------------- */}
       <section id="skills" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto">
           <Reveal>
             <SectionHeading
               eyebrow="Toolkit"
@@ -1497,7 +1599,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
             />
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 xl:gap-8">
             {SKILLS_DATA.map((group, i) => (
               <Reveal key={i} delay={(i % 2) * 80}>
                 <div className="h-full rounded-3xl border border-line bg-card p-8 shadow-soft transition-all duration-300 hover:border-accent/40">
@@ -1526,7 +1628,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
 
       {/* ---------------- Education ---------------- */}
       <section id="education" className="py-28 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto">
           <Reveal>
             <SectionHeading eyebrow="Background" title="Education" />
           </Reveal>
@@ -1551,11 +1653,10 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
                     </div>
                     <div className="md:text-right md:shrink-0">
                       <span
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${
-                          edu.status === 'In Progress'
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${edu.status === 'In Progress'
                             ? 'text-accent border-accent/30 bg-accent-soft'
                             : 'text-muted border-line bg-surface'
-                        }`}
+                          }`}
                       >
                         {edu.status}
                       </span>
@@ -1573,7 +1674,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
 
       {/* ---------------- Contact ---------------- */}
       <section id="contact" className="py-28 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto">
           <Reveal>
             <div className="rounded-3xl border border-line bg-card p-10 md:p-14 shadow-soft text-center relative overflow-hidden">
               <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-accent-soft blur-3xl pointer-events-none" />
@@ -1597,7 +1698,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
                   venom0836@duck.com
                 </a>
 
-                <div className="mt-9 flex justify-center">
+                <div className="mt-9 flex flex-wrap justify-center gap-3">
                   <a
                     href="https://github.com/ruda0008"
                     target="_blank"
@@ -1606,6 +1707,15 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
                   >
                     <Github className="w-4 h-4" />
                     <span className="text-sm font-medium">View on GitHub</span>
+                  </a>
+                  <a
+                    href="https://ca.linkedin.com/in/aryanrudani"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-line text-ink hover:bg-surface hover:text-accent transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    <span className="text-sm font-medium">Connect on LinkedIn</span>
                   </a>
                 </div>
 
@@ -1617,7 +1727,7 @@ I believe good infrastructure should be invisible. If it's running well, nobody 
       </section>
 
       <footer className="py-10 px-6 border-t border-line">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-sm text-muted text-center md:text-left">
             © {new Date().getFullYear()} <span className="text-ink font-medium">Aryan Rudani</span> ·
             Cloud Developer &amp; Security Specialist

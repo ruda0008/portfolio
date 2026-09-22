@@ -21,16 +21,16 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aryanrudani.space" />
 
-    <!-- No-flash theme init: applies saved/system theme before paint -->
+    <!-- No-flash theme init: defaults to light (white) mode unless explicitly set to dark -->
     <script>
       (function () {
         try {
           var stored = localStorage.getItem('theme');
-          var prefersDark =
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var dark = stored ? stored === 'dark' : prefersDark;
-          if (dark) document.documentElement.classList.add('dark');
+          if (stored === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
         } catch (e) {}
       })();
     </script>
