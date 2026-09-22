@@ -29,6 +29,7 @@ import {
   Calendar,
   Linkedin,
 } from 'lucide-react';
+import StarryBackground from './components/StarryBackground';
 
 /* ================================================================== */
 /*  Illustrations (original SVG, theme-aware via CSS variables)       */
@@ -1243,6 +1244,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-page text-ink">
+      {/* Sitewide celestial starfield & interactive constellations */}
+      <StarryBackground theme={theme} />
+
       {/* Sitewide grain texture */}
       <div className="grain-overlay" aria-hidden="true" />
 
